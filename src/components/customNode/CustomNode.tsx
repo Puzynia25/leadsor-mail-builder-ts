@@ -1,19 +1,11 @@
 import { FC } from "react";
-
-import { Box, Card, CardContent, Typography } from "@mui/material";
-import { Handle, NodeProps, Position } from "@xyflow/react";
+import { Handle, Position } from "@xyflow/react";
+import useNode, { NodeLabel } from "../../hooks/useNode";
 
 import "./CustomNode.scss";
-// import useNode from "../hooks/useNode";
 
-const CustomNode: FC<NodeProps> = ({ id, data }) => {
-    // const { color, content } = useNode(data.label, data);
-    const color = "#2b7e2f";
-    const content = (
-        <div>
-            <p className="node-title">{data.text}</p>
-        </div>
-    );
+const CustomNode: FC<{ id: string; data: { label: NodeLabel } }> = ({ id, data }) => {
+    const { color, render } = useNode(data.label);
 
     return (
         <>
@@ -23,7 +15,7 @@ const CustomNode: FC<NodeProps> = ({ id, data }) => {
                     <p className="node-label" style={{ backgroundColor: color }}>
                         {data.label}
                     </p>
-                    {content}
+                    {render}
                 </div>
             </div>
             <Handle type="source" position={Position.Right} id={`${id}-source`} className="handle" />
