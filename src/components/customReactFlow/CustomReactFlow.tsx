@@ -19,7 +19,9 @@ import { SidebarItem } from "../../constants/sidebarItems";
 
 import "./CustomReactFlow.scss";
 
-const CustomReactFlow = () => {
+const CustomReactFlow: FC<{ handleNodeClick: (e: React.MouseEvent, node: Node | null) => void }> = ({
+    handleNodeClick,
+}) => {
     const [nodes, setNodes] = useState<Node[]>([]);
     const [edges, setEdges] = useState<Edge[]>([]);
 
@@ -37,8 +39,6 @@ const CustomReactFlow = () => {
         if (!sideBarItemData) {
             return;
         }
-
-        console.log(sideBarItemData, "sideBarItem");
 
         const sideBarItem: SidebarItem = JSON.parse(sideBarItemData);
 
@@ -62,14 +62,15 @@ const CustomReactFlow = () => {
     return (
         <div className="custom-rf__wrapper" onDrop={onDrop} onDragOver={onDragOver}>
             <ReactFlow
+                className="custom-rf__content"
                 nodes={nodes}
                 edges={edges}
                 onEdgesChange={onEdgesChange}
                 onNodesChange={onNodesChange}
                 onConnect={onConnect}
+                onNodeClick={handleNodeClick}
                 nodeTypes={nodeTypes}
                 nodeOrigin={[0.5, 0.5]}
-                className="custom-rf__content"
             />
         </div>
     );
