@@ -1,16 +1,21 @@
+import { useState } from "react";
+import { Edge } from "@xyflow/react";
+
 import Sidebar from "./components/sidebar/Sidebar";
 import CustomReactFlow from "./components/customReactFlow/CustomReactFlow";
+import SettingsMenu from "./components/settings/SettingsMenu";
+import { CustomNodeType } from "./components/nodes/Node.types";
 
 import "./App.scss";
-import { useState } from "react";
-import { Node } from "@xyflow/react";
-import SettingsMenu from "./components/settingsMenu/SettingsMenu";
 
 const App = () => {
-    const [settingNode, setSettingNode] = useState<Node | null>(null);
+    const [nodes, setNodes] = useState<CustomNodeType[]>([]);
+    const [edges, setEdges] = useState<Edge[]>([]);
+
+    const [settingNode, setSettingNode] = useState<CustomNodeType | null>(null);
     const [showSettingsMenu, setShowSettingsMenu] = useState(false);
 
-    const handleNodeClick: (e: React.MouseEvent, node: Node | null) => void = (_e, node) => {
+    const handleNodeClick: (e: React.MouseEvent, node: CustomNodeType | null) => void = (_e, node) => {
         setShowSettingsMenu(true);
         setSettingNode(node);
     };
@@ -20,12 +25,41 @@ const App = () => {
         setSettingNode(null);
     };
 
+    const handleUpdateNodeContent = (nodeId: string, newNode: CustomNodeType) => {
+        const changedNodes = (nodes: CustomNodeType[]): CustomNodeType[] => {
+            return nodes.map((node) => {
+                if (node.id === nodeId) {
+                    if (settingNode && settingNode.id === nodeId) {
+                        setSettingNode(newNode);
+                    }
+
+                    return newNode;
+                }
+                return node;
+            });
+        };
+
+        setNodes((nds) => changedNodes(nds));
+    };
+
     return (
         <div className="app-wrapper">
             <Sidebar />
-            <CustomReactFlow handleNodeClick={handleNodeClick} />
+            <CustomReactFlow
+                nodes={nodes}
+                edges={edges}
+                setNodes={setNodes}
+                setEdges={setEdges}
+                handleNodeClick={handleNodeClick}
+            />
 
-            {showSettingsMenu && <SettingsMenu node={settingNode} onClose={handleCloseSettingMenu} />}
+            {showSettingsMenu && settingNode && (
+                <SettingsMenu
+                    node={settingNode}
+                    onClose={handleCloseSettingMenu}
+                    onUpdateNodeContent={handleUpdateNodeContent}
+                />
+            )}
         </div>
     );
 };

@@ -1,38 +1,47 @@
 import { FC } from "react";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import {
     ReactFlow,
     applyNodeChanges,
     applyEdgeChanges,
     addEdge,
-    NodeChange,
-    EdgeChange,
-    Connection,
     Edge,
-    Node,
     useReactFlow,
+    OnNodesChange,
+    OnEdgesChange,
+    OnConnect,
+    DefaultEdgeOptions,
 } from "@xyflow/react";
 import { v4 as uuidv4 } from "uuid";
 
 import { calculateNodePosition, nodeTypes } from "../../utils";
-import { SidebarItem } from "../../constants/sidebarItems";
+import { SidebarItem } from "../sidebar/SidebarItem.types";
+import { CustomNodeType } from "../nodes/Node.types";
 
 import "./CustomReactFlow.scss";
 
-const CustomReactFlow: FC<{ handleNodeClick: (e: React.MouseEvent, node: Node | null) => void }> = ({
-    handleNodeClick,
-}) => {
-    const [nodes, setNodes] = useState<Node[]>([]);
-    const [edges, setEdges] = useState<Edge[]>([]);
-
+const CustomReactFlow: FC<{
+    nodes: CustomNodeType[];
+    edges: Edge[];
+    setNodes: React.Dispatch<React.SetStateAction<CustomNodeType[]>>;
+    setEdges: React.Dispatch<React.SetStateAction<Edge[]>>;
+    handleNodeClick: (e: React.MouseEvent, node: CustomNodeType | null) => void;
+}> = ({ nodes, edges, setNodes, setEdges, handleNodeClick }) => {
     const { getViewport } = useReactFlow();
 
-    const onNodesChange = useCallback((changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds)), []);
-    const onEdgesChange = useCallback((changes: EdgeChange[]) => setEdges((eds) => applyEdgeChanges(changes, eds)), []);
-    const onConnect = useCallback((params: Connection) => setEdges((eds) => addEdge(params, eds)), []);
+    const onNodesChange: OnNodesChange<CustomNodeType> = useCallback(
+        (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+        []
+    );
+    const onEdgesChange: OnEdgesChange = useCallback(
+        (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+        []
+    );
+    const onConnect: OnConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
 
     const onDrop: (e: React.DragEvent) => void = (e) => {
         e.preventDefault();
+
         const reactFlowBounds: DOMRect = e.currentTarget.getBoundingClientRect();
         const sideBarItemData: string = e.dataTransfer.getData("application/reactflow");
 
@@ -42,13 +51,11 @@ const CustomReactFlow: FC<{ handleNodeClick: (e: React.MouseEvent, node: Node | 
 
         const sideBarItem: SidebarItem = JSON.parse(sideBarItemData);
 
-        const newNode: Node = {
+        const newNode: CustomNodeType = {
             id: uuidv4(),
-            data: {
-                label: sideBarItem.label,
-            },
+            data: { ...sideBarItem.data },
             position: calculateNodePosition(e, getViewport, reactFlowBounds),
-            type: "custom",
+            type: sideBarItem.type,
         };
 
         setNodes((nds) => [...nds, newNode]);
@@ -71,9 +78,14 @@ const CustomReactFlow: FC<{ handleNodeClick: (e: React.MouseEvent, node: Node | 
                 onNodeClick={handleNodeClick}
                 nodeTypes={nodeTypes}
                 nodeOrigin={[0.5, 0.5]}
+                defaultEdgeOptions={defaultEdgeOptions}
             />
         </div>
     );
 };
 
 export default CustomReactFlow;
+
+const defaultEdgeOptions: DefaultEdgeOptions = {
+    animated: true,
+};

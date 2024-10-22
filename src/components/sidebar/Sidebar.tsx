@@ -1,8 +1,8 @@
-import { SidebarItem, sidebarItems } from "../../constants/sidebarItems";
 import SidebarItems from "./SidebarItem";
+import { SidebarItem } from "./SidebarItem.types";
+import { sidebarItems } from "../../constants/sidebarItems";
 
 import "./Sidebar.scss";
-
 const Sidebar = () => {
     const onDragStart = (e: React.DragEvent, item: SidebarItem) => {
         // console.log(item, "onDragStart");

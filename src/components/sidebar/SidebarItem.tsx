@@ -1,6 +1,5 @@
 import { FC } from "react";
-import { SidebarItem } from "../../constants/sidebarItems";
-// import useNode from "../../hooks/useNode";
+import { SidebarItem } from "./SidebarItem.types";
 
 import "./SidebarItem.scss";
 
@@ -8,12 +7,12 @@ const SidebarItems: FC<{ item: SidebarItem; onDragStart: (e: React.DragEvent, it
     item,
     onDragStart,
 }) => {
-    console.log(item, "SidebarItems");
+    // console.log(item, "SidebarItems");
     return (
         <div className="sidebar-item-wrapper">
             <div className="sidebar-item" draggable onDragStart={(e) => onDragStart(e, item)}>
                 {item.icon}
-                <p>{item.label}</p>
+                <p>{item.data.label}</p>
             </div>
         </div>
     );

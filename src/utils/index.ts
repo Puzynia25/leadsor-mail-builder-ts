@@ -1,7 +1,11 @@
-import { NodeProps } from "@xyflow/react";
-import { FC } from "react";
-import CustomNode from "../components/customNode/CustomNode";
-import { NodeLabel } from "../hooks/useNode";
+import { NodeTypes } from "@xyflow/react";
+import MessageNode from "../components/nodes/MessageNode";
+import PauseNode from "../components/nodes/PauseNode";
+import FilterNode from "../components/nodes/FilterNode";
+import MessageSettings from "../components/settings/MessageSettings";
+import PauseSettings from "../components/settings/PauseSettings";
+import FilterSettings from "../components/settings/FilterSettings";
+import { ISettingsMenu, ISettingsMenuProps } from "../components/settings/SettingsMenu.types";
 
 export const calculateNodePosition = (
     e: React.DragEvent,
@@ -17,4 +21,18 @@ export const calculateNodePosition = (
     return canvasPosition;
 };
 
-export const nodeTypes: { [key: string]: FC<NodeProps> } = { custom: CustomNode };
+export const nodeTypes: NodeTypes = {
+    message: MessageNode,
+    pause: PauseNode,
+    filter: FilterNode,
+};
+
+export interface INodeMap {
+    [key: string]: (data: ISettingsMenuProps) => ISettingsMenu;
+}
+
+export const nodeMap: INodeMap = {
+    Message: MessageSettings,
+    Pause: PauseSettings,
+    Filter: FilterSettings,
+};

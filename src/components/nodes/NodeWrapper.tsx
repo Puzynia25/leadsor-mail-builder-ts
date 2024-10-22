@@ -1,21 +1,19 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { Handle, Position } from "@xyflow/react";
-import useNode, { NodeLabel } from "../../hooks/useNode";
 
-import "./CustomNode.scss";
+import "./NodeWrapper.scss";
+import { NodeData } from "./Node.types";
 
-const CustomNode: FC<{ id: string; data: { label: NodeLabel } }> = ({ id, data }) => {
-    const { color, render } = useNode(data.label);
-
+const NodeWrapper: FC<{ id: string; data: NodeData; children: ReactNode }> = ({ id, data, children }) => {
     return (
         <>
             <Handle type="target" position={Position.Left} id={`${id}-target`} className="handle" />
             <div className="node-wrapper" tabIndex={0}>
                 <div className="node-content">
-                    <p className="node-label" style={{ backgroundColor: color }}>
+                    <p className="node-label" style={{ backgroundColor: data.color }}>
                         {data.label}
                     </p>
-                    {render}
+                    {children}
                 </div>
             </div>
             <Handle type="source" position={Position.Right} id={`${id}-source`} className="handle" />
@@ -23,4 +21,4 @@ const CustomNode: FC<{ id: string; data: { label: NodeLabel } }> = ({ id, data }
     );
 };
 
-export default CustomNode;
+export default NodeWrapper;

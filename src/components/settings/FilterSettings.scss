@@ -1,0 +1,12 @@
+.filter-settings__content {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.filter-settings__select {
+    padding: 16px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex: 1;
+}

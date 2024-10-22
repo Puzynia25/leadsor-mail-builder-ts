@@ -11,4 +11,12 @@
     padding: 10px;
     margin-top: 10px;
     border-radius: 15px;
+    overflow: scroll;
+}
+
+.message-content__btns {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding-top: 20px;
 }
