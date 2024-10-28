@@ -6,14 +6,12 @@ import "./PauseNode.scss";
 
 const PauseNode = ({ id, data }: NodeProps<PauseNodeType>) => {
     return (
-        <NodeWrapper id={id} data={data}>
-            <div className="pause-content__wrapper">
-                <p className="pause-content__text">
-                    Delay
-                    <span className="pause-content__duration">{data.pause}</span>
-                    {data.timeRange}
-                </p>
-            </div>
+        <NodeWrapper id={id} data={data} handle="all">
+            <p className="pause-node__text">
+                Delay
+                <span className="pause-node__duration">{data.pause}</span>
+                {data.timeRange}
+            </p>
         </NodeWrapper>
     );
 };

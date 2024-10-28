@@ -6,22 +6,18 @@ import ButtonNode from "./ButtonNode";
 import "./MessageNode.scss";
 
 const MessageNode = ({ id, data }: NodeProps<MessageNodeType>) => {
-    console.log(data, "MessageNode");
-
     const renderBtns = (btns: IBtn[]) => {
         if (!data.buttons || data.buttons.length === 0) {
             return null;
         }
-        return btns.map((btn) => <ButtonNode key={btn.id} btn={btn} />);
+        return btns.map((btn) => <ButtonNode key={btn.id} btn={btn} isHandle={true} />);
     };
     const btns = data.buttons && renderBtns(data.buttons);
 
     return (
-        <NodeWrapper id={id} data={data}>
-            <div className="message-content__wrapper">
-                <p className="message-content__text">{data.text}</p>
-                {btns && <div className="message-content__btns">{btns}</div>}
-            </div>
+        <NodeWrapper id={id} data={data} handle="all">
+            <p className="message-node__text">{data.text}</p>
+            {btns && <div className="message-node__btns">{btns}</div>}
         </NodeWrapper>
     );
 };

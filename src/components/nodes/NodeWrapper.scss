@@ -1,26 +1,32 @@
+@import "../../styles/variables.scss";
+
 .node-wrapper {
-    position: relative;
     cursor: move;
-    width: 250px;
+    position: relative;
+    width: 280px;
+    padding: 10px;
     background: rgba(255, 255, 255, 0.7);
     box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
     border: 2px solid #ffff;
     border-radius: 15px;
-    pointer-events: auto;
 
     &:focus {
-        border: 2px solid #16a635;
-        box-shadow: 0px 0px 0px 3px rgba(25, 210, 90, 0.3);
+        border: 2px solid rgba(17, 140, 60, 0.8);
+        box-shadow: 0px 0px 0px 3px rgba(17, 140, 60, 0.3);
     }
 }
 
-.node-text {
-    color: dimgray;
-    background: #eee;
-    font-size: 0.9rem;
-    padding: 10px;
-    margin-top: 20px;
+.node-content {
+    color: $font-color;
+    padding: 10px 10px 0;
+    margin-top: 10px;
     border-radius: 15px;
+
+    p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        overflow: auto;
+    }
 }
 
 .node-label {
@@ -30,8 +36,4 @@
     padding: 5px;
     border-radius: 10px;
     color: white;
-}
-
-.node-content {
-    padding: 15px;
 }

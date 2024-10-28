@@ -9,7 +9,7 @@
     box-sizing: border-box;
 }
 
-.handle {
+.react-flow__handle {
     width: 15px;
     height: 15px;
     background-color: #164ea6;

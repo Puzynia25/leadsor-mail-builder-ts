@@ -9,7 +9,7 @@ const PauseSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISett
     const pauseNode = node as PauseNodeType;
 
     const [pause, setPause] = useState(pauseNode.data.pause);
-    const [timeRange, setTimeRange] = useState("minutes");
+    const [timeRange, setTimeRange] = useState("hours");
 
     const createNewNode = (newData: PauseNodeData): PauseNodeType => {
         const newNode: PauseNodeType = {

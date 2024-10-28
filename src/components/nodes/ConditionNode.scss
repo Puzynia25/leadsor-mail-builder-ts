@@ -1,8 +1,10 @@
+@import "../../styles/variables.scss";
+
 .btn__wrapper {
     position: relative;
 }
 
-.btn__badge-wrapper {
+.condition-node__badge-wrapper {
     display: flex;
     gap: 10px;
 

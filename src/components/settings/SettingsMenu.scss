@@ -1,4 +1,4 @@
-@import "../../styles//variables.scss";
+@import "../../styles/variables.scss";
 
 .overlay-dark {
     position: fixed;
@@ -8,14 +8,13 @@
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
-    pointer-events: none;
 }
 
 .settings-menu__wrapper {
     position: fixed;
     top: 0;
     right: 0;
-    width: 25%;
+    width: 500px;
     height: 100vh;
     padding: 20px;
     background: $background;
@@ -23,6 +22,7 @@
     color: $font-color;
     display: flex;
     flex-direction: column;
+    overflow: auto;
 }
 
 .settings-menu__title {
@@ -31,22 +31,25 @@
     text-transform: uppercase;
 }
 
-.settings-menu__content {
+.settings-menu__inner {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.settings-menu__inner {
-    padding: 20px;
+.settings-menu__content {
+    div {
+        font-size: 0.9rem;
+    }
 }
 
 .divider {
     margin: 10px 0;
     width: 100%;
     height: 2px;
-    background: rgba(47, 125, 49, 0.9);
+    background: $primary;
+    opacity: 0.9;
 }
 
 .btns__wrapper {

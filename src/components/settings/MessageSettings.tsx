@@ -7,10 +7,9 @@ import { v4 as uuidv4 } from "uuid";
 
 const MessageSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISettingsMenu => {
     const messageNode = node as MessageNodeType;
-    // const [messageNode, setMessageNode] = useState(node as MessageNodeProps);
 
     const buttonTextRef = useRef<HTMLInputElement>(null);
-    const buttonRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
+    const buttonRefs = useRef<{ [key: string]: HTMLInputElement }>({});
 
     const [nodeText, setNodeText] = useState(messageNode.data.text);
 
@@ -125,7 +124,7 @@ const MessageSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISe
                     />
                     <Button
                         variant="outlined"
-                        sx={{ border: "1px dashed darkgrey" }}
+                        sx={{ border: "1px dashed darkgrey", color: "ButtonText" }}
                         fullWidth
                         onClick={handleAddButtonClick}>
                         + Add button

@@ -5,7 +5,9 @@ import FilterNode from "../components/nodes/FilterNode";
 import MessageSettings from "../components/settings/MessageSettings";
 import PauseSettings from "../components/settings/PauseSettings";
 import FilterSettings from "../components/settings/FilterSettings";
-import { ISettingsMenu, ISettingsMenuProps } from "../components/settings/SettingsMenu.types";
+import { INodeMap } from "./nodeMap";
+import { IBtn } from "../components/nodes/Node.types";
+import { v4 as uuidv4 } from "uuid";
 
 export const calculateNodePosition = (
     e: React.DragEvent,
@@ -27,12 +29,13 @@ export const nodeTypes: NodeTypes = {
     filter: FilterNode,
 };
 
-export interface INodeMap {
-    [key: string]: (data: ISettingsMenuProps) => ISettingsMenu;
-}
-
 export const nodeMap: INodeMap = {
     Message: MessageSettings,
     Pause: PauseSettings,
     Filter: FilterSettings,
+};
+
+export const notBtn: IBtn = {
+    id: uuidv4(),
+    text: "NOT",
 };

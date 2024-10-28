@@ -23,7 +23,7 @@ export interface IBtn {
 export interface IFilter {
     id: string;
     criteria: string;
-    text: string;
+    equals: string;
 }
 
 // export interface IFilterNodeContent extends INodeBaseContent {
@@ -38,9 +38,7 @@ export type NodeData = { label: string; color: string };
 export type MessageNodeData = NodeData & { text: string; buttons?: IBtn[] };
 export type PauseNodeData = NodeData & { pause: number; timeRange: string };
 export type FilterNodeData = NodeData & {
-    text: string;
-    criteria?: string;
-    filters?: IFilter[];
+    conditions?: IFilter[];
 };
 
 // type MessageNodeData = { content: IMessageNodeContent };

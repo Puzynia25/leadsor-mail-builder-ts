@@ -1,13 +1,7 @@
 @import "../../styles/variables.scss";
 
-.filter-content__wrapper {
-    text-align: center;
-    padding: 0 5px;
-}
-
-.filter-content__text {
-    color: $font-color;
-    font-size: 0.9rem;
-    padding: 10px;
-    margin-top: 10px;
+.filter-node__conditions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }

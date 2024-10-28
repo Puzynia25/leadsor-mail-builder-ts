@@ -1,15 +1,33 @@
 import { NodeProps } from "@xyflow/react";
-import { FilterNodeType } from "./Node.types";
+import { FilterNodeType, IFilter } from "./Node.types";
 import NodeWrapper from "./NodeWrapper";
+import ButtonNode from "./ButtonNode";
+import { notBtn } from "../../utils";
+import ConditionNode from "./ConditionNode";
 
 import "./FilterNode.scss";
 
 const FilterNode = ({ id, data }: NodeProps<FilterNodeType>) => {
+    const renderConditions = (conditionList: IFilter[]) => {
+        if (conditionList.length === 0) {
+            return null;
+        }
+
+        return conditionList.map((el) => {
+            if (el.criteria === "") {
+                return null;
+            }
+            return <ConditionNode key={el.id} id={el.id} condition={el} />;
+        });
+    };
+
+    const conditions = renderConditions(data.conditions ?? []);
+
     return (
-        <NodeWrapper id={id} data={data}>
-            <div className="message-content__wrapper">
-                <p className="message-content__text">{data.text}</p>
-                {/* {filters && <div className="message-content__btns">{filters}</div>} */}
+        <NodeWrapper id={id} data={data} handle="left">
+            <div className="filter-node__conditions">
+                {conditions}
+                <ButtonNode btn={notBtn} isHandle={true} />
             </div>
         </NodeWrapper>
     );

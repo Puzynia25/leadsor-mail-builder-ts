@@ -10,7 +10,14 @@ const SettingsMenu = ({ node, onClose, onUpdateNodeContent }: ISettingsMenuProps
         onUpdateNodeContent,
     };
 
-    const { render } = useSettingsMenu(node.data.label, data);
+    const { render, applyChanges } = useSettingsMenu(node.data.label, data);
+
+    const handleApply = () => {
+        if (applyChanges) {
+            applyChanges();
+        }
+        onClose();
+    };
 
     return (
         <section>
@@ -18,10 +25,10 @@ const SettingsMenu = ({ node, onClose, onUpdateNodeContent }: ISettingsMenuProps
             <div className="settings-menu__wrapper">
                 <h6 className="settings-menu__title">{node.data.label}</h6>
                 <div className="divider" />
-                <div className="settings-menu__content">
-                    <div className="settings-menu__inner">{render}</div>
+                <div className="settings-menu__inner">
+                    <div className="settings-menu__content">{render}</div>
                     <div className="btn-wrapper">
-                        <Button variant="contained" color="success" onClick={onClose}>
+                        <Button variant="contained" color="success" onClick={handleApply}>
                             Apply
                         </Button>
                     </div>

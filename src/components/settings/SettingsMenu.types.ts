@@ -2,9 +2,8 @@ import { CustomNodeType } from "../nodes/Node.types";
 
 export interface ISettingsMenu {
     render: JSX.Element;
+    applyChanges?: () => void;
 }
-
-type events = () => void;
 
 // export interface ISettingsMenuProps {
 //     node: Node<CommonNodeData>;
@@ -18,8 +17,9 @@ type events = () => void;
 
 export interface ISettingsMenuProps {
     node: CustomNodeType;
-    onClose?: events;
+    onClose?: () => void;
     onUpdateNodeContent: (nodeId: string, newNode: CustomNodeType) => void;
+    onApplyChanges?: () => void;
 }
 
 // export enum TimeRange {

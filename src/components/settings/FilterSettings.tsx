@@ -1,15 +1,38 @@
 import { useState } from "react";
-import { MenuItem, Select, TextField } from "@mui/material";
 import { ISettingsMenu, ISettingsMenuProps } from "./SettingsMenu.types";
-import { FilterNodeData, FilterNodeType } from "../nodes/Node.types";
+import { FilterNodeData, FilterNodeType, IFilter } from "../nodes/Node.types";
+import { _currency } from "../../constants";
+import { v4 as uuidv4 } from "uuid";
+import { Button } from "@mui/material";
+import ConditionItem from "./ConditionItem";
 
 import "./FilterSettings.scss";
+import ButtonNode from "../nodes/ButtonNode";
+import { notBtn } from "../../utils";
 
 const FilterSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISettingsMenu => {
     const filterNode = node as FilterNodeType;
 
-    const [criteria, setCriteria] = useState("");
-    const [text, setText] = useState("");
+    const [conditions, setConditions] = useState<IFilter[]>(filterNode.data.conditions ?? []);
+
+    const onAddNewCondition = () => {
+        const newCondition = { id: uuidv4(), criteria: "", equals: "" };
+        setConditions((prevConditions) => [...prevConditions, newCondition]);
+    };
+
+    const onDeleteCondition = (id: string) => {
+        setConditions((prev) => prev.filter((el) => el.id !== id));
+    };
+
+    const updateCondition = (id: string, updatedCondition: FilterNodeData) => {
+        const updatedConditions = (prevConditions: IFilter[]) => {
+            return prevConditions.map((condition) =>
+                condition.id === id ? { ...condition, ...updatedCondition } : condition
+            );
+        };
+
+        setConditions((prevConditions) => updatedConditions(prevConditions));
+    };
 
     const createNewNode = (newData: FilterNodeData): FilterNodeType => {
         const newNode: FilterNodeType = {
@@ -20,71 +43,78 @@ const FilterSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISet
         return newNode;
     };
 
-    const handleUpdateCriteria = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const newData: FilterNodeData = {
+    const applyChanges = () => {
+        const updatedData: FilterNodeData = {
             ...filterNode.data,
-            criteria: e.target.value,
+            conditions: conditions,
         };
-
-        setCriteria(e.target.value);
-        onUpdateNodeContent(filterNode.id, createNewNode(newData));
+        onUpdateNodeContent(node.id, createNewNode(updatedData));
     };
 
-    const handleUpdateText = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newData: FilterNodeData = {
-            ...filterNode.data,
-            text: e.target.value,
-        };
+    //current conditions
+    const renderCurrentConditions = (conditions: IFilter[]) => {
+        if (conditions.length === 0) {
+            return null;
+        }
 
-        setText(e.target.value);
-        onUpdateNodeContent(filterNode.id, createNewNode(newData));
+        // return conditions.map((btn) => (
+        //     <Box key={btn.id} display="flex" alignItems="center" marginBottom={2}>
+        //         <TextField label={btn.text} fullWidth size="small" inputRef={(el) => (buttonRefs[btn.id] = el)} />
+        //         <IconButton aria-label="edit" onClick={() => handleUpdateButton(btn.id)} sx={{ marginLeft: "5px" }}>
+        //             <Edit />
+        //         </IconButton>
+        //         <IconButton onClick={() => handleDeleteButton(btn.id)} color="error" aria-label="delete">
+        //             <DeleteRounded />
+        //         </IconButton>
+        //     </Box>
+        // ));
     };
 
-    // const renderFilters = (filters) => {
-    //     if (!filters || filters.length === 0) {
-    //         return null;
-    //     }
+    //new conditions
+    const renderConditions = (conditions: IFilter[]) => {
+        if (conditions.length === 0) {
+            onAddNewCondition();
+        }
 
-    //     return filters.map((filter) => (
-    //         <Box key={filter.id} display="flex" alignItems="center" marginBottom={2}>
-    //             <TextField label={filter.text} fullWidth size="small" inputRef={(el) => (filterRefs[filter.id] = el)} />
-    //             {/* <IconButton aria-label="edit" onClick={() => handleUpdateButton(btn.id)} sx={{ marginLeft: "5px" }}>
-    //                 <Edit />
-    //             </IconButton>
-    //             <IconButton onClick={() => handleDeleteButton(btn.id)} color="error" aria-label="delete">
-    //                 <DeleteRounded />
-    //             </IconButton> */}
-    //         </Box>
-    //     ));
-    // };
+        return conditions.map((condition) => {
+            return (
+                <div key={condition.id}>
+                    <ConditionItem
+                        conditions={conditions}
+                        condition={condition}
+                        onDelete={() => onDeleteCondition(condition.id)}
+                        onUpdate={(updatedConditionData: IFilter) =>
+                            updateCondition(condition.id, updatedConditionData)
+                        }
+                    />
+                    <div className="if-not-divider">
+                        <p>If not:</p>
+                        <div className="divider"></div>
+                    </div>
+                </div>
+            );
+        });
+    };
 
-    // const filters = filterNode.data.filters && renderFilters(filterNode.data.filters);
+    const allConditions = renderConditions(conditions);
+    // const currentConditions = filterNode.data.conditions && renderConditions(filterNode.data.conditions);
 
     return {
         render: (
-            <div>
-                <div className="filter-settings__content">
-                    <Select
-                        displayEmpty
-                        value={criteria}
-                        onChange={handleUpdateCriteria}
-                        sx={{ bgcolor: "#ffff", flex: 1 }}>
-                        <MenuItem value="">Select criteria...</MenuItem>
-                        <MenuItem value="name">Name</MenuItem>
-                        <MenuItem value="assignee">Assignee</MenuItem>
-                    </Select>
-                    <TextField
-                        value={text}
-                        size="medium"
-                        onChange={handleUpdateText}
-                        sx={{ width: "80px", bgcolor: "#ffff", flex: 1 }}
-                    />
-                </div>
-
-                {/* Current filters */}
-                {/* <div className="btns__wrapper">{filters}</div> */}
+            <div className="filter-settings__content">
+                {/* Add condition */}
+                {allConditions}
+                <ButtonNode btn={notBtn} isHandle={false} />
+                <Button
+                    variant="outlined"
+                    sx={{ border: "1px dashed darkgrey", color: "ButtonText", marginY: 3 }}
+                    fullWidth
+                    onClick={onAddNewCondition}>
+                    + Add new condition
+                </Button>
             </div>
         ),
+        applyChanges,
     };
 };
 

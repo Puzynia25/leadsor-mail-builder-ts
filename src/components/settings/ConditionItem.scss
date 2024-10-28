@@ -1,0 +1,43 @@
+.condition-item__content {
+    margin-top: 10px;
+
+    &:not(:last-child) {
+        margin-bottom: 20px;
+    }
+}
+
+.condition-item__selects {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+    align-items: center;
+
+    // > div {
+    //     flex-grow: 1;
+    //     min-width: 100px;
+    // }
+}
+
+.if-not-divider {
+    color: darkgrey;
+    font-weight: 500;
+    display: flex;
+    margin: 20px 0;
+
+    p {
+        width: fit-content;
+        text-wrap: nowrap;
+        margin: 0 5px 0 0;
+    }
+
+    .divider {
+        background: darkgrey;
+        height: 1px;
+    }
+}
+
+.form-control {
+    .MuiMenuItem-root {
+        font-size: 0.9rem;
+    }
+}

@@ -1,4 +1,4 @@
-import { AccessTimeRounded, MessageRounded, TuneRounded } from "@mui/icons-material";
+import { AccessTimeRounded, LanRounded, MessageRounded } from "@mui/icons-material";
 import { SidebarItem } from "../components/sidebar/SidebarItem.types";
 
 export const sidebarItems: SidebarItem[] = [
@@ -8,7 +8,7 @@ export const sidebarItems: SidebarItem[] = [
         data: {
             label: "Message",
             color: "#2b7e2f",
-            text: "type your message",
+            text: "type your message...",
         },
         type: "message",
     },
@@ -20,8 +20,8 @@ export const sidebarItems: SidebarItem[] = [
     },
     {
         id: "3",
-        icon: <TuneRounded fontSize="large" color="warning" />,
-        data: { label: "Filter", color: "#fe9c0c", text: "type your filter" },
+        icon: <LanRounded fontSize="large" color="warning" />,
+        data: { label: "Filter", color: "#fe9c0c" },
         type: "filter",
     },
 ];

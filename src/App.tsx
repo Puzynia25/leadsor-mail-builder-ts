@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Edge } from "@xyflow/react";
-
+import AppHeader from "./components/appHeader/AppHeader";
 import Sidebar from "./components/sidebar/Sidebar";
 import CustomReactFlow from "./components/customReactFlow/CustomReactFlow";
 import SettingsMenu from "./components/settings/SettingsMenu";
 import { CustomNodeType } from "./components/nodes/Node.types";
+import { Divider } from "@mui/material";
 
 import "./App.scss";
 
@@ -43,23 +44,27 @@ const App = () => {
     };
 
     return (
-        <div className="app-wrapper">
-            <Sidebar />
-            <CustomReactFlow
-                nodes={nodes}
-                edges={edges}
-                setNodes={setNodes}
-                setEdges={setEdges}
-                handleNodeClick={handleNodeClick}
-            />
-
-            {showSettingsMenu && settingNode && (
-                <SettingsMenu
-                    node={settingNode}
-                    onClose={handleCloseSettingMenu}
-                    onUpdateNodeContent={handleUpdateNodeContent}
+        <div className="app__wrapper">
+            <AppHeader />
+            <Divider />
+            <div className="app__container">
+                <Sidebar />
+                <CustomReactFlow
+                    nodes={nodes}
+                    edges={edges}
+                    setNodes={setNodes}
+                    setEdges={setEdges}
+                    handleNodeClick={handleNodeClick}
                 />
-            )}
+
+                {showSettingsMenu && settingNode && (
+                    <SettingsMenu
+                        node={settingNode}
+                        onClose={handleCloseSettingMenu}
+                        onUpdateNodeContent={handleUpdateNodeContent}
+                    />
+                )}
+            </div>
         </div>
     );
 };

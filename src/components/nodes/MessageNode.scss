@@ -1,20 +1,13 @@
 @import "../../styles/variables.scss";
 
-.message-content__wrapper {
-    padding: 5px;
-}
-
-.message-content__text {
-    color: $font-color;
-    background: $background;
-    font-size: 0.9rem;
-    padding: 10px;
-    margin-top: 10px;
+.message-node__text {
+    background: #eee;
+    padding: 7px;
     border-radius: 15px;
-    overflow: scroll;
+    overflow: auto;
 }
 
-.message-content__btns {
+.message-node__btns {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
