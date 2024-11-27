@@ -1,27 +1,30 @@
 import { Button } from "@mui/material";
-import { useReactFlow } from "@xyflow/react";
+import { Edge, useReactFlow } from "@xyflow/react";
+import { useCallback } from "react";
+import { collectChainData } from "../../utils";
+import { CustomNodeType } from "../nodes/Node.types";
+import { SaveAlt } from "@mui/icons-material";
 
 const CollectDataButton = () => {
     const { getNodes, getEdges } = useReactFlow();
 
-    const collectData = () => {
-        const nodes = getNodes();
-        const edges = getEdges();
+    const nodes: CustomNodeType[] = getNodes();
+    const edges: Edge[] = getEdges();
 
-        const flowData = {
-            nodes,
-            edges,
-        };
+    const collectData = useCallback(() => {
+        const startNode: CustomNodeType = nodes.find((node) => node.id === "start-node");
 
-        console.log("CollectDataButton", flowData);
-    };
+        if (startNode) {
+            const chainData = collectChainData(startNode, nodes, edges);
+            console.log("!!!collectData", chainData);
+        }
+    }, [nodes, edges]);
 
     return (
-        <div>
-            <Button variant="contained" onClick={collectData} color="info">
-                Save
-            </Button>
-        </div>
+        <Button variant="outlined" onClick={collectData} color="info">
+            <SaveAlt fontSize="small" sx={{ marginRight: 1 }} />
+            Save
+        </Button>
     );
 };
 

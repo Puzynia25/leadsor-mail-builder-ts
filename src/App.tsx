@@ -1,23 +1,28 @@
-import { useState } from "react";
-import { Edge } from "@xyflow/react";
+import { useCallback, useState } from "react";
+import { addEdge, Edge, OnConnect, useEdgesState, useNodesState } from "@xyflow/react";
 import AppHeader from "./components/appHeader/AppHeader";
 import Sidebar from "./components/sidebar/Sidebar";
 import CustomReactFlow from "./components/customReactFlow/CustomReactFlow";
 import SettingsMenu from "./components/settings/SettingsMenu";
 import { CustomNodeType } from "./components/nodes/Node.types";
 import { Divider } from "@mui/material";
+import { initialEdges, initialNodes } from "./utils/initial-elements";
 
 import "./App.scss";
 
 const App = () => {
-    const [nodes, setNodes] = useState<CustomNodeType[]>([]);
-    const [edges, setEdges] = useState<Edge[]>([]);
-
+    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
     const [settingNode, setSettingNode] = useState<CustomNodeType | null>(null);
     const [showSettingsMenu, setShowSettingsMenu] = useState(false);
 
+    const onConnect: OnConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
+
     const handleNodeClick: (e: React.MouseEvent, node: CustomNodeType | null) => void = (_e, node) => {
-        setShowSettingsMenu(true);
+        if (node?.type !== "start") {
+            setShowSettingsMenu(true);
+        }
+
         setSettingNode(node);
     };
 
@@ -40,7 +45,7 @@ const App = () => {
             });
         };
 
-        setNodes((nds) => changedNodes(nds));
+        setNodes((nds) => changedNodes(nds as CustomNodeType[]));
     };
 
     return (
@@ -52,9 +57,10 @@ const App = () => {
                 <CustomReactFlow
                     nodes={nodes}
                     edges={edges}
-                    setNodes={setNodes}
-                    setEdges={setEdges}
                     handleNodeClick={handleNodeClick}
+                    onNodesChange={onNodesChange}
+                    onEdgesChange={onEdgesChange}
+                    onConnect={onConnect}
                 />
 
                 {showSettingsMenu && settingNode && (

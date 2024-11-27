@@ -46,8 +46,9 @@ export type FilterNodeData = NodeData & {
 // type FilterNodeData = { content: IFilterNodeContent };
 
 export type CommonNodeData = MessageNodeData | PauseNodeData | FilterNodeData;
-export type CustomNodeType = MessageNodeType | PauseNodeType | FilterNodeType;
+export type CustomNodeType = StartNodeType | MessageNodeType | PauseNodeType | FilterNodeType;
 
+export type StartNodeType = Node<NodeData, "start">;
 export type MessageNodeType = Node<MessageNodeData, "message">;
 export type PauseNodeType = Node<PauseNodeData, "pause">;
 export type FilterNodeType = Node<FilterNodeData, "filter">;

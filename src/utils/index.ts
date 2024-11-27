@@ -1,13 +1,10 @@
-import { NodeTypes } from "@xyflow/react";
+import { Edge, getOutgoers, NodeTypes } from "@xyflow/react";
 import MessageNode from "../components/nodes/MessageNode";
 import PauseNode from "../components/nodes/PauseNode";
 import FilterNode from "../components/nodes/FilterNode";
-import MessageSettings from "../components/settings/MessageSettings";
-import PauseSettings from "../components/settings/PauseSettings";
-import FilterSettings from "../components/settings/FilterSettings";
-import { INodeMap } from "./nodeMap";
-import { IBtn } from "../components/nodes/Node.types";
+import { CustomNodeType, IBtn } from "../components/nodes/Node.types";
 import { v4 as uuidv4 } from "uuid";
+import StartNode from "../components/nodes/StartNode";
 
 export const calculateNodePosition = (
     e: React.DragEvent,
@@ -24,18 +21,36 @@ export const calculateNodePosition = (
 };
 
 export const nodeTypes: NodeTypes = {
+    start: StartNode,
     message: MessageNode,
     pause: PauseNode,
     filter: FilterNode,
 };
 
-export const nodeMap: INodeMap = {
-    Message: MessageSettings,
-    Pause: PauseSettings,
-    Filter: FilterSettings,
-};
-
 export const notBtn: IBtn = {
     id: uuidv4(),
     text: "NOT",
+};
+
+export const collectChainData = (
+    startNode: CustomNodeType,
+    allNodes: CustomNodeType[],
+    allEdges: Edge[]
+): CustomNodeType[] => {
+    const chain: CustomNodeType[] = [];
+    const visited = new Set<string>();
+
+    const traverse = (node: CustomNodeType) => {
+        if (!node || visited.has(node.id)) return;
+        visited.add(node.id);
+        chain.push(node);
+
+        const outgoers = getOutgoers(node, allNodes, allEdges);
+        // console.log(outgoers, "outgoers");
+        outgoers.forEach(traverse);
+    };
+
+    traverse(startNode);
+
+    return chain;
 };
