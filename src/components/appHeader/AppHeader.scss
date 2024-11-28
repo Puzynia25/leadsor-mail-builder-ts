@@ -1,7 +1,23 @@
 .app__header {
     height: 70px;
     display: flex;
+    gap: 20px;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
+}
+
+.header__btns {
+    display: flex;
+    gap: 15px;
+}
+
+.header__title {
+    display: flex;
+    align-items: center;
+}
+
+.header__title-icon {
+    border: 1px solid black;
+    border-radius: 15px;
 }
