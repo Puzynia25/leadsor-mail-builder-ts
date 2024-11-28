@@ -1,4 +1,14 @@
 .sidebar-wrapper {
     background: #f0f0f0;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 200px;
+}
+
+.sidebar__title {
+    margin: 10px 0;
+    font-weight: 400;
+    font-size: 1.2rem;
 }

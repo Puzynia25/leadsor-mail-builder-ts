@@ -1,21 +1,23 @@
-import { FC } from "react";
-import { SidebarItem } from "./SidebarItem.types";
+import { SidebarItem as SidebarItemType } from "./SidebarItem.types";
 
 import "./SidebarItem.scss";
 
-const SidebarItems: FC<{ item: SidebarItem; onDragStart: (e: React.DragEvent, item: SidebarItem) => void }> = ({
+const SidebarItem = ({
     item,
     onDragStart,
+}: {
+    item: SidebarItemType;
+    onDragStart: (e: React.DragEvent, item: SidebarItemType) => void;
 }) => {
-    // console.log(item, "SidebarItems");
+    // console.log(item, "SidebarItem");
     return (
-        <div className="sidebar-item-wrapper">
+        <div className="sidebar-item__wrapper">
             <div className="sidebar-item" draggable onDragStart={(e) => onDragStart(e, item)}>
                 {item.icon}
-                <p>{item.data.label}</p>
+                <p className="sidebar-item__label">{item.data.label}</p>
             </div>
         </div>
     );
 };
 
-export default SidebarItems;
+export default SidebarItem;
