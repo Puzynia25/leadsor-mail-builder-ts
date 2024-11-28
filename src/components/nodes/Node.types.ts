@@ -20,7 +20,7 @@ export interface IBtn {
     text: string;
 }
 
-export interface IFilter {
+export interface ICondition {
     id: string;
     criteria: string;
     equals: string;
@@ -35,20 +35,20 @@ export interface INodeRender {
 }
 
 export type NodeData = { label: string; color: string };
-export type MessageNodeData = NodeData & { text: string; buttons?: IBtn[] };
-export type PauseNodeData = NodeData & { pause: number; timeRange: string };
-export type FilterNodeData = NodeData & {
-    conditions?: IFilter[];
+export type ImmediatelyNodeData = NodeData & { text: string; buttons?: IBtn[] };
+export type WaitNodeData = NodeData & { wait: number; timeRange: string };
+export type ConditionNodeData = NodeData & {
+    conditions?: ICondition[];
 };
 
 // type MessageNodeData = { content: IMessageNodeContent };
 // type PauseNodeData = { content: IPauseNodeContent };
 // type FilterNodeData = { content: IFilterNodeContent };
 
-export type CommonNodeData = MessageNodeData | PauseNodeData | FilterNodeData;
-export type CustomNodeType = StartNodeType | MessageNodeType | PauseNodeType | FilterNodeType;
+export type CommonNodeData = ImmediatelyNodeData | WaitNodeData | ConditionNodeData;
+export type CustomNodeType = StartNodeType | ImmediatelyNodeType | WaitNodeType | ConditionNodeType;
 
 export type StartNodeType = Node<NodeData, "start">;
-export type MessageNodeType = Node<MessageNodeData, "message">;
-export type PauseNodeType = Node<PauseNodeData, "pause">;
-export type FilterNodeType = Node<FilterNodeData, "filter">;
+export type ImmediatelyNodeType = Node<ImmediatelyNodeData, "immediately">;
+export type WaitNodeType = Node<WaitNodeData, "wait">;
+export type ConditionNodeType = Node<ConditionNodeData, "condition">;

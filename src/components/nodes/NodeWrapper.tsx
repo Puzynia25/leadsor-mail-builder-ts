@@ -20,11 +20,11 @@ const NodeWrapper = ({
             {(handle === "left" || handle === "all") && (
                 <Handle type="target" position={Position.Left} id={`${id}-target`} />
             )}
-            <div className="node-wrapper" tabIndex={0}>
-                <p className="node-label" style={{ backgroundColor: data.color }}>
+            <div className="node__wrapper" tabIndex={0}>
+                <p className="node__wrapper-label" style={{ backgroundColor: data.color }}>
                     {data.label}
                 </p>
-                <div className="node-content">{children}</div>
+                <div className="node__wrapper-content">{children}</div>
             </div>
             {(handle === "right" || handle === "all") && (
                 <Handle type="source" position={Position.Right} id={`${id}-source`} />

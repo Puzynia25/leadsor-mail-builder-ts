@@ -1,10 +1,10 @@
 import { Edge, getOutgoers, NodeTypes } from "@xyflow/react";
-import MessageNode from "../components/nodes/MessageNode";
-import PauseNode from "../components/nodes/PauseNode";
-import FilterNode from "../components/nodes/FilterNode";
+import ImmediatelyNode from "../components/nodes/ImmediatelyNode";
+import StartNode from "../components/nodes/StartNode";
+import ConditionNode from "../components/nodes/conditionNode/ConditionNode";
+import WaitNode from "../components/nodes/WaitNode";
 import { CustomNodeType, IBtn } from "../components/nodes/Node.types";
 import { v4 as uuidv4 } from "uuid";
-import StartNode from "../components/nodes/StartNode";
 
 export const calculateNodePosition = (
     e: React.DragEvent,
@@ -22,9 +22,9 @@ export const calculateNodePosition = (
 
 export const nodeTypes: NodeTypes = {
     start: StartNode,
-    message: MessageNode,
-    pause: PauseNode,
-    filter: FilterNode,
+    immediately: ImmediatelyNode,
+    wait: WaitNode,
+    condition: ConditionNode,
 };
 
 export const notBtn: IBtn = {

@@ -6,7 +6,7 @@ import CustomReactFlow from "./components/customReactFlow/CustomReactFlow";
 import SettingsMenu from "./components/settings/SettingsMenu";
 import { CustomNodeType } from "./components/nodes/Node.types";
 import { Divider } from "@mui/material";
-import { initialEdges, initialNodes } from "./utils/initial-elements";
+import { initialEdges, initialNodes } from "./components/customReactFlow/initialElements";
 
 import "./App.scss";
 

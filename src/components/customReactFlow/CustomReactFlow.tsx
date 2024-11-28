@@ -1,43 +1,39 @@
-import { FC } from "react";
-import { useCallback } from "react";
 import {
     ReactFlow,
-    applyNodeChanges,
-    applyEdgeChanges,
-    addEdge,
     Edge,
     useReactFlow,
     OnNodesChange,
     OnEdgesChange,
     OnConnect,
     DefaultEdgeOptions,
+    Controls,
+    Background,
 } from "@xyflow/react";
 import { v4 as uuidv4 } from "uuid";
-
 import { calculateNodePosition, nodeTypes } from "../../utils";
 import { SidebarItem } from "../sidebar/SidebarItem.types";
 import { CustomNodeType } from "../nodes/Node.types";
 
 import "./CustomReactFlow.scss";
 
-const CustomReactFlow: FC<{
+const CustomReactFlow = ({
+    nodes,
+    edges,
+    handleNodeClick,
+    onNodesChange,
+    onEdgesChange,
+    onConnect,
+}: {
     nodes: CustomNodeType[];
     edges: Edge[];
-    setNodes: React.Dispatch<React.SetStateAction<CustomNodeType[]>>;
-    setEdges: React.Dispatch<React.SetStateAction<Edge[]>>;
     handleNodeClick: (e: React.MouseEvent, node: CustomNodeType | null) => void;
-}> = ({ nodes, edges, setNodes, setEdges, handleNodeClick }) => {
-    const { getViewport } = useReactFlow();
+    onNodesChange: OnNodesChange<CustomNodeType>;
+    onEdgesChange: OnEdgesChange<Edge>;
+    onConnect: OnConnect;
+}) => {
+    const { getViewport, addNodes, getNodes } = useReactFlow();
 
-    const onNodesChange: OnNodesChange<CustomNodeType> = useCallback(
-        (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-        []
-    );
-    const onEdgesChange: OnEdgesChange = useCallback(
-        (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-        []
-    );
-    const onConnect: OnConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
+    // const nodes: CustomNodeType[] = getNodes();
 
     const onDrop: (e: React.DragEvent) => void = (e) => {
         e.preventDefault();
@@ -58,7 +54,7 @@ const CustomReactFlow: FC<{
             type: sideBarItem.type,
         };
 
-        setNodes((nds) => [...nds, newNode]);
+        addNodes(newNode);
     };
 
     const onDragOver: (e: React.DragEvent) => void = (e) => {
@@ -72,14 +68,16 @@ const CustomReactFlow: FC<{
                 className="custom-rf__content"
                 nodes={nodes}
                 edges={edges}
-                onEdgesChange={onEdgesChange}
                 onNodesChange={onNodesChange}
+                onEdgesChange={onEdgesChange}
                 onConnect={onConnect}
                 onNodeClick={handleNodeClick}
                 nodeTypes={nodeTypes}
                 nodeOrigin={[0.5, 0.5]}
-                defaultEdgeOptions={defaultEdgeOptions}
-            />
+                defaultEdgeOptions={defaultEdgeOptions}>
+                <Controls />
+                <Background />
+            </ReactFlow>
         </div>
     );
 };

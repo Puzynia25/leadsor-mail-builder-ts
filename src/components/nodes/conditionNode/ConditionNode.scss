@@ -1,0 +1,7 @@
+@import "../../../styles/variables.scss";
+
+.condition-node__conditions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

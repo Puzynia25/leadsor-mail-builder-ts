@@ -25,7 +25,7 @@ export const sidebarItems: Sidebar = {
         {
             id: "2",
             icon: <AccessTimeRounded fontSize="large" color="primary" />,
-            data: { label: "Wait", color: "#6c95b2", pause: 3, timeRange: "hours" },
+            data: { label: "Wait", color: "#6c95b2", wait: 3, timeRange: "hours" },
             type: "wait",
         },
         {

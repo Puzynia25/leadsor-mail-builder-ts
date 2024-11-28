@@ -1,43 +1,43 @@
 import { useState } from "react";
 import { MenuItem, Select, TextField } from "@mui/material";
 import { ISettingsMenu, ISettingsMenuProps } from "./SettingsMenu.types";
-import { PauseNodeData, PauseNodeType } from "../nodes/Node.types";
+import { WaitNodeData, WaitNodeType } from "../nodes/Node.types";
 
-import "./PauseSettings.scss";
+import "./WaitSettings.scss";
 
 const PauseSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISettingsMenu => {
-    const pauseNode = node as PauseNodeType;
+    const waitNode = node as WaitNodeType;
 
-    const [pause, setPause] = useState(pauseNode.data.pause);
+    const [pause, setPause] = useState(waitNode.data.wait);
     const [timeRange, setTimeRange] = useState("hours");
 
-    const createNewNode = (newData: PauseNodeData): PauseNodeType => {
-        const newNode: PauseNodeType = {
-            ...pauseNode,
+    const createNewNode = (newData: WaitNodeData): WaitNodeType => {
+        const newNode: WaitNodeType = {
+            ...waitNode,
             data: newData,
         };
 
         return newNode;
     };
 
-    const handleUpdatePause = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const newData: PauseNodeData = {
-            ...pauseNode.data,
-            pause: Number(e.target.value),
+    const handleUpdateWait = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newData: WaitNodeData = {
+            ...waitNode.data,
+            wait: Number(e.target.value),
         };
 
         setPause(Number(e.target.value));
-        onUpdateNodeContent(pauseNode.id, createNewNode(newData));
+        onUpdateNodeContent(waitNode.id, createNewNode(newData));
     };
 
     const handleUpdateTimeRange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newData: PauseNodeData = {
-            ...pauseNode.data,
+        const newData: WaitNodeData = {
+            ...waitNode.data,
             timeRange: e.target.value,
         };
 
         setTimeRange(e.target.value);
-        onUpdateNodeContent(pauseNode.id, createNewNode(newData));
+        onUpdateNodeContent(waitNode.id, createNewNode(newData));
     };
 
     return {
@@ -48,7 +48,7 @@ const PauseSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISett
                     <TextField
                         value={pause}
                         size="medium"
-                        onChange={handleUpdatePause}
+                        onChange={handleUpdateWait}
                         sx={{ width: "80px", bgcolor: "#ffff" }}
                     />
                     <Select value={timeRange} onChange={handleUpdateTimeRange} sx={{ bgcolor: "#ffff" }}>

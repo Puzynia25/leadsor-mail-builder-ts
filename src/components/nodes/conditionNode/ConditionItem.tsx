@@ -1,12 +1,12 @@
 import { Button, Chip } from "@mui/material";
 import { Handle, Position } from "@xyflow/react";
-import { IFilter } from "./Node.types";
+import { ICondition } from "../Node.types";
 
-import "./ConditionNode.scss";
+import "./ConditionItem.scss";
 
-const ConditionNode = ({ id, condition }: { id: string; condition: IFilter }) => {
+const ConditionItem = ({ id, condition }: { id: string; condition: ICondition }) => {
     return (
-        <div className="condition-node__wrapper">
+        <div className="condition__wrapper">
             <div className="btn__wrapper">
                 <Button
                     variant="text"
@@ -38,4 +38,4 @@ const ConditionNode = ({ id, condition }: { id: string; condition: IFilter }) =>
     );
 };
 
-export default ConditionNode;
+export default ConditionItem;

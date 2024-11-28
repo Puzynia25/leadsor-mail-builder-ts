@@ -1,31 +1,31 @@
 import { useRef, useState } from "react";
-import { Box, Button, TextField, IconButton, TextareaAutosize } from "@mui/material";
+import { Box, Button, TextField, IconButton, TextareaAutosize, Divider } from "@mui/material";
 import { Edit, DeleteRounded } from "@mui/icons-material";
 import { ISettingsMenu, ISettingsMenuProps } from "./SettingsMenu.types";
-import { IBtn, MessageNodeData, MessageNodeType } from "../nodes/Node.types";
+import { IBtn, ImmediatelyNodeData, ImmediatelyNodeType } from "../nodes/Node.types";
 import { v4 as uuidv4 } from "uuid";
 
 const MessageSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISettingsMenu => {
-    const messageNode = node as MessageNodeType;
+    const immediatelyNode = node as ImmediatelyNodeType;
 
     const buttonTextRef = useRef<HTMLInputElement>(null);
     const buttonRefs = useRef<{ [key: string]: HTMLInputElement }>({});
 
-    const [nodeText, setNodeText] = useState(messageNode.data.text);
+    const [nodeText, setNodeText] = useState(immediatelyNode.data.text);
 
     const handleUpdateNodeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const newData: MessageNodeData = {
-            ...messageNode.data,
+        const newData: ImmediatelyNodeData = {
+            ...immediatelyNode.data,
             text: e.target.value,
         };
 
         setNodeText(e.target.value);
-        onUpdateNodeContent(messageNode.id, createNewNode(newData));
+        onUpdateNodeContent(immediatelyNode.id, createNewNode(newData));
     };
 
-    const createNewNode = (newData: MessageNodeData): MessageNodeType => {
-        const newNode: MessageNodeType = {
-            ...messageNode,
+    const createNewNode = (newData: ImmediatelyNodeData): ImmediatelyNodeType => {
+        const newNode: ImmediatelyNodeType = {
+            ...immediatelyNode,
             data: newData,
         };
 
@@ -40,46 +40,52 @@ const MessageSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISe
                 id: uuidv4(),
                 text: buttonText,
             };
-            const newData: MessageNodeData = {
-                ...messageNode.data,
-                buttons: [...(messageNode.data.buttons ?? []), newButton],
+            const newData: ImmediatelyNodeData = {
+                ...immediatelyNode.data,
+                buttons: [...(immediatelyNode.data.buttons ?? []), newButton],
             };
-            onUpdateNodeContent(messageNode.id, createNewNode(newData));
+            onUpdateNodeContent(immediatelyNode.id, createNewNode(newData));
             buttonTextRef.current.value = "";
         }
     };
 
     const handleUpdateButton = (btnId: string) => {
-        const data = messageNode.data;
+        const data = immediatelyNode.data;
         const newText = buttonRefs[btnId]?.value;
 
-        const newData: MessageNodeData = {
+        const newData: ImmediatelyNodeData = {
             ...data,
             buttons: data.buttons && data.buttons.map((btn) => (btn.id === btnId ? { ...btn, text: newText } : btn)),
         };
 
-        onUpdateNodeContent(messageNode.id, createNewNode(newData));
+        onUpdateNodeContent(immediatelyNode.id, createNewNode(newData));
     };
 
     const handleDeleteButton = (btnId: string) => {
-        const data = messageNode.data;
+        const data = immediatelyNode.data;
 
-        const newData: MessageNodeData = {
+        const newData: ImmediatelyNodeData = {
             ...data,
             buttons: data.buttons && data.buttons.filter((btn) => btn.id !== btnId),
         };
 
-        onUpdateNodeContent(messageNode.id, createNewNode(newData));
+        onUpdateNodeContent(immediatelyNode.id, createNewNode(newData));
     };
 
     const renderButtons = (btns: IBtn[]) => {
         if (!btns || btns.length === 0) {
-            return null;
+            return <div>There are no buttons</div>;
         }
 
         return btns.map((btn) => (
-            <Box key={btn.id} display="flex" alignItems="center" marginBottom={2}>
-                <TextField label={btn.text} fullWidth size="small" inputRef={(el) => (buttonRefs[btn.id] = el)} />
+            <Box key={btn.id} display="flex" alignItems="center" marginY={2}>
+                <TextField
+                    placeholder={btn.text}
+                    fullWidth
+                    size="small"
+                    inputRef={(el) => (buttonRefs[btn.id] = el)}
+                    className="text-field"
+                />
                 <IconButton aria-label="edit" onClick={() => handleUpdateButton(btn.id)} sx={{ marginLeft: "5px" }}>
                     <Edit />
                 </IconButton>
@@ -90,7 +96,13 @@ const MessageSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISe
         ));
     };
 
-    const btns = messageNode.data.buttons && renderButtons(messageNode.data.buttons);
+    const btns = immediatelyNode.data.buttons && (
+        <>
+            <div>Current buttons:</div>
+            <div>{renderButtons(immediatelyNode.data.buttons)}</div>
+            <Divider />
+        </>
+    );
 
     return {
         render: (
@@ -121,6 +133,7 @@ const MessageSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISe
                         margin="normal"
                         placeholder="type button text..."
                         inputRef={buttonTextRef}
+                        className="text-field"
                     />
                     <Button
                         variant="outlined"

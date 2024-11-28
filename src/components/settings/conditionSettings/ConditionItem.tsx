@@ -1,6 +1,6 @@
 import { FormControl, IconButton, MenuItem, Select } from "@mui/material";
-import { IFilter } from "../nodes/Node.types";
-import { _currency } from "../../constants";
+import { ICondition } from "../../nodes/Node.types";
+import { _currency } from "../../../constants";
 import { useEffect, useState } from "react";
 import { DeleteRounded } from "@mui/icons-material";
 
@@ -12,10 +12,10 @@ const ConditionItem = ({
     onDelete,
     onUpdate,
 }: {
-    condition: IFilter;
-    conditions: IFilter[];
+    condition: ICondition;
+    conditions: ICondition[];
     onDelete: () => void;
-    onUpdate: (updatedCondition: Partial<IFilter>) => void;
+    onUpdate: (updatedCondition: Partial<ICondition>) => void;
 }) => {
     const [criteria, setCriteria] = useState(condition.criteria || "");
     const [equals, setEquals] = useState(condition.equals || "");
