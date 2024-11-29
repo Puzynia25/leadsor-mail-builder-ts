@@ -54,10 +54,6 @@ const AppHeader = () => {
                     Analytics
                 </Button>
                 <Button variant="outlined" onClick={(e) => console.log(e.target)} color="info">
-                    <Settings fontSize="small" sx={{ marginRight: 1 }} />
-                    Options
-                </Button>
-                <Button variant="outlined" onClick={(e) => console.log(e.target)} color="info">
                     <FilterAlt fontSize="small" sx={{ marginRight: 1 }} />
                     Filter
                 </Button>

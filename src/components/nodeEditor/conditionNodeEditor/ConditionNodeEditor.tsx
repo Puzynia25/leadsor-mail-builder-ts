@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { ISettingsMenu, ISettingsMenuProps } from "../SettingsMenu.types";
-import { ConditionNodeData, ConditionNodeType, ICondition } from "../../nodes/Node.types";
+import { INodeEditor, INodeEditorProps } from "../NodeEditor.types";
+import { ConditionNodeData, ICondition } from "../../nodes/Node.types";
 import { _currency } from "../../../constants";
 import { v4 as uuidv4 } from "uuid";
 import { Button } from "@mui/material";
@@ -8,12 +8,12 @@ import ConditionItem from "./ConditionItem";
 import ButtonNode from "../../nodes/ButtonNode";
 import { notBtn } from "../../../utils";
 
-import "./ConditionSettings.scss";
+import "./ConditionNodeEditor.scss";
 
-const FilterSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISettingsMenu => {
-    const filterNode = node as ConditionNodeType;
+const ConditionNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
+    const conditionNodeData = data as ConditionNodeData;
 
-    const [conditions, setConditions] = useState<ICondition[]>(filterNode.data.conditions ?? []);
+    const [conditions, setConditions] = useState<ICondition[]>(conditionNodeData.conditions ?? []);
 
     const onAddNewCondition = () => {
         const newCondition = { id: uuidv4(), criteria: "", equals: "" };
@@ -24,7 +24,7 @@ const FilterSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISet
         setConditions((prev) => prev.filter((el) => el.id !== id));
     };
 
-    const updateCondition = (id: string, updatedCondition: ConditionNodeData) => {
+    const updateCondition = (id: string, updatedCondition: Partial<ICondition>) => {
         const updatedConditions = (prevConditions: ICondition[]) => {
             return prevConditions.map((condition) =>
                 condition.id === id ? { ...condition, ...updatedCondition } : condition
@@ -34,21 +34,12 @@ const FilterSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISet
         setConditions((prevConditions) => updatedConditions(prevConditions));
     };
 
-    const createNewNode = (newData: ConditionNodeData): ConditionNodeType => {
-        const newNode: ConditionNodeType = {
-            ...filterNode,
-            data: newData,
-        };
-
-        return newNode;
-    };
-
     const applyChanges = () => {
         const updatedData: ConditionNodeData = {
-            ...filterNode.data,
+            ...conditionNodeData,
             conditions: conditions,
         };
-        onUpdateNodeContent(node.id, createNewNode(updatedData));
+        onUpdateNodeContent(updatedData);
     };
 
     //current conditions
@@ -83,9 +74,7 @@ const FilterSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISet
                         conditions={conditions}
                         condition={condition}
                         onDelete={() => onDeleteCondition(condition.id)}
-                        onUpdate={(updatedConditionData: ICondition) =>
-                            updateCondition(condition.id, updatedConditionData)
-                        }
+                        onUpdate={(updatedConditionData) => updateCondition(condition.id, updatedConditionData)}
                     />
                     <div className="if-not-divider">
                         <p>If not:</p>
@@ -101,7 +90,7 @@ const FilterSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISet
 
     return {
         render: (
-            <div className="condition-settings__content">
+            <div className="condition-node-editor__content">
                 {/* Add condition */}
                 {allConditions}
                 <ButtonNode btn={notBtn} isHandle={false} />
@@ -118,4 +107,4 @@ const FilterSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISet
     };
 };
 
-export default FilterSettings;
+export default ConditionNodeEditor;

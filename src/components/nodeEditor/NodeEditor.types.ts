@@ -1,6 +1,6 @@
-import { CustomNodeType } from "../nodes/Node.types";
+import { CommonNodeData, CustomNodeType } from "../nodes/Node.types";
 
-export interface ISettingsMenu {
+export interface INodeEditor {
     render: JSX.Element;
     applyChanges?: () => void;
 }
@@ -15,10 +15,10 @@ export interface ISettingsMenu {
 //     onUpdateNodePause: (nodeId: string, newText: string) => void;
 // }
 
-export interface ISettingsMenuProps {
-    node: CustomNodeType;
+export interface INodeEditorProps {
+    data: CommonNodeData;
     onClose?: () => void;
-    onUpdateNodeContent: (nodeId: string, newNode: CustomNodeType) => void;
+    onUpdateNodeContent: (newNodeData: CommonNodeData) => void;
     onApplyChanges?: () => void;
 }
 

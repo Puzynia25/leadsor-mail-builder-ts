@@ -1,35 +1,26 @@
 import { useRef, useState } from "react";
 import { Box, Button, TextField, IconButton, TextareaAutosize, Divider } from "@mui/material";
 import { Edit, DeleteRounded } from "@mui/icons-material";
-import { ISettingsMenu, ISettingsMenuProps } from "./SettingsMenu.types";
-import { IBtn, ImmediatelyNodeData, ImmediatelyNodeType } from "../nodes/Node.types";
+import { INodeEditor, INodeEditorProps } from "./NodeEditor.types";
+import { IBtn, ImmediatelyNodeData } from "../nodes/Node.types";
 import { v4 as uuidv4 } from "uuid";
 
-const MessageSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISettingsMenu => {
-    const immediatelyNode = node as ImmediatelyNodeType;
+const ImmediatelyNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
+    const immediatelyNodeData = data as ImmediatelyNodeData;
 
     const buttonTextRef = useRef<HTMLInputElement>(null);
     const buttonRefs = useRef<{ [key: string]: HTMLInputElement }>({});
 
-    const [nodeText, setNodeText] = useState(immediatelyNode.data.text);
+    const [nodeText, setNodeText] = useState("");
 
     const handleUpdateNodeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const newData: ImmediatelyNodeData = {
-            ...immediatelyNode.data,
+            ...immediatelyNodeData,
             text: e.target.value,
         };
 
         setNodeText(e.target.value);
-        onUpdateNodeContent(immediatelyNode.id, createNewNode(newData));
-    };
-
-    const createNewNode = (newData: ImmediatelyNodeData): ImmediatelyNodeType => {
-        const newNode: ImmediatelyNodeType = {
-            ...immediatelyNode,
-            data: newData,
-        };
-
-        return newNode;
+        onUpdateNodeContent(newData);
     };
 
     const handleAddButtonClick = () => {
@@ -41,16 +32,16 @@ const MessageSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISe
                 text: buttonText,
             };
             const newData: ImmediatelyNodeData = {
-                ...immediatelyNode.data,
-                buttons: [...(immediatelyNode.data.buttons ?? []), newButton],
+                ...immediatelyNodeData,
+                buttons: [...(immediatelyNodeData.buttons ?? []), newButton],
             };
-            onUpdateNodeContent(immediatelyNode.id, createNewNode(newData));
+            onUpdateNodeContent(newData);
             buttonTextRef.current.value = "";
         }
     };
 
     const handleUpdateButton = (btnId: string) => {
-        const data = immediatelyNode.data;
+        const data = immediatelyNodeData;
         const newText = buttonRefs[btnId]?.value;
 
         const newData: ImmediatelyNodeData = {
@@ -58,18 +49,18 @@ const MessageSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISe
             buttons: data.buttons && data.buttons.map((btn) => (btn.id === btnId ? { ...btn, text: newText } : btn)),
         };
 
-        onUpdateNodeContent(immediatelyNode.id, createNewNode(newData));
+        onUpdateNodeContent(newData);
     };
 
     const handleDeleteButton = (btnId: string) => {
-        const data = immediatelyNode.data;
+        const data = immediatelyNodeData;
 
         const newData: ImmediatelyNodeData = {
             ...data,
             buttons: data.buttons && data.buttons.filter((btn) => btn.id !== btnId),
         };
 
-        onUpdateNodeContent(immediatelyNode.id, createNewNode(newData));
+        onUpdateNodeContent(newData);
     };
 
     const renderButtons = (btns: IBtn[]) => {
@@ -96,10 +87,10 @@ const MessageSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISe
         ));
     };
 
-    const btns = immediatelyNode.data.buttons && (
+    const btns = immediatelyNodeData.buttons && (
         <>
             <div>Current buttons:</div>
-            <div>{renderButtons(immediatelyNode.data.buttons)}</div>
+            <div>{renderButtons(immediatelyNodeData.buttons)}</div>
             <Divider />
         </>
     );
@@ -119,6 +110,7 @@ const MessageSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISe
                         }}
                         value={nodeText}
                         onChange={handleUpdateNodeText}
+                        placeholder="type your message..."
                     />
                 </div>
 
@@ -148,4 +140,4 @@ const MessageSettings = ({ node, onUpdateNodeContent }: ISettingsMenuProps): ISe
     };
 };
 
-export default MessageSettings;
+export default ImmediatelyNodeEditor;

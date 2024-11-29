@@ -1,10 +1,10 @@
-import ImmediatelySettings from "../components/settings/ImmediatelySettings";
-import WaitSettings from "../components/settings/WaitSettings";
-import ConditionSettings from "../components/settings/conditionSettings/ConditionSettings";
+import ImmediatelyNodeEditor from "../components/nodeEditor/ImmediatelyNodeEditor";
+import WaitNodeEditor from "../components/nodeEditor/WaitNodeEditor";
+import ConditionNodeEditor from "../components/nodeEditor/conditionNodeEditor/ConditionNodeEditor";
 import { INodeMap } from "./nodeMap.types";
 
 export const nodeMap: INodeMap = {
-    Immediately: ImmediatelySettings,
-    Wait: WaitSettings,
-    Condition: ConditionSettings,
+    Immediately: ImmediatelyNodeEditor,
+    Wait: WaitNodeEditor,
+    Condition: ConditionNodeEditor,
 };

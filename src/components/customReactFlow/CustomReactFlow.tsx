@@ -16,21 +16,23 @@ import { CustomNodeType } from "../nodes/Node.types";
 
 import "./CustomReactFlow.scss";
 
-const CustomReactFlow = ({
-    nodes,
-    edges,
-    handleNodeClick,
-    onNodesChange,
-    onEdgesChange,
-    onConnect,
-}: {
+interface ICustomReactFlowProps {
     nodes: CustomNodeType[];
     edges: Edge[];
-    handleNodeClick: (e: React.MouseEvent, node: CustomNodeType | null) => void;
     onNodesChange: OnNodesChange<CustomNodeType>;
     onEdgesChange: OnEdgesChange<Edge>;
     onConnect: OnConnect;
-}) => {
+    onEditNode: (nodeId: string) => void;
+}
+
+const CustomReactFlow = ({
+    nodes,
+    edges,
+    onNodesChange,
+    onEdgesChange,
+    onConnect,
+    onEditNode,
+}: ICustomReactFlowProps) => {
     const { getViewport, addNodes, getNodes } = useReactFlow();
 
     // const nodes: CustomNodeType[] = getNodes();
@@ -66,12 +68,17 @@ const CustomReactFlow = ({
         <div className="custom-rf__wrapper" onDrop={onDrop} onDragOver={onDragOver}>
             <ReactFlow
                 className="custom-rf__content"
-                nodes={nodes}
+                nodes={nodes.map((node) => ({
+                    ...node,
+                    data: {
+                        ...node.data,
+                        onEdit: () => onEditNode(node.id), // Передаем onEdit
+                    },
+                }))}
                 edges={edges}
                 onNodesChange={onNodesChange}
                 onEdgesChange={onEdgesChange}
                 onConnect={onConnect}
-                onNodeClick={handleNodeClick}
                 nodeTypes={nodeTypes}
                 nodeOrigin={[0.5, 0.5]}
                 defaultEdgeOptions={defaultEdgeOptions}>

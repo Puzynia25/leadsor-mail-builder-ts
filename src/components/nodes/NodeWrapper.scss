@@ -1,6 +1,6 @@
 @import "../../styles/variables.scss";
 
-.node__wrapper {
+.node__wrapper-content {
     cursor: move;
     position: relative;
     width: 230px;
@@ -16,7 +16,7 @@
     }
 }
 
-.node__wrapper-content {
+.node__wrapper-child {
     color: $font-color;
     padding: 10px 10px 0;
     margin-top: 10px;

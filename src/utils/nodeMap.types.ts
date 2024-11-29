@@ -1,5 +1,5 @@
-import { ISettingsMenu, ISettingsMenuProps } from "../components/settings/SettingsMenu.types";
+import { INodeEditor, INodeEditorProps } from "../components/nodeEditor/NodeEditor.types";
 
 export interface INodeMap {
-    [key: string]: (data: ISettingsMenuProps) => ISettingsMenu;
+    [key: string]: (data: INodeEditorProps) => INodeEditor;
 }

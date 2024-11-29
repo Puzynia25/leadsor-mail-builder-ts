@@ -3,49 +3,39 @@ import { addEdge, Edge, OnConnect, useEdgesState, useNodesState } from "@xyflow/
 import AppHeader from "./components/appHeader/AppHeader";
 import Sidebar from "./components/sidebar/Sidebar";
 import CustomReactFlow from "./components/customReactFlow/CustomReactFlow";
-import SettingsMenu from "./components/settings/SettingsMenu";
-import { CustomNodeType } from "./components/nodes/Node.types";
 import { Divider } from "@mui/material";
 import { initialEdges, initialNodes } from "./components/customReactFlow/initialElements";
+import NodeEditor from "./components/nodeEditor/NodeEditor";
 
 import "./App.scss";
+import { CustomNodeType } from "./components/nodes/Node.types";
 
 const App = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-    const [settingNode, setSettingNode] = useState<CustomNodeType | null>(null);
-    const [showSettingsMenu, setShowSettingsMenu] = useState(false);
+
+    const [selectedNode, setSelectedNode] = useState(null);
+    const [isEditorOpen, setIsEditorOpen] = useState(false);
 
     const onConnect: OnConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
 
-    const handleNodeClick: (e: React.MouseEvent, node: CustomNodeType | null) => void = (_e, node) => {
-        if (node?.type !== "start") {
-            setShowSettingsMenu(true);
+    const handleEditNode = (nodeId: string) => {
+        const node: CustomNodeType = nodes.find((n) => n.id === nodeId);
+        if (node) {
+            setSelectedNode(node);
+            setIsEditorOpen(true);
         }
-
-        setSettingNode(node);
     };
 
-    const handleCloseSettingMenu: () => void = () => {
-        setShowSettingsMenu(false);
-        setSettingNode(null);
+    const handleCloseEditor = () => {
+        setIsEditorOpen(false);
+        setSelectedNode(null);
     };
 
-    const handleUpdateNodeContent = (nodeId: string, newNode: CustomNodeType) => {
-        const changedNodes = (nodes: CustomNodeType[]): CustomNodeType[] => {
-            return nodes.map((node) => {
-                if (node.id === nodeId) {
-                    if (settingNode && settingNode.id === nodeId) {
-                        setSettingNode(newNode);
-                    }
-
-                    return newNode;
-                }
-                return node;
-            });
-        };
-
-        setNodes((nds) => changedNodes(nds as CustomNodeType[]));
+    const handleUpdateNodeContent = (updatedData) => {
+        setNodes((nds) =>
+            nds.map((n) => (n.id === selectedNode.id ? { ...n, data: { ...n.data, ...updatedData } } : n))
+        );
     };
 
     return (
@@ -57,20 +47,20 @@ const App = () => {
                 <CustomReactFlow
                     nodes={nodes}
                     edges={edges}
-                    handleNodeClick={handleNodeClick}
                     onNodesChange={onNodesChange}
                     onEdgesChange={onEdgesChange}
                     onConnect={onConnect}
+                    onEditNode={handleEditNode}
                 />
-
-                {showSettingsMenu && settingNode && (
-                    <SettingsMenu
-                        node={settingNode}
-                        onClose={handleCloseSettingMenu}
-                        onUpdateNodeContent={handleUpdateNodeContent}
-                    />
-                )}
             </div>
+
+            {isEditorOpen && selectedNode && (
+                <NodeEditor
+                    data={selectedNode.data}
+                    onClose={handleCloseEditor}
+                    onUpdateNodeContent={handleUpdateNodeContent}
+                />
+            )}
         </div>
     );
 };

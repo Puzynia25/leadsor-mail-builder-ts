@@ -10,7 +10,7 @@
     z-index: 1;
 }
 
-.settings-menu__wrapper {
+.node-editor__wrapper {
     position: fixed;
     top: 0;
     right: 0;
@@ -25,20 +25,20 @@
     overflow: auto;
 }
 
-.settings-menu__title {
+.node-editor__title {
     color: rgba(47, 125, 49, 0.9);
     font-size: 0.9rem;
     text-transform: uppercase;
 }
 
-.settings-menu__inner {
+.node-editor__inner {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.settings-menu__content {
+.node-editor__content {
     div {
         font-size: 0.9rem;
     }
