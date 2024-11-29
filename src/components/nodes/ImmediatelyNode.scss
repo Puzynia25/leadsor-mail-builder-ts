@@ -1,15 +1,8 @@
 @import "../../styles/variables.scss";
 
-.message-node__text {
+.message-node__name {
     background: #eee;
     padding: 7px;
     border-radius: 15px;
     overflow: auto;
-}
-
-.message-node__btns {
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-    padding-top: 20px;
 }

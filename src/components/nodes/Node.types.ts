@@ -35,7 +35,7 @@ export interface INodeRender {
 }
 
 export type NodeData = { label: string; color: string; onEdit?: () => void };
-export type ImmediatelyNodeData = NodeData & { text: string; buttons?: IBtn[] };
+export type ImmediatelyNodeData = NodeData & { name: string; buttons?: IBtn[] };
 export type WaitNodeData = NodeData & { wait: number; timeRange: string };
 export type ConditionNodeData = NodeData & {
     conditions?: ICondition[];
