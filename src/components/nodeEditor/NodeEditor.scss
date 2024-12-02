@@ -26,9 +26,10 @@
 }
 
 .node-editor__title {
-    color: rgba(47, 125, 49, 0.9);
+    color: $primary;
     font-size: 0.9rem;
     text-transform: uppercase;
+    margin-bottom: 20px;
 }
 
 .node-editor__inner {

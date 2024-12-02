@@ -1,5 +1,19 @@
-.wait-node-editor__content {
-    margin-top: 20px;
+.wait-node-editor__container {
     display: flex;
+    flex-direction: column;
     gap: 20px;
+}
+
+.wait-node-editor__item-title {
+    font-weight: 500;
+}
+
+.wait-node-editor__time-period {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.wait-node-editor__select {
+    margin: 10px 0;
 }

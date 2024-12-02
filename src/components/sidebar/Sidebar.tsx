@@ -1,19 +1,19 @@
 import SidebarItem from "./SidebarItem";
-import { SidebarItem as SidebarItemType } from "./SidebarItem.types";
-
-import "./Sidebar.scss";
+import { ISidebarItem } from "./SidebarItem.types";
 import { Divider } from "@mui/material";
 import { sidebarItems } from "./InitialValues";
 
+import "./Sidebar.scss";
+
 const Sidebar = () => {
-    const onDragStart = (e: React.DragEvent, item: SidebarItemType) => {
+    const onDragStart = (e: React.DragEvent, item: ISidebarItem) => {
         // console.log(item, "onDragStart");
         e.dataTransfer.setData("application/reactflow", JSON.stringify(item));
         e.dataTransfer.effectAllowed = "move";
     };
 
     // const renderItemList = (sidebarItems: SidebarItem[]) =>
-    //     sidebarItems.map((item: SidebarItemType) => <SidebarItem key={item.id} item={item} onDragStart={onDragStart} />);
+    //     sidebarItems.map((item: ISidebarItem) => <SidebarItem key={item.id} item={item} onDragStart={onDragStart} />);
 
     // const elements = renderItemList(sidebarItems);
     return (
@@ -31,8 +31,8 @@ const Sidebar = () => {
             <div>
                 <h4 className="sidebar__title">Workflow Control</h4>
                 <Divider />
-                {sidebarItems.workflowControl.map((item) => (
-                    <SidebarItem key={item.id} item={item} onDragStart={onDragStart} />
+                {sidebarItems.workflowControl.map((workflow) => (
+                    <SidebarItem key={workflow.id} item={workflow} onDragStart={onDragStart} />
                 ))}
             </div>
 

@@ -7,7 +7,7 @@ import { notBtn } from "../../../utils";
 
 import "./ConditionNode.scss";
 
-const FilterNode = ({ id, data }: NodeProps<ConditionNodeType>) => {
+const ConditionNode = ({ id, data }: NodeProps<ConditionNodeType>) => {
     const renderConditions = (conditionList: ICondition[]) => {
         if (conditionList.length === 0) {
             return null;
@@ -33,4 +33,4 @@ const FilterNode = ({ id, data }: NodeProps<ConditionNodeType>) => {
     );
 };
 
-export default FilterNode;
+export default ConditionNode;

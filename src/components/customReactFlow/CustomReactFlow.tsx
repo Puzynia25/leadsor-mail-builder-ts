@@ -10,12 +10,12 @@ import {
     Background,
 } from "@xyflow/react";
 import { v4 as uuidv4 } from "uuid";
-import { calculateNodePosition, nodeTypes } from "../../utils";
-import { SidebarItem } from "../sidebar/SidebarItem.types";
+import { calculateNodePosition } from "../../utils";
+import { ISidebarItem } from "../sidebar/SidebarItem.types";
 import { CustomNodeType } from "../nodes/Node.types";
+import { nodeTypes } from "./CustomReactFlow.types";
 
 import "./CustomReactFlow.scss";
-
 interface ICustomReactFlowProps {
     nodes: CustomNodeType[];
     edges: Edge[];
@@ -47,7 +47,7 @@ const CustomReactFlow = ({
             return;
         }
 
-        const sideBarItem: SidebarItem = JSON.parse(sideBarItemData);
+        const sideBarItem: ISidebarItem = JSON.parse(sideBarItemData);
 
         const newNode: CustomNodeType = {
             id: uuidv4(),

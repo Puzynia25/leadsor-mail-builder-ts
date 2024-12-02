@@ -15,7 +15,7 @@ export const sidebarItems: Sidebar = {
             data: {
                 label: "Immediately",
                 color: "#2b7e2f",
-                name: "name",
+                name: "Immediately",
             },
             type: "immediately",
         },

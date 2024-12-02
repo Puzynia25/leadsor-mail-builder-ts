@@ -23,8 +23,10 @@ const NodeEditor = ({ data, onClose, onUpdateNodeContent }: INodeEditorProps) =>
         <section>
             <div className="overlay-dark" />
             <div className="node-editor__wrapper">
-                <h6 className="node-editor__title">{data.label}</h6>
-                <div className="divider" />
+                <div className="node-editor__title">
+                    <h6>{data.label}</h6>
+                    <div className="divider" />
+                </div>
                 <div className="node-editor__inner">
                     <div className="node-editor__content">{render}</div>
                     <div className="btn-wrapper">

@@ -20,13 +20,6 @@ export const calculateNodePosition = (
     return canvasPosition;
 };
 
-export const nodeTypes: NodeTypes = {
-    start: StartNode,
-    immediately: ImmediatelyNode,
-    wait: WaitNode,
-    condition: ConditionNode,
-};
-
 export const notBtn: IBtn = {
     id: uuidv4(),
     text: "NOT",

@@ -6,9 +6,9 @@ import CustomReactFlow from "./components/customReactFlow/CustomReactFlow";
 import { Divider } from "@mui/material";
 import { initialEdges, initialNodes } from "./components/customReactFlow/initialElements";
 import NodeEditor from "./components/nodeEditor/NodeEditor";
+import { CustomNodeType } from "./components/nodes/Node.types";
 
 import "./App.scss";
-import { CustomNodeType } from "./components/nodes/Node.types";
 
 const App = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);

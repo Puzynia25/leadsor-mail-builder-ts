@@ -1,4 +1,4 @@
-import { SidebarItem as SidebarItemType } from "./SidebarItem.types";
+import { ISidebarItem } from "./SidebarItem.types";
 
 import "./SidebarItem.scss";
 
@@ -6,8 +6,8 @@ const SidebarItem = ({
     item,
     onDragStart,
 }: {
-    item: SidebarItemType;
-    onDragStart: (e: React.DragEvent, item: SidebarItemType) => void;
+    item: ISidebarItem;
+    onDragStart: (e: React.DragEvent, item: ISidebarItem) => void;
 }) => {
     // console.log(item, "SidebarItem");
     return (

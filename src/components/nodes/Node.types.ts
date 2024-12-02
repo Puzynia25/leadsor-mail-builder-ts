@@ -35,9 +35,15 @@ export interface INodeRender {
 }
 
 export type NodeData = { label: string; color: string; onEdit?: () => void };
-export type ImmediatelyNodeData = NodeData & { name: string; buttons?: IBtn[] };
+export type ImmediatelyNodeData = NodeData & { name: string };
 export type WaitNodeData = NodeData & { wait: number; timeRange: string };
 export type ConditionNodeData = NodeData & {
+    conditions?: ICondition[];
+};
+export type EmailNodeData = NodeData & {
+    conditions?: ICondition[];
+};
+export type SmsNodeData = NodeData & {
     conditions?: ICondition[];
 };
 
@@ -45,10 +51,18 @@ export type ConditionNodeData = NodeData & {
 // type PauseNodeData = { content: IPauseNodeContent };
 // type FilterNodeData = { content: IFilterNodeContent };
 
-export type CommonNodeData = ImmediatelyNodeData | WaitNodeData | ConditionNodeData;
-export type CustomNodeType = StartNodeType | ImmediatelyNodeType | WaitNodeType | ConditionNodeType;
+export type CommonNodeData = ImmediatelyNodeData | WaitNodeData | ConditionNodeData | EmailNodeData | SmsNodeData;
+export type CustomNodeType =
+    | StartNodeType
+    | ImmediatelyNodeType
+    | WaitNodeType
+    | ConditionNodeType
+    | EmailNodeType
+    | SmsNodeType;
 
 export type StartNodeType = Node<NodeData, "start">;
 export type ImmediatelyNodeType = Node<ImmediatelyNodeData, "immediately">;
 export type WaitNodeType = Node<WaitNodeData, "wait">;
 export type ConditionNodeType = Node<ConditionNodeData, "condition">;
+export type EmailNodeType = Node<EmailNodeData, "email">;
+export type SmsNodeType = Node<SmsNodeData, "sms">;

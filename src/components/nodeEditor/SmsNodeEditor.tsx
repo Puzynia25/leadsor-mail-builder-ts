@@ -1,21 +1,22 @@
 import { useState } from "react";
 import { TextareaAutosize } from "@mui/material";
 import { INodeEditor, INodeEditorProps } from "./NodeEditor.types";
-import { ImmediatelyNodeData } from "../nodes/Node.types";
+import { SmsNodeData } from "../nodes/Node.types";
 
-const ImmediatelyNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
-    const immediatelyNodeData = data as ImmediatelyNodeData;
+const SmsNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
+    const smsNodeData = data as SmsNodeData;
 
-    const [nodeName, setNodeName] = useState(immediatelyNodeData.name);
+    // const [nodeName, setNodeName] = useState(smsNodeData.name);
 
     const handleUpdateNodeName = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const newData: ImmediatelyNodeData = {
-            ...immediatelyNodeData,
-            name: e.target.value,
-        };
+        // const newData: EmailNodeData = {
+        //     ...smsNodeData,
+        //     name: e.target.value,
+        // };
 
-        setNodeName(e.target.value);
-        onUpdateNodeContent(newData);
+        // setNodeName(e.target.value);
+        // onUpdateNodeContent(newData);
+        console.log("handleUpdateNodeName");
     };
 
     return {
@@ -37,7 +38,7 @@ const ImmediatelyNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps):
                                 borderColor: "lightgray",
                                 resize: "vertical",
                             }}
-                            value={nodeName}
+                            value="{nodeName}"
                             onChange={handleUpdateNodeName}
                             placeholder="type node name..."
                         />
@@ -48,4 +49,4 @@ const ImmediatelyNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps):
     };
 };
 
-export default ImmediatelyNodeEditor;
+export default SmsNodeEditor;

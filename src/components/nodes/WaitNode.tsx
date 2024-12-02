@@ -8,9 +8,9 @@ const WaitNode = ({ id, data }: NodeProps<WaitNodeType>) => {
     return (
         <NodeWrapper id={id} data={data} handle="all">
             <p className="wait-node__text">
-                Delay
-                <span className="wait-node__duration">{data.wait}</span>
-                {data.timeRange}
+                some delay...
+                {/* <span className="wait-node__duration">{data.wait}</span>
+                {data.timeRange} */}
             </p>
         </NodeWrapper>
     );

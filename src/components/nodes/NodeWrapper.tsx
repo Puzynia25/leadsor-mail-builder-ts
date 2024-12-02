@@ -30,7 +30,7 @@ const NodeWrapper = ({ id, data, selected, children, handle }: NodeWrapperProps)
                     <Handle type="source" position={Position.Right} id={`${id}-source`} />
                 )}
             </div>
-            <CustomNodeToolbar data={data} selected={selected} onEdit={() => setIsEditorOpen(true)} />
+            <CustomNodeToolbar data={data} selected={selected} nodeId={id} />
         </>
     );
 };
