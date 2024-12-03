@@ -8,7 +8,7 @@ import "./CustomNodeToolbar.scss";
 const CustomNodeToolbar = ({ nodeId, data, selected }: { nodeId: string; data: CommonNodeData; selected: boolean }) => {
     const { setNodes } = useReactFlow();
 
-    const handleDeleteNode = () => {
+    const onDeleteNode = () => {
         setNodes((nodes) => nodes.filter((node) => node.id !== nodeId));
     };
 
@@ -16,17 +16,17 @@ const CustomNodeToolbar = ({ nodeId, data, selected }: { nodeId: string; data: C
         <>
             <NodeToolbar isVisible={selected} position="bottom" className="node-toolbar__wrapper">
                 <IconButton onClick={data.onEdit}>
-                    <SettingsOutlined sx={{ color: "#fff" }} fontSize="small" />
+                    <SettingsOutlined className="node-toolbar__icon" />
                 </IconButton>
                 <IconButton onClick={(e) => console.log("copy")}>
-                    <ContentCopyOutlined sx={{ color: "#fff" }} fontSize="small" />
+                    <ContentCopyOutlined fontSize="small" className="node-toolbar__icon" />
                 </IconButton>
                 <IconButton onClick={(e) => console.log("contacts")}>
-                    <ContactsOutlined sx={{ color: "#fff" }} fontSize="small" />
+                    <ContactsOutlined fontSize="small" className="node-toolbar__icon" />
                 </IconButton>
                 <Divider orientation="vertical" variant="middle" flexItem sx={{ bgcolor: "#fff" }} />
-                <IconButton onClick={handleDeleteNode}>
-                    <DeleteOutlined sx={{ color: "#f53030d5" }} fontSize="small" />
+                <IconButton onClick={onDeleteNode}>
+                    <DeleteOutlined className="node-toolbar__delete-icon" />
                 </IconButton>
             </NodeToolbar>
         </>
