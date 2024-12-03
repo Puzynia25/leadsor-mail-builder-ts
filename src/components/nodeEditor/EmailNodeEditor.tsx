@@ -1,50 +1,55 @@
 import { useState } from "react";
-import { TextareaAutosize } from "@mui/material";
+import { Button, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
 import { INodeEditor, INodeEditorProps } from "./NodeEditor.types";
 import { EmailNodeData } from "../nodes/Node.types";
+import { EditOutlined, RemoveRedEyeOutlined } from "@mui/icons-material";
+
+import "./EmailNodeEditor.scss";
 
 const EmailNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
     const emailNodeData = data as EmailNodeData;
 
-    // const [nodeName, setNodeName] = useState(emailNodeData.name);
+    const [email, setEmail] = useState("some email");
 
-    const handleUpdateNodeName = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        // const newData: EmailNodeData = {
-        //     ...emailNodeData,
-        //     name: e.target.value,
-        // };
+    const handleUpdateEmail = (e: SelectChangeEvent<string>) => {
+        const newData: EmailNodeData = {
+            ...emailNodeData,
+            email: e.target.value,
+        };
+        console.log(email, "handleUpdateCalendar");
 
-        // setNodeName(e.target.value);
-        // onUpdateNodeContent(newData);
-        console.log("handleUpdateNodeName");
+        setEmail(e.target.value);
+        onUpdateNodeContent(newData);
     };
 
     return {
         render: (
-            <>
+            <div className="wait-node-editor__container">
                 <div>
-                    <label>
-                        <p>
-                            <b>Node name:</b>
-                        </p>
-
-                        <TextareaAutosize
-                            minRows={3}
-                            style={{
-                                width: "100%",
-                                marginTop: "10px",
-                                padding: "8px",
-                                borderRadius: "15px",
-                                borderColor: "lightgray",
-                                resize: "vertical",
-                            }}
-                            value="{nodeName}"
-                            onChange={handleUpdateNodeName}
-                            placeholder="type node name..."
-                        />
-                    </label>
+                    <p className="wait-node-editor__item-title">Email to be sent:</p>
+                    <div className="wait-node-editor__select">
+                        <Select value={email} onChange={handleUpdateEmail} sx={{ width: "100%", bgcolor: "#ffff" }}>
+                            <MenuItem value={email}>{email}</MenuItem>
+                        </Select>
+                    </div>
                 </div>
-            </>
+
+                <div>
+                    <p className="wait-node-editor__item-title">Email subject:</p>
+                    <div className="wait-node-editor__select">
+                        <TextField value="" size="medium" sx={{ width: "100%", bgcolor: "#ffff" }} />
+                    </div>
+                </div>
+
+                <div className="wait-node-editor__preview">
+                    <Button variant="contained" sx={{ bgcolor: "ButtonText", opacity: "0.5" }}>
+                        <RemoveRedEyeOutlined fontSize="small" sx={{ marginRight: "7px" }} /> Preview
+                    </Button>
+                    <Button variant="contained" sx={{ bgcolor: "ButtonText", opacity: "0.5" }}>
+                        <EditOutlined fontSize="small" sx={{ marginRight: "7px" }} /> Edit email
+                    </Button>
+                </div>
+            </div>
         ),
     };
 };
