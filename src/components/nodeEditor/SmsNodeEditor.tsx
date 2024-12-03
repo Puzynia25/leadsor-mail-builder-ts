@@ -1,50 +1,36 @@
 import { useState } from "react";
-import { TextareaAutosize } from "@mui/material";
+import { MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
 import { INodeEditor, INodeEditorProps } from "./NodeEditor.types";
-import { SmsNodeData } from "../nodes/Node.types";
+import { EmailNodeData } from "../nodes/Node.types";
 
 const SmsNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
-    const smsNodeData = data as SmsNodeData;
+    const emailNodeData = data as EmailNodeData;
 
-    // const [nodeName, setNodeName] = useState(smsNodeData.name);
+    const [sender, setSender] = useState("some sender");
 
-    const handleUpdateNodeName = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        // const newData: EmailNodeData = {
-        //     ...smsNodeData,
-        //     name: e.target.value,
-        // };
+    const handleUpdateSender = (e: SelectChangeEvent<string>) => {
+        const newData: EmailNodeData = {
+            ...emailNodeData,
+            sender: e.target.value,
+        };
+        console.log(sender, "handleUpdateSender");
 
-        // setNodeName(e.target.value);
-        // onUpdateNodeContent(newData);
-        console.log("handleUpdateNodeName");
+        setSender(e.target.value);
+        onUpdateNodeContent(newData);
     };
 
     return {
         render: (
-            <>
+            <div className="wait-node-editor__container">
                 <div>
-                    <label>
-                        <p>
-                            <b>Node name:</b>
-                        </p>
-
-                        <TextareaAutosize
-                            minRows={3}
-                            style={{
-                                width: "100%",
-                                marginTop: "10px",
-                                padding: "8px",
-                                borderRadius: "15px",
-                                borderColor: "lightgray",
-                                resize: "vertical",
-                            }}
-                            value="{nodeName}"
-                            onChange={handleUpdateNodeName}
-                            placeholder="type node name..."
-                        />
-                    </label>
+                    <p className="wait-node-editor__item-title">SMS message to be sent:</p>
+                    <div className="wait-node-editor__select">
+                        <Select value={sender} onChange={handleUpdateSender} sx={{ width: "100%", bgcolor: "#ffff" }}>
+                            <MenuItem value={sender}>{sender}</MenuItem>
+                        </Select>
+                    </div>
                 </div>
-            </>
+            </div>
         ),
     };
 };
