@@ -2,9 +2,9 @@ import { useCallback, useState } from "react";
 import { addEdge, Edge, OnConnect, useEdgesState, useNodesState } from "@xyflow/react";
 import AppHeader from "./components/appHeader/AppHeader";
 import Sidebar from "./components/sidebar/Sidebar";
-import CustomReactFlow from "./components/customReactFlow/CustomReactFlow";
+import FlowWrapper from "./components/flowWrapper/FlowWrapper";
 import { Divider } from "@mui/material";
-import { initialEdges, initialNodes } from "./components/customReactFlow/initialElements";
+import { initialEdges, initialNodes } from "./components/flowWrapper/initialElements";
 import NodeEditor from "./components/nodeEditor/NodeEditor";
 import { CustomNodeType } from "./components/nodes/Node.types";
 
@@ -44,7 +44,7 @@ const App = () => {
             <Divider />
             <div className="app__container">
                 <Sidebar />
-                <CustomReactFlow
+                <FlowWrapper
                     nodes={nodes}
                     edges={edges}
                     onNodesChange={onNodesChange}

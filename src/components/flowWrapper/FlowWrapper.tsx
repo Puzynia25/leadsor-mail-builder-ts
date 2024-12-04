@@ -13,10 +13,11 @@ import { v4 as uuidv4 } from "uuid";
 import { calculateNodePosition } from "../../utils";
 import { ISidebarItem } from "../sidebar/SidebarItem.types";
 import { CustomNodeType } from "../nodes/Node.types";
-import { nodeTypes } from "./CustomReactFlow.types";
+import { nodeTypes } from "./FlowWrapper.types";
 
-import "./CustomReactFlow.scss";
-interface ICustomReactFlowProps {
+import "./FlowWrapper.scss";
+
+interface IFlowWrapperProps {
     nodes: CustomNodeType[];
     edges: Edge[];
     onNodesChange: OnNodesChange<CustomNodeType>;
@@ -25,14 +26,7 @@ interface ICustomReactFlowProps {
     onEditNode: (nodeId: string) => void;
 }
 
-const CustomReactFlow = ({
-    nodes,
-    edges,
-    onNodesChange,
-    onEdgesChange,
-    onConnect,
-    onEditNode,
-}: ICustomReactFlowProps) => {
+const FlowWrapper = ({ nodes, edges, onNodesChange, onEdgesChange, onConnect, onEditNode }: IFlowWrapperProps) => {
     const { getViewport, addNodes, getNodes } = useReactFlow();
 
     // const nodes: CustomNodeType[] = getNodes();
@@ -89,7 +83,7 @@ const CustomReactFlow = ({
     );
 };
 
-export default CustomReactFlow;
+export default FlowWrapper;
 
 const defaultEdgeOptions: DefaultEdgeOptions = {
     animated: true,
