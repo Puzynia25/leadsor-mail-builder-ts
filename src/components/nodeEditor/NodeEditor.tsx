@@ -4,13 +4,13 @@ import { INodeEditorProps } from "./NodeEditor.types";
 
 import "./NodeEditor.scss";
 
-const NodeEditor = ({ data, onClose, onUpdateNodeContent }: INodeEditorProps) => {
+const NodeEditor = ({ type, data, onClose, onUpdateNodeContent }: INodeEditorProps) => {
     const nodeData: INodeEditorProps = {
         data,
         onUpdateNodeContent,
     };
 
-    const { render, applyChanges } = useNodeEditor(data.label, nodeData);
+    const { render, applyChanges } = useNodeEditor(type, nodeData);
 
     const handleApply = () => {
         if (applyChanges) {

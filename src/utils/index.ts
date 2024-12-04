@@ -1,8 +1,4 @@
-import { Edge, getOutgoers, NodeTypes } from "@xyflow/react";
-import ImmediatelyNode from "../components/nodes/ImmediatelyNode";
-import StartNode from "../components/nodes/StartNode";
-import ConditionNode from "../components/nodes/conditionNode/ConditionNode";
-import WaitNode from "../components/nodes/WaitNode";
+import { Edge, getOutgoers } from "@xyflow/react";
 import { CustomNodeType, IBtn } from "../components/nodes/Node.types";
 import { v4 as uuidv4 } from "uuid";
 

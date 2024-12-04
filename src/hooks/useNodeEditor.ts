@@ -1,7 +1,7 @@
 import { INodeEditor, INodeEditorProps } from "../components/nodeEditor/NodeEditor.types";
 import { nodeMap } from "../utils/nodeMap";
 
-export const useNodeEditor = (label: string, nodeData: INodeEditorProps): INodeEditor => {
-    const nodeComponent = nodeMap[label];
+export const useNodeEditor = (type: string, nodeData: INodeEditorProps): INodeEditor => {
+    const nodeComponent = nodeMap[type];
     return nodeComponent(nodeData);
 };

@@ -16,6 +16,7 @@ export interface INodeEditor {
 // }
 
 export interface INodeEditorProps {
+    type: string;
     data: CommonNodeData;
     onClose?: () => void;
     onUpdateNodeContent: (newNodeData: CommonNodeData) => void;

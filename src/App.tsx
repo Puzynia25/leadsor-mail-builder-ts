@@ -56,6 +56,7 @@ const App = () => {
 
             {isEditorOpen && selectedNode && (
                 <NodeEditor
+                    type={selectedNode.type}
                     data={selectedNode.data}
                     onClose={handleCloseEditor}
                     onUpdateNodeContent={handleUpdateNodeContent}
