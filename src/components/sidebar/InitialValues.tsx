@@ -1,13 +1,14 @@
 import {
     AccessTimeRounded,
     AlternateEmailRounded,
+    CalendarMonthRounded,
     LanRounded,
     PlayArrowRounded,
     SmsRounded,
 } from "@mui/icons-material";
-import { Sidebar } from "./SidebarItem.types";
+import { ISidebar } from "./SidebarItem.types";
 
-export const sidebarItems: Sidebar = {
+export const sidebarItems: ISidebar = {
     triggers: [
         {
             id: "1",
@@ -18,6 +19,16 @@ export const sidebarItems: Sidebar = {
                 name: "Immediately",
             },
             type: "immediately",
+        },
+        {
+            id: "2",
+            icon: <CalendarMonthRounded fontSize="large" color="success" />,
+            data: {
+                label: "Scheduled Time",
+                color: "#2b7e2f",
+                name: "ScheduledTime",
+            },
+            type: "scheduledTime",
         },
     ],
 

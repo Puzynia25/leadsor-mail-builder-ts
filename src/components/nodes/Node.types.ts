@@ -36,6 +36,7 @@ export interface INodeRender {
 
 export type NodeData = { label: string; color: string; onEdit?: () => void };
 export type ImmediatelyNodeData = NodeData & { name: string };
+export type ScheduledTimeNodeData = NodeData & { name: string };
 export type WaitNodeData = NodeData & { wait: number; timeRange: string };
 export type ConditionNodeData = NodeData & {
     conditions?: ICondition[];
@@ -51,10 +52,17 @@ export type SmsNodeData = NodeData & {
 // type PauseNodeData = { content: IPauseNodeContent };
 // type FilterNodeData = { content: IFilterNodeContent };
 
-export type CommonNodeData = ImmediatelyNodeData | WaitNodeData | ConditionNodeData | EmailNodeData | SmsNodeData;
+export type CommonNodeData =
+    | ImmediatelyNodeData
+    | ScheduledTimeNodeData
+    | WaitNodeData
+    | ConditionNodeData
+    | EmailNodeData
+    | SmsNodeData;
 export type CustomNodeType =
     | StartNodeType
     | ImmediatelyNodeType
+    | ScheduledTimeNodeType
     | WaitNodeType
     | ConditionNodeType
     | EmailNodeType
@@ -62,6 +70,7 @@ export type CustomNodeType =
 
 export type StartNodeType = Node<NodeData, "start">;
 export type ImmediatelyNodeType = Node<ImmediatelyNodeData, "immediately">;
+export type ScheduledTimeNodeType = Node<ScheduledTimeNodeData, "scheduledTime">;
 export type WaitNodeType = Node<WaitNodeData, "wait">;
 export type ConditionNodeType = Node<ConditionNodeData, "condition">;
 export type EmailNodeType = Node<EmailNodeData, "email">;

@@ -4,7 +4,7 @@ export interface ISidebarItem {
     id: string;
     icon: JSX.Element;
     data: CommonNodeData;
-    type: "immediately" | "wait" | "condition" | "email" | "sms";
+    type: "immediately" | "scheduledTime" | "wait" | "condition" | "email" | "sms";
 }
 
 export interface ISidebar {
