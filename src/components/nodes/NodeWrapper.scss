@@ -29,11 +29,18 @@
     }
 }
 
+.node__wrapper-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    border-radius: 10px;
+    padding: 5px 0;
+    color: #fff;
+}
+
 .node__wrapper-label {
-    text-align: center;
+    // text-align: center;
     font-size: 0.9rem;
     font-weight: 600;
-    padding: 5px;
-    border-radius: 10px;
-    color: white;
 }

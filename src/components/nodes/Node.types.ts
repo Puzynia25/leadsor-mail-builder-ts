@@ -34,7 +34,7 @@ export interface INodeRender {
     render: JSX.Element;
 }
 
-export type NodeData = { label: string; color: string; onEdit?: () => void };
+export type NodeData = { icon: string; label: string; color: string; onEdit?: () => void };
 export type ImmediatelyNodeData = NodeData & { name: string };
 export type ScheduledTimeNodeData = NodeData & { name: string };
 export type WaitNodeData = NodeData & { wait: number; timeRange: string };
