@@ -8,8 +8,12 @@ import "./ImmediatelyNode.scss";
 const ImmediatelyNode = ({ id, data }: NodeProps<ImmediatelyNodeType>) => {
     return (
         <NodeWrapper id={id} data={data} handle="right">
-            <span className="immediately-node__title">Name: </span>
-            <Chip label={data.name} />
+            {data.name && (
+                <>
+                    <span className="immediately-node__title">Name: </span>
+                    <Chip label={data.name} />
+                </>
+            )}
         </NodeWrapper>
     );
 };
