@@ -8,13 +8,12 @@ const ImmediatelyNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps):
 
     const [nodeName, setNodeName] = useState(immediatelyNodeData.name);
 
-    const handleUpdateNodeName = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const newData: ImmediatelyNodeData = {
+    const applyChanges = () => {
+        const newData = {
             ...immediatelyNodeData,
-            name: e.target.value,
+            name: nodeName,
         };
 
-        setNodeName(e.target.value);
         onUpdateNodeContent(newData);
     };
 
@@ -38,13 +37,14 @@ const ImmediatelyNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps):
                                 resize: "vertical",
                             }}
                             value={nodeName}
-                            onChange={handleUpdateNodeName}
+                            onChange={(e) => setNodeName(e.target.value)}
                             placeholder="type node name..."
                         />
                     </label>
                 </div>
             </>
         ),
+        applyChanges,
     };
 };
 

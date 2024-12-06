@@ -14,23 +14,13 @@ const ScheduledTimeNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps
     const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
     const [selectedTime, setSelectedTime] = useState<Dayjs | null>(dayjs());
 
-    const handleUpdateNodeDate = (newDate: Dayjs | null) => {
+    const applyChanges = () => {
         const newData: ScheduledTimeNodeData = {
             ...scheduledTimeNodeData,
-            date: newDate?.toISOString() ?? "",
+            date: selectedDate?.toISOString() ?? "",
+            time: selectedTime?.toISOString() ?? "",
         };
 
-        setSelectedDate(newDate);
-        onUpdateNodeContent(newData);
-    };
-
-    const handleUpdateNodeTime = (newTime: Dayjs | null) => {
-        const newData: ScheduledTimeNodeData = {
-            ...scheduledTimeNodeData,
-            time: newTime?.toISOString() ?? "",
-        };
-
-        setSelectedTime(newTime);
         onUpdateNodeContent(newData);
     };
 
@@ -43,7 +33,7 @@ const ScheduledTimeNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
                                 value={selectedDate}
-                                onChange={handleUpdateNodeDate}
+                                onChange={(newDate) => setSelectedDate(newDate)}
                                 sx={{ width: "100%", bgcolor: "#ffff" }}>
                                 <TextField />
                             </DatePicker>
@@ -56,7 +46,7 @@ const ScheduledTimeNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <TimePicker
                                 value={selectedTime}
-                                onChange={handleUpdateNodeTime}
+                                onChange={(newTime) => setSelectedTime(newTime)}
                                 sx={{ width: "100%", bgcolor: "#ffff" }}>
                                 <TextField />
                             </TimePicker>
@@ -65,6 +55,7 @@ const ScheduledTimeNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps
                 </div>
             </div>
         ),
+        applyChanges,
     };
 };
 

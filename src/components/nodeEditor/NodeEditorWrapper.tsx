@@ -5,12 +5,7 @@ import { INodeEditorProps } from "./NodeEditorWrapper.types";
 import "./NodeEditorWrapper.scss";
 
 const NodeEditorWrapper = ({ type, data, onClose, onUpdateNodeContent }: INodeEditorProps) => {
-    const nodeData: INodeEditorProps = {
-        data,
-        onUpdateNodeContent,
-    };
-
-    const { render, applyChanges } = useNodeEditor(type, nodeData);
+    const { render, applyChanges } = useNodeEditor({ type, data, onUpdateNodeContent });
 
     const handleApply = () => {
         if (applyChanges) {

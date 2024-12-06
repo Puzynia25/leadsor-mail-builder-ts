@@ -11,14 +11,12 @@ const EmailNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INode
 
     const [email, setEmail] = useState("some email");
 
-    const handleUpdateEmail = (e: SelectChangeEvent<string>) => {
+    const applyChanges = () => {
         const newData: EmailNodeData = {
             ...emailNodeData,
-            email: e.target.value,
+            email,
         };
-        console.log(email, "handleUpdateCalendar");
 
-        setEmail(e.target.value);
         onUpdateNodeContent(newData);
     };
 
@@ -28,7 +26,10 @@ const EmailNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INode
                 <div>
                     <p className="wait-node-editor__item-title">Email to be sent:</p>
                     <div className="wait-node-editor__select">
-                        <Select value={email} onChange={handleUpdateEmail} sx={{ width: "100%", bgcolor: "#ffff" }}>
+                        <Select
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            sx={{ width: "100%", bgcolor: "#ffff" }}>
                             <MenuItem value={email}>{email}</MenuItem>
                         </Select>
                     </div>
@@ -51,6 +52,7 @@ const EmailNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INode
                 </div>
             </div>
         ),
+        applyChanges,
     };
 };
 

@@ -1,5 +1,5 @@
-import { ChangeEventHandler, useState } from "react";
-import { MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { useState } from "react";
+import { MenuItem, Select, TextField } from "@mui/material";
 import { INodeEditor, INodeEditorProps, TimeRange } from "../NodeEditorWrapper.types";
 import { WaitNodeData } from "../../nodes/Node.types";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -17,62 +17,16 @@ const WaitNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeE
     const [timePeriod, setTimePeriod] = useState<number>(0);
     const [timeRange, setTimeRange] = useState<TimeRange>(TimeRange.minute);
 
-    const handleUpdateType = (e: SelectChangeEvent<string>) => {
+    const applyChanges = () => {
         const newData: WaitNodeData = {
             ...waitNodeData,
-            type: e.target.value,
+            type,
+            waitingType,
+            calendar: calendar ? calendar.format("YYYY-MM-DD") : "",
+            timePeriod,
+            timeRange,
         };
 
-        setType(e.target.value);
-        onUpdateNodeContent(newData);
-    };
-
-    const handleUpdateWaitingType = (e: SelectChangeEvent<string>) => {
-        const newData: WaitNodeData = {
-            ...waitNodeData,
-            waitingType: e.target.value,
-        };
-        console.log(waitingType, "handleUpdateWaitingType");
-
-        setWaitingType(e.target.value);
-        onUpdateNodeContent(newData);
-    };
-
-    const handleUpdateTimePeriod: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
-        const newData: WaitNodeData = {
-            ...waitNodeData,
-            timePeriod: Number(e.target.value),
-        };
-
-        console.log(timePeriod, "handleUpdateTimePeriod");
-
-        setTimePeriod(Number(e.target.value));
-        onUpdateNodeContent(newData);
-    };
-
-    const handleUpdateTimeRange = (e: SelectChangeEvent<string>) => {
-        const newTimeRange = e.target.value as TimeRange;
-
-        const newData: WaitNodeData = {
-            ...waitNodeData,
-            timeRange: newTimeRange,
-        };
-        console.log(timeRange, "handleUpdateTimeRange");
-
-        setTimeRange(newTimeRange);
-        onUpdateNodeContent(newData);
-    };
-
-    const handleUpdateCalendar = (date: Dayjs | null) => {
-        const newCalendar = date?.format("YYYY-MM-DD");
-
-        const newData: WaitNodeData = {
-            ...waitNodeData,
-            calendar: newCalendar ?? "",
-        };
-        console.log(calendar, "handleUpdateCalendar");
-
-        setCalendar(date);
         onUpdateNodeContent(newData);
     };
 
@@ -82,7 +36,10 @@ const WaitNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeE
                 <div>
                     <p className="wait-node-editor__item-title">Type:</p>
                     <div className="wait-node-editor__select">
-                        <Select value={type} onChange={handleUpdateType} sx={{ width: "100%", bgcolor: "#ffff" }}>
+                        <Select
+                            value={type}
+                            onChange={(e) => setType(e.target.value)}
+                            sx={{ width: "100%", bgcolor: "#ffff" }}>
                             <MenuItem value="setWaitingTime">Set waiting time</MenuItem>
                         </Select>
                     </div>
@@ -93,7 +50,7 @@ const WaitNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeE
                     <div className="wait-node-editor__select">
                         <Select
                             value={waitingType}
-                            onChange={handleUpdateWaitingType}
+                            onChange={(e) => setWaitingType(e.target.value)}
                             sx={{ width: "100%", bgcolor: "#ffff" }}>
                             <MenuItem value="calendar">Date in the calendar</MenuItem>
                             <MenuItem value="timePeriod">Time period</MenuItem>
@@ -108,7 +65,7 @@ const WaitNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeE
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                     value={calendar}
-                                    onChange={handleUpdateCalendar}
+                                    onChange={(date) => setCalendar(date)}
                                     sx={{ width: "100%", bgcolor: "#ffff" }}>
                                     <TextField />
                                 </DatePicker>
@@ -124,13 +81,13 @@ const WaitNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeE
                             <TextField
                                 value={timePeriod}
                                 size="medium"
-                                onChange={handleUpdateTimePeriod}
+                                onChange={(e) => setTimePeriod(Number(e.target.value))}
                                 sx={{ width: "100%", marginRight: "10px", bgcolor: "#ffff" }}
                                 type="number"
                             />
                             <Select
                                 value={timeRange}
-                                onChange={handleUpdateTimeRange}
+                                onChange={(e) => setTimeRange(e.target.value as TimeRange)}
                                 sx={{ width: "100%", bgcolor: "#ffff" }}>
                                 <MenuItem value={TimeRange.minute}>minute</MenuItem>
                                 <MenuItem value={TimeRange.hour}>hour</MenuItem>
@@ -143,6 +100,7 @@ const WaitNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeE
                 )}
             </div>
         ),
+        applyChanges,
     };
 };
 

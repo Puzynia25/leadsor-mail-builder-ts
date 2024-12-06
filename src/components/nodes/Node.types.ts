@@ -36,7 +36,7 @@ export interface INodeRender {
 
 export type NodeData = { icon: string; label: string; color: string; onEdit?: () => void };
 export type ImmediatelyNodeData = NodeData & { name: string };
-export type ScheduledTimeNodeData = NodeData & { name: string };
+export type ScheduledTimeNodeData = NodeData & { date?: string; time?: string };
 export type WaitNodeData = NodeData & {
     type?: string;
     waitingType?: string;
@@ -48,10 +48,11 @@ export type ConditionNodeData = NodeData & {
     conditions?: ICondition[];
 };
 export type EmailNodeData = NodeData & {
-    conditions?: ICondition[];
+    email?: string;
 };
 export type SmsNodeData = NodeData & {
-    conditions?: ICondition[];
+    sender?: string;
+    message?: string;
 };
 
 // type MessageNodeData = { content: IMessageNodeContent };

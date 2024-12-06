@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { MenuItem, Select, SelectChangeEvent, TextareaAutosize } from "@mui/material";
+import { MenuItem, Select, TextareaAutosize } from "@mui/material";
 import { INodeEditor, INodeEditorProps } from "../NodeEditorWrapper.types";
-import { EmailNodeData } from "../../nodes/Node.types";
+import { EmailNodeData, SmsNodeData } from "../../nodes/Node.types";
 
 const SmsNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
     const emailNodeData = data as EmailNodeData;
@@ -9,23 +9,9 @@ const SmsNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEd
     const [sender, setSender] = useState("some sender");
     const [message, setMessage] = useState("");
 
-    const handleUpdateSender = (e: SelectChangeEvent<string>) => {
-        const newData: EmailNodeData = {
-            ...emailNodeData,
-            sender: e.target.value,
-        };
+    const applyChanges = () => {
+        const newData: SmsNodeData = { ...emailNodeData, sender, message };
 
-        setSender(e.target.value);
-        onUpdateNodeContent(newData);
-    };
-
-    const handleUpdateMessage = (e) => {
-        const newData: EmailNodeData = {
-            ...emailNodeData,
-            message: e.target.value,
-        };
-
-        setMessage(e.target.value);
         onUpdateNodeContent(newData);
     };
 
@@ -35,7 +21,10 @@ const SmsNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEd
                 <div>
                     <p className="wait-node-editor__item-title">SMS message to be sent:</p>
                     <div className="wait-node-editor__select">
-                        <Select value={sender} onChange={handleUpdateSender} sx={{ width: "100%", bgcolor: "#ffff" }}>
+                        <Select
+                            value={sender}
+                            onChange={(e) => setSender(e.target.value)}
+                            sx={{ width: "100%", bgcolor: "#ffff" }}>
                             <MenuItem value={sender}>{sender}</MenuItem>
                         </Select>
                     </div>
@@ -55,13 +44,14 @@ const SmsNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEd
                                 resize: "vertical",
                             }}
                             value={message}
-                            onChange={handleUpdateMessage}
+                            onChange={(e) => setMessage(e.target.value)}
                             placeholder="type sms message..."
                         />
                     </div>
                 </div>
             </div>
         ),
+        applyChanges,
     };
 };
 
