@@ -8,8 +8,13 @@ import "./ScheduledTimeNode.scss";
 const ScheduledTimeNode = ({ id, data }: NodeProps<ScheduledTimeNodeType>) => {
     return (
         <NodeWrapper id={id} data={data} handle="right">
-            <span className="scheduled-time-node__title">Name: </span>
-            <Chip label={data.name} />
+            {data.date && data.time && (
+                <>
+                    <span className="scheduled-time-node__title">Will start after: </span>
+                    <Chip label={data.date} sx={{ margin: "5px" }} />
+                    <Chip label={data.time} />
+                </>
+            )}
         </NodeWrapper>
     );
 };

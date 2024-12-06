@@ -11,14 +11,16 @@ import "./ScheduledTimeNodeEditor.scss";
 const ScheduledTimeNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
     const scheduledTimeNodeData = data as ScheduledTimeNodeData;
 
-    const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
-    const [selectedTime, setSelectedTime] = useState<Dayjs | null>(dayjs());
+    const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs(scheduledTimeNodeData.date) ?? dayjs());
+    const [selectedTime, setSelectedTime] = useState<Dayjs | null>(
+        dayjs(scheduledTimeNodeData.time, "hh:mm a") ?? dayjs()
+    );
 
     const applyChanges = () => {
         const newData: ScheduledTimeNodeData = {
             ...scheduledTimeNodeData,
-            date: selectedDate?.toISOString() ?? "",
-            time: selectedTime?.toISOString() ?? "",
+            date: selectedDate?.format("YYYY-MM-DD") ?? "",
+            time: selectedTime?.format("hh:mm a") ?? "",
         };
 
         onUpdateNodeContent(newData);
