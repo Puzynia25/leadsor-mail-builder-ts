@@ -11,11 +11,11 @@ import "./WaitNodeEditor.scss";
 const WaitNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
     const waitNodeData = data as WaitNodeData;
 
-    const [type, setType] = useState<string>("setWaitingTime");
-    const [waitingType, setWaitingType] = useState<string>("timePeriod");
-    const [calendar, setCalendar] = useState<Dayjs | null>(dayjs());
-    const [timePeriod, setTimePeriod] = useState<number>(0);
-    const [timeRange, setTimeRange] = useState<TimeRange>(TimeRange.minute);
+    const [type, setType] = useState<string>(waitNodeData.type ?? "setWaitingTime");
+    const [waitingType, setWaitingType] = useState<string>(waitNodeData.waitingType ?? "timePeriod");
+    const [calendar, setCalendar] = useState<Dayjs | null>(dayjs(waitNodeData.calendar) ?? dayjs());
+    const [timePeriod, setTimePeriod] = useState<number>(waitNodeData.timePeriod ?? 0);
+    const [timeRange, setTimeRange] = useState<TimeRange>(waitNodeData.timeRange ?? TimeRange.minute);
 
     const applyChanges = () => {
         const newData: WaitNodeData = {

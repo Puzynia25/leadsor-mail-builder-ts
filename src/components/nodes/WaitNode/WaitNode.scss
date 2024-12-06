@@ -1,13 +1,11 @@
 @import "../../../styles/variables.scss";
 
-.wait-node__text {
-    text-align: center;
+.wait-node__title {
+    font-weight: 600;
+    font-size: 0.8rem;
 }
 
-.wait-node__duration {
+.MuiChip-label {
     font-size: 0.8rem;
-    padding: 0 8px;
-    margin: 0 5px;
-    background: #eee;
-    border-radius: 15px;
+    font-weight: 500;
 }
