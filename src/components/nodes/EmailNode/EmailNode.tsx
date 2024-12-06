@@ -1,18 +1,18 @@
-import { SmsNodeType } from "./Node.types";
+import { EmailNodeType } from "../Node.types";
 import { NodeProps } from "@xyflow/react";
-import NodeWrapper from "./NodeWrapper";
+import NodeWrapper from "../NodeWrapper";
 import { Chip } from "@mui/material";
 
-import "./SmsNode.scss";
+import "./EmailNode.scss";
 
-const SmsNode = ({ id, data }: NodeProps<SmsNodeType>) => {
+const EmailNode = ({ id, data }: NodeProps<EmailNodeType>) => {
     return (
         <NodeWrapper id={id} data={data} handle="all">
-            SmsNode
+            EmailNode
             {/* <span className="immediately-node__title">Name: </span>
             <Chip label={data.name} /> */}
         </NodeWrapper>
     );
 };
 
-export default SmsNode;
+export default EmailNode;

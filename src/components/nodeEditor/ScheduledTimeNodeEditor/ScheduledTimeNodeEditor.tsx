@@ -1,7 +1,7 @@
-import { ChangeEventHandler, RefAttributes, useState } from "react";
+import { useState } from "react";
 import { TextField } from "@mui/material";
-import { INodeEditor, INodeEditorProps } from "./NodeEditor.types";
-import { ScheduledTimeNodeData } from "../nodes/Node.types";
+import { INodeEditor, INodeEditorProps } from "../NodeEditorWrapper.types";
+import { ScheduledTimeNodeData } from "../../nodes/Node.types";
 import { DatePicker, LocalizationProvider, TimePicker, TimePickerProps } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";

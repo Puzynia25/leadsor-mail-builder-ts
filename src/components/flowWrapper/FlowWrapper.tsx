@@ -59,9 +59,9 @@ const FlowWrapper = ({ nodes, edges, onNodesChange, onEdgesChange, onConnect, on
     };
 
     return (
-        <div className="custom-rf__wrapper" onDrop={onDrop} onDragOver={onDragOver}>
+        <main className="flow__wrapper" onDrop={onDrop} onDragOver={onDragOver}>
             <ReactFlow
-                className="custom-rf__content"
+                className="flow__content"
                 nodes={nodes.map((node) => ({
                     ...node,
                     data: {
@@ -79,7 +79,7 @@ const FlowWrapper = ({ nodes, edges, onNodesChange, onEdgesChange, onConnect, on
                 <Controls />
                 <Background />
             </ReactFlow>
-        </div>
+        </main>
     );
 };
 

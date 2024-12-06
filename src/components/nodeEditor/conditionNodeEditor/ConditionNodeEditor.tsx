@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { INodeEditor, INodeEditorProps } from "../NodeEditor.types";
+import { INodeEditor, INodeEditorProps } from "../NodeEditorWrapper.types";
 import { ConditionNodeData, ICondition } from "../../nodes/Node.types";
 import { _currency } from "../../../constants";
 import { v4 as uuidv4 } from "uuid";

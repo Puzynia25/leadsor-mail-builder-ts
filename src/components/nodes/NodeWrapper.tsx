@@ -36,6 +36,25 @@ const NodeWrapper = ({ id, data, selected, children, handle }: NodeWrapperProps)
             </div>
             <CustomNodeToolbar data={data} selected={selected} nodeId={id} />
         </>
+        // <>
+        //     <div>
+        //         {(handle === "left" || handle === "all") && (
+        //             <Handle type="target" position={Position.Left} id={`${id}-target`} />
+        //         )}
+        //         <div className="node__wrapper-content" tabIndex={0}>
+        //             <div className="node__wrapper-title" style={{ backgroundColor: data.color }}>
+        //                 {IconComponent ? <IconComponent fontSize="large" sx={{ color: "#fff" }} /> : null}
+        //                 {/* <p className="node__wrapper-label">{data.label}</p> */}
+        //             </div>
+        //         </div>
+
+        //         {(handle === "right" || handle === "all") && (
+        //             <Handle type="source" position={Position.Right} id={`${id}-source`} />
+        //         )}
+        //     </div>
+        //     <div className="node__wrapper-child">{children}</div>
+        //     <CustomNodeToolbar data={data} selected={selected} nodeId={id} />
+        // </>
     );
 };
 

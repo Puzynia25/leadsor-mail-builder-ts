@@ -1,4 +1,4 @@
-import CollectDataButton from "../collectDataButton/collectDataButton";
+import CollectDataButton from "../buttons/CollectDataButton/collectDataButton";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import {
     AnalyticsOutlined,
@@ -11,11 +11,11 @@ import {
 } from "@mui/icons-material";
 import logo from "../../assets/logo.svg";
 
-import "./AppHeader.scss";
+import "./Header.scss";
 
-const AppHeader = () => {
+const Header = () => {
     return (
-        <div className="app__header">
+        <div className="header__wrapper">
             <div className="header__logo">
                 <img src={logo} alt="logo" />
             </div>
@@ -69,4 +69,4 @@ const AppHeader = () => {
     );
 };
 
-export default AppHeader;
+export default Header;

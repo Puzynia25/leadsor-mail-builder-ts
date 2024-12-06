@@ -1,8 +1,8 @@
 import { Button } from "@mui/material";
 import { Edge, useReactFlow } from "@xyflow/react";
 import { useCallback } from "react";
-import { collectChainData } from "../../utils";
-import { CustomNodeType } from "../nodes/Node.types";
+import { collectChainData } from "../../../utils";
+import { CustomNodeType } from "../../nodes/Node.types";
 import { SaveAlt } from "@mui/icons-material";
 
 const CollectDataButton = () => {

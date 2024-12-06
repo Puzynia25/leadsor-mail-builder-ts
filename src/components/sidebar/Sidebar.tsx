@@ -12,39 +12,37 @@ const Sidebar = () => {
         e.dataTransfer.effectAllowed = "move";
     };
 
-    // const renderItemList = (sidebarItems: SidebarItem[]) =>
-    //     sidebarItems.map((item: ISidebarItem) => <SidebarItem key={item.id} item={item} onDragStart={onDragStart} />);
-
-    // const elements = renderItemList(sidebarItems);
     return (
-        <div className="sidebar-wrapper">
-            {/* Triggers */}
-            <div>
-                <h4 className="sidebar__title">Triggers</h4>
-                <Divider />
-                {sidebarItems.triggers.map((trigger) => (
-                    <SidebarItem key={trigger.id} item={trigger} onDragStart={onDragStart} />
-                ))}
-            </div>
+        <aside className="sidebar__wrapper">
+            <div className="sidebar__content">
+                {/* Triggers */}
+                <div>
+                    <h4 className="sidebar__title">Triggers</h4>
+                    <Divider />
+                    {sidebarItems.triggers.map((trigger) => (
+                        <SidebarItem key={trigger.id} item={trigger} onDragStart={onDragStart} />
+                    ))}
+                </div>
 
-            {/* Workflow Control */}
-            <div>
-                <h4 className="sidebar__title">Workflow Control</h4>
-                <Divider />
-                {sidebarItems.workflowControl.map((workflow) => (
-                    <SidebarItem key={workflow.id} item={workflow} onDragStart={onDragStart} />
-                ))}
-            </div>
+                {/* Workflow Control */}
+                <div>
+                    <h4 className="sidebar__title">Workflow Control</h4>
+                    <Divider />
+                    {sidebarItems.workflowControl.map((workflow) => (
+                        <SidebarItem key={workflow.id} item={workflow} onDragStart={onDragStart} />
+                    ))}
+                </div>
 
-            {/* Actions */}
-            <div>
-                <h4 className="sidebar__title">Actions</h4>
-                <Divider />
-                {sidebarItems.actions.map((action) => (
-                    <SidebarItem key={action.id} item={action} onDragStart={onDragStart} />
-                ))}
+                {/* Actions */}
+                <div>
+                    <h4 className="sidebar__title">Actions</h4>
+                    <Divider />
+                    {sidebarItems.actions.map((action) => (
+                        <SidebarItem key={action.id} item={action} onDragStart={onDragStart} />
+                    ))}
+                </div>
             </div>
-        </div>
+        </aside>
     );
 };
 

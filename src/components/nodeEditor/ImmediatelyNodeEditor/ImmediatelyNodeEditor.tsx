@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TextareaAutosize } from "@mui/material";
-import { INodeEditor, INodeEditorProps } from "./NodeEditor.types";
-import { ImmediatelyNodeData } from "../nodes/Node.types";
+import { INodeEditor, INodeEditorProps } from "../NodeEditorWrapper.types";
+import { ImmediatelyNodeData } from "../../nodes/Node.types";
 
 const ImmediatelyNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
     const immediatelyNodeData = data as ImmediatelyNodeData;

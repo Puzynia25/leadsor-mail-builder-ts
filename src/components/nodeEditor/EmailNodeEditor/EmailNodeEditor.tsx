@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
-import { INodeEditor, INodeEditorProps } from "./NodeEditor.types";
-import { EmailNodeData } from "../nodes/Node.types";
+import { INodeEditor, INodeEditorProps } from "../NodeEditorWrapper.types";
+import { EmailNodeData } from "../../nodes/Node.types";
 import { EditOutlined, RemoveRedEyeOutlined } from "@mui/icons-material";
 
 import "./EmailNodeEditor.scss";

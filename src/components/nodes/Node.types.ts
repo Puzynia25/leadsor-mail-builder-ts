@@ -37,7 +37,13 @@ export interface INodeRender {
 export type NodeData = { icon: string; label: string; color: string; onEdit?: () => void };
 export type ImmediatelyNodeData = NodeData & { name: string };
 export type ScheduledTimeNodeData = NodeData & { name: string };
-export type WaitNodeData = NodeData & { wait: number; timeRange: string };
+export type WaitNodeData = NodeData & {
+    type?: string;
+    waitingType?: string;
+    timePeriod?: number;
+    calendar?: string;
+    timeRange?: string;
+};
 export type ConditionNodeData = NodeData & {
     conditions?: ICondition[];
 };

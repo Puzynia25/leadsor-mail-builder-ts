@@ -1,11 +1,11 @@
 import { useCallback, useState } from "react";
 import { addEdge, Edge, OnConnect, useEdgesState, useNodesState } from "@xyflow/react";
-import AppHeader from "./components/appHeader/AppHeader";
+import Header from "./components/header/Header";
 import Sidebar from "./components/sidebar/Sidebar";
 import FlowWrapper from "./components/flowWrapper/FlowWrapper";
 import { Divider } from "@mui/material";
 import { initialEdges, initialNodes } from "./components/flowWrapper/initialElements";
-import NodeEditor from "./components/nodeEditor/NodeEditor";
+import NodeEditorWrapper from "./components/nodeEditor/NodeEditorWrapper";
 import { CustomNodeType } from "./components/nodes/Node.types";
 
 import "./App.scss";
@@ -40,7 +40,7 @@ const App = () => {
 
     return (
         <div className="app__wrapper">
-            <AppHeader />
+            <Header />
             <Divider />
             <div className="app__container">
                 <Sidebar />
@@ -55,7 +55,7 @@ const App = () => {
             </div>
 
             {isEditorOpen && selectedNode && (
-                <NodeEditor
+                <NodeEditorWrapper
                     type={selectedNode.type}
                     data={selectedNode.data}
                     onClose={handleCloseEditor}

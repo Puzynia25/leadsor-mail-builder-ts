@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { MenuItem, Select, SelectChangeEvent, TextareaAutosize, TextField } from "@mui/material";
-import { INodeEditor, INodeEditorProps } from "./NodeEditor.types";
-import { EmailNodeData } from "../nodes/Node.types";
+import { MenuItem, Select, SelectChangeEvent, TextareaAutosize } from "@mui/material";
+import { INodeEditor, INodeEditorProps } from "../NodeEditorWrapper.types";
+import { EmailNodeData } from "../../nodes/Node.types";
 
 const SmsNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
     const emailNodeData = data as EmailNodeData;

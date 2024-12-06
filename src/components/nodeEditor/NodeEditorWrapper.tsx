@@ -1,10 +1,10 @@
 import { Button } from "@mui/material";
 import { useNodeEditor } from "../../hooks/useNodeEditor";
-import { INodeEditorProps } from "./NodeEditor.types";
+import { INodeEditorProps } from "./NodeEditorWrapper.types";
 
-import "./NodeEditor.scss";
+import "./NodeEditorWrapper.scss";
 
-const NodeEditor = ({ type, data, onClose, onUpdateNodeContent }: INodeEditorProps) => {
+const NodeEditorWrapper = ({ type, data, onClose, onUpdateNodeContent }: INodeEditorProps) => {
     const nodeData: INodeEditorProps = {
         data,
         onUpdateNodeContent,
@@ -40,4 +40,4 @@ const NodeEditor = ({ type, data, onClose, onUpdateNodeContent }: INodeEditorPro
     );
 };
 
-export default NodeEditor;
+export default NodeEditorWrapper;

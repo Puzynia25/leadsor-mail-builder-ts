@@ -1,6 +1,6 @@
-import { ScheduledTimeNodeType } from "./Node.types";
+import { ScheduledTimeNodeType } from "../Node.types";
 import { NodeProps } from "@xyflow/react";
-import NodeWrapper from "./NodeWrapper";
+import NodeWrapper from "../NodeWrapper";
 import { Chip } from "@mui/material";
 
 import "./ScheduledTimeNode.scss";

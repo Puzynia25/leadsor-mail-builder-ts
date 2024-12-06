@@ -1,6 +1,6 @@
-import { ImmediatelyNodeType } from "./Node.types";
+import { ImmediatelyNodeType } from "../Node.types";
 import { NodeProps } from "@xyflow/react";
-import NodeWrapper from "./NodeWrapper";
+import NodeWrapper from "../NodeWrapper";
 import { Chip } from "@mui/material";
 
 import "./ImmediatelyNode.scss";
