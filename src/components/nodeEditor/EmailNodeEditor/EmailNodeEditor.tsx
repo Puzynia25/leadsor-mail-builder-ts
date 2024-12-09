@@ -9,7 +9,7 @@ import "./EmailNodeEditor.scss";
 const EmailNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
     const emailNodeData = data as EmailNodeData;
 
-    const [email, setEmail] = useState("some email");
+    const [email, setEmail] = useState(emailNodeData.email ?? "some email");
 
     const applyChanges = () => {
         const newData: EmailNodeData = {

@@ -8,9 +8,18 @@ import "./SmsNode.scss";
 const SmsNode = ({ id, data }: NodeProps<SmsNodeType>) => {
     return (
         <NodeWrapper id={id} data={data} handle="all">
-            SmsNode
-            {/* <span className="immediately-node__title">Name: </span>
-            <Chip label={data.name} /> */}
+            {data.sender && data.message && (
+                <>
+                    <div>
+                        <span className="immediately-node__title">Sender: </span>
+                        <Chip label={data.sender} sx={{ margin: "5px" }} />
+                    </div>
+                    <div>
+                        <span className="immediately-node__title">Message: </span>
+                        <Chip label={data.message} />
+                    </div>
+                </>
+            )}
         </NodeWrapper>
     );
 };

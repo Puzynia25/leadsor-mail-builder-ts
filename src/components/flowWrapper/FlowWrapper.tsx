@@ -66,7 +66,7 @@ const FlowWrapper = ({ nodes, edges, onNodesChange, onEdgesChange, onConnect, on
                     ...node,
                     data: {
                         ...node.data,
-                        onEdit: () => onEditNode(node.id), // Передаем onEdit
+                        onEdit: () => onEditNode(node.id),
                     },
                 }))}
                 edges={edges}

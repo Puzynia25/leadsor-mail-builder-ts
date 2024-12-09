@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { MenuItem, Select, TextareaAutosize } from "@mui/material";
 import { INodeEditor, INodeEditorProps } from "../NodeEditorWrapper.types";
-import { EmailNodeData, SmsNodeData } from "../../nodes/Node.types";
+import { SmsNodeData } from "../../nodes/Node.types";
 
 const SmsNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
-    const emailNodeData = data as EmailNodeData;
+    const smsNodeData = data as SmsNodeData;
 
-    const [sender, setSender] = useState("some sender");
-    const [message, setMessage] = useState("");
+    const [sender, setSender] = useState(smsNodeData.sender ?? "some sender");
+    const [message, setMessage] = useState(smsNodeData.message ?? "");
 
     const applyChanges = () => {
-        const newData: SmsNodeData = { ...emailNodeData, sender, message };
+        const newData: SmsNodeData = { ...smsNodeData, sender, message };
 
         onUpdateNodeContent(newData);
     };
