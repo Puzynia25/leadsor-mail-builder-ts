@@ -1,12 +1,12 @@
+import { useState } from "react";
 import { Divider, IconButton } from "@mui/material";
 import { ContactsOutlined, ContentCopyOutlined, DeleteOutlined, SettingsOutlined } from "@mui/icons-material";
 import { NodeToolbar as FlowNodeToolbar, useReactFlow } from "@xyflow/react";
 import { CommonNodeData, CustomNodeType } from "../nodes/Node.types";
 import { v4 as uuidv4 } from "uuid";
+import ContactsDialog from "./ContactsDialog/ContactsDialog";
 
 import "./NodeToolbar.scss";
-import { useState } from "react";
-import ContactsDialog from "./ContactsDialog/ContactsDialog";
 
 const NodeToolbar = ({ nodeId, data, selected }: { nodeId: string; data: CommonNodeData; selected: boolean }) => {
     const { setNodes } = useReactFlow();
@@ -64,7 +64,7 @@ const NodeToolbar = ({ nodeId, data, selected }: { nodeId: string; data: CommonN
                     <DeleteOutlined className="node-toolbar__delete-icon" />
                 </IconButton>
             </FlowNodeToolbar>
-            <ContactsDialog open={isContactsOpen} onClose={onCloseContacts} contacts={contacts} />
+            <ContactsDialog open={isContactsOpen} onClose={onCloseContacts} contacts={contacts} data={data} />
         </>
     );
 };
