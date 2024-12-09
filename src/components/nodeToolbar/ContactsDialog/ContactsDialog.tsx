@@ -1,25 +1,24 @@
-import {
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-    Typography,
-    Chip,
-} from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, Typography, Chip, Divider } from "@mui/material";
 import { ContactsDialogProps } from "./ContactsDialog.types";
+import ContactsTable from "./ContactsTable";
 
 const ContactsDialog = ({ open, onClose, contacts, data }: ContactsDialogProps) => {
+    const contactsTableContent =
+        contacts.length === 0 ? <Typography>No data found</Typography> : <ContactsTable contacts={contacts} />;
+
     return (
         <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
             <DialogTitle>
                 <div>
-                    <div className="node-settings__title">
+                    <div className="node-settings__title" style={{ color: data.color }}>
                         <h6>{data.label}</h6>
-                        <div className="divider" />
+                        <Divider
+                            sx={{
+                                borderBottomWidth: "medium",
+                                bgcolor: data.color,
+                                marginTop: "7px",
+                            }}
+                        />
                     </div>
 
                     <p>Contacts that have passed through the node</p>
@@ -29,30 +28,7 @@ const ContactsDialog = ({ open, onClose, contacts, data }: ContactsDialogProps) 
                     />
                 </div>
             </DialogTitle>
-            <DialogContent>
-                {contacts.length === 0 ? (
-                    <Typography>No data found</Typography>
-                ) : (
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Pass-through time</TableCell>
-                                <TableCell>Email</TableCell>
-                                <TableCell>Phone</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {contacts.map((contact, index) => (
-                                <TableRow key={index}>
-                                    <TableCell>{contact.time}</TableCell>
-                                    <TableCell>{contact.email}</TableCell>
-                                    <TableCell>{contact.phone}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                )}
-            </DialogContent>
+            <DialogContent>{contactsTableContent}</DialogContent>
         </Dialog>
     );
 };

@@ -1,9 +1,11 @@
 import { CommonNodeData } from "../../nodes/Node.types";
 
-interface Contact {
+export interface Contact {
+    id: string;
     time: string;
     email: string;
     phone: string;
+    contactContinued: string;
 }
 
 export interface ContactsDialogProps {
@@ -11,4 +13,8 @@ export interface ContactsDialogProps {
     onClose: () => void;
     contacts: Contact[];
     data: CommonNodeData;
+}
+
+export interface ContactTableProps {
+    contacts: Contact[];
 }

@@ -5,26 +5,29 @@ import Sidebar from "./components/sidebar/Sidebar";
 import FlowWrapper from "./components/flowWrapper/FlowWrapper";
 import { Divider } from "@mui/material";
 import { initialEdges, initialNodes } from "./components/flowWrapper/initialElements";
-import { CustomNodeType } from "./components/nodes/Node.types";
+import { CommonNodeData, CustomNodeType } from "./components/nodes/Node.types";
 import NodeSettingsWrapper from "./components/nodeToolbar/NodeSettings/NodeSettingsWrapper";
+import ContactsDialog from "./components/nodeToolbar/ContactsDialog/ContactsDialog";
+import { Contact } from "./components/nodeToolbar/ContactsDialog/ContactsDialog.types";
 
 import "./App.scss";
-import ContactsDialog from "./components/nodeToolbar/ContactsDialog/ContactsDialog";
 
 const App = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-    const [selectedNode, setSelectedNode] = useState(null);
+    const [selectedNode, setSelectedNode] = useState<CustomNodeType | null>(null);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isContactsOpen, setIsContactsOpen] = useState(false);
 
-    const [contacts, setContacts] = useState([{ time: "10:30 am", email: "example@example.com", phone: "+123456789" }]);
+    const [contacts, setContacts] = useState<Contact[]>([
+        { id: "0", time: "10:30 am", email: "example@example.com", phone: "+123456789", contactContinued: "" },
+    ]);
 
     const onConnect: OnConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
 
     const handleEditNode = (nodeId: string) => {
-        const node: CustomNodeType = nodes.find((n) => n.id === nodeId);
+        const node = nodes.find((n) => n.id === nodeId);
         if (node) {
             setSelectedNode(node);
             setIsSettingsOpen(true);
@@ -36,9 +39,14 @@ const App = () => {
         setSelectedNode(null);
     };
 
-    const handleUpdateNodeContent = (updatedData) => {
-        setNodes((nds) =>
-            nds.map((n) => (n.id === selectedNode.id ? { ...n, data: { ...n.data, ...updatedData } } : n))
+    const handleUpdateNodeContent = (updatedData: Partial<CommonNodeData>) => {
+        if (!selectedNode) return;
+
+        setNodes(
+            (nds) =>
+                nds.map((n) =>
+                    n.id === selectedNode.id ? { ...n, data: { ...n.data, ...updatedData } } : n
+                ) as CustomNodeType[]
         );
     };
 
@@ -74,7 +82,7 @@ const App = () => {
 
             {isSettingsOpen && selectedNode && (
                 <NodeSettingsWrapper
-                    type={selectedNode.type}
+                    type={selectedNode.type ?? ""}
                     data={selectedNode.data}
                     onClose={handleCloseSettings}
                     onUpdateNodeContent={handleUpdateNodeContent}
