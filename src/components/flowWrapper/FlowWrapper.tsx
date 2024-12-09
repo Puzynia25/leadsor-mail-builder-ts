@@ -24,9 +24,18 @@ interface IFlowWrapperProps {
     onEdgesChange: OnEdgesChange<Edge>;
     onConnect: OnConnect;
     onEditNode: (nodeId: string) => void;
+    onOpenContacts: (nodeId: string) => void;
 }
 
-const FlowWrapper = ({ nodes, edges, onNodesChange, onEdgesChange, onConnect, onEditNode }: IFlowWrapperProps) => {
+const FlowWrapper = ({
+    nodes,
+    edges,
+    onNodesChange,
+    onEdgesChange,
+    onConnect,
+    onEditNode,
+    onOpenContacts,
+}: IFlowWrapperProps) => {
     const { getViewport, addNodes, getNodes } = useReactFlow();
 
     // const nodes: CustomNodeType[] = getNodes();
@@ -67,6 +76,7 @@ const FlowWrapper = ({ nodes, edges, onNodesChange, onEdgesChange, onConnect, on
                     data: {
                         ...node.data,
                         onEdit: () => onEditNode(node.id),
+                        onOpenContacts: () => onOpenContacts(node.id),
                     },
                 }))}
                 edges={edges}

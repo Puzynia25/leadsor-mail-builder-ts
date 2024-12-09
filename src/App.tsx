@@ -9,6 +9,7 @@ import { CustomNodeType } from "./components/nodes/Node.types";
 import NodeSettingsWrapper from "./components/nodeToolbar/NodeSettings/NodeSettingsWrapper";
 
 import "./App.scss";
+import ContactsDialog from "./components/nodeToolbar/ContactsDialog/ContactsDialog";
 
 const App = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -16,6 +17,9 @@ const App = () => {
 
     const [selectedNode, setSelectedNode] = useState(null);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    const [isContactsOpen, setIsContactsOpen] = useState(false);
+
+    const [contacts, setContacts] = useState([{ time: "10:30 am", email: "example@example.com", phone: "+123456789" }]);
 
     const onConnect: OnConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
 
@@ -38,6 +42,19 @@ const App = () => {
         );
     };
 
+    const handleOpenContacts = (nodeId: string) => {
+        const node = nodes.find((n) => n.id === nodeId);
+        if (node) {
+            setSelectedNode(node);
+            setIsContactsOpen(true);
+        }
+    };
+
+    const handleCloseContacts = () => {
+        setIsContactsOpen(false);
+        setSelectedNode(null);
+    };
+
     return (
         <div className="app__wrapper">
             <Header />
@@ -51,6 +68,7 @@ const App = () => {
                     onEdgesChange={onEdgesChange}
                     onConnect={onConnect}
                     onEditNode={handleEditNode}
+                    onOpenContacts={handleOpenContacts}
                 />
             </div>
 
@@ -60,6 +78,15 @@ const App = () => {
                     data={selectedNode.data}
                     onClose={handleCloseSettings}
                     onUpdateNodeContent={handleUpdateNodeContent}
+                />
+            )}
+
+            {isContactsOpen && selectedNode && (
+                <ContactsDialog
+                    open={isContactsOpen}
+                    onClose={handleCloseContacts}
+                    contacts={contacts}
+                    data={selectedNode.data}
                 />
             )}
         </div>

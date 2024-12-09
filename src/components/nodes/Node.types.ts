@@ -35,7 +35,7 @@ export interface INodeRender {
     render: JSX.Element;
 }
 
-export type NodeData = { icon: string; label: string; color: string; onEdit?: () => void };
+export type NodeData = { icon: string; label: string; color: string; onEdit?: () => void; onOpenContacts?: () => void };
 export type ImmediatelyNodeData = NodeData & { name: string };
 export type ScheduledTimeNodeData = NodeData & { date?: string; time?: string };
 export type WaitNodeData = NodeData & {
