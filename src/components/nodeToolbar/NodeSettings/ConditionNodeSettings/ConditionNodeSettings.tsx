@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { INodeEditor, INodeEditorProps } from "../NodeEditorWrapper.types";
-import { ConditionNodeData, ICondition } from "../../nodes/Node.types";
-import { _currency } from "../../../constants";
+import { INodeSettingsWrapper, INodeSettingsWrapperProps } from "../NodeSettingsWrapper.types";
+import { ConditionNodeData, ICondition } from "../../../nodes/Node.types";
+import { _currency } from "../../../../constants";
 import { v4 as uuidv4 } from "uuid";
 import { Button } from "@mui/material";
 import ConditionItem from "./ConditionItem";
-import ButtonNode from "../../nodes/ButtonNode";
-import { notBtn } from "../../../utils";
+import ButtonNode from "../../../nodes/ButtonNode";
+import { notBtn } from "../../../../utils";
 
-import "./ConditionNodeEditor.scss";
+import "./ConditionNodeSettings.scss";
 
-const ConditionNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
+const ConditionNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapperProps): INodeSettingsWrapper => {
     const conditionNodeData = data as ConditionNodeData;
 
     const [conditions, setConditions] = useState<ICondition[]>(conditionNodeData.conditions ?? []);
@@ -90,7 +90,7 @@ const ConditionNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): I
 
     return {
         render: (
-            <div className="condition-node-editor__content">
+            <div className="condition-node-settings__content">
                 {/* Add condition */}
                 {allConditions}
                 <ButtonNode btn={notBtn} isHandle={false} />
@@ -107,4 +107,4 @@ const ConditionNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): I
     };
 };
 
-export default ConditionNodeEditor;
+export default ConditionNodeSettings;

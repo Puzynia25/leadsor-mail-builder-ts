@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { MenuItem, Select, TextField } from "@mui/material";
-import { INodeEditor, INodeEditorProps, TimeRange } from "../NodeEditorWrapper.types";
-import { WaitNodeData } from "../../nodes/Node.types";
+import { INodeSettingsWrapper, INodeSettingsWrapperProps, TimeRange } from "../NodeSettingsWrapper.types";
+import { WaitNodeData } from "../../../nodes/Node.types";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
 
-import "./WaitNodeEditor.scss";
-
-const WaitNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
+const WaitNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapperProps): INodeSettingsWrapper => {
     const waitNodeData = data as WaitNodeData;
 
     const [type, setType] = useState<string>(waitNodeData.type ?? "setWaitingTime");
@@ -32,10 +30,10 @@ const WaitNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeE
 
     return {
         render: (
-            <div className="wait-node-editor__container">
+            <div className="node-settings__container">
                 <div>
-                    <p className="wait-node-editor__item-title">Type:</p>
-                    <div className="wait-node-editor__select">
+                    <p className="node-settings__item-title">Type:</p>
+                    <div className="node-settings__select">
                         <Select
                             value={type}
                             onChange={(e) => setType(e.target.value)}
@@ -46,8 +44,8 @@ const WaitNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeE
                 </div>
 
                 <div>
-                    <p className="wait-node-editor__item-title">Waiting type:</p>
-                    <div className="wait-node-editor__select">
+                    <p className="node-settings__item-title">Waiting type:</p>
+                    <div className="node-settings__select">
                         <Select
                             value={waitingType}
                             onChange={(e) => setWaitingType(e.target.value)}
@@ -60,8 +58,8 @@ const WaitNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeE
 
                 {waitingType === "calendar" && (
                     <div>
-                        <p className="wait-node-editor__item-title">Date picker:</p>
-                        <div className="wait-node-editor__select">
+                        <p className="node-settings__item-title">Date picker:</p>
+                        <div className="node-settings__select">
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                     value={calendar}
@@ -76,8 +74,8 @@ const WaitNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeE
 
                 {waitingType === "timePeriod" && (
                     <div>
-                        <p className="wait-node-editor__item-title">Enter the time period:</p>
-                        <div className="wait-node-editor__time-period">
+                        <p className="node-settings__item-title">Enter the time period:</p>
+                        <div className="node-settings__time-period">
                             <TextField
                                 value={timePeriod}
                                 size="medium"
@@ -104,4 +102,4 @@ const WaitNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeE
     };
 };
 
-export default WaitNodeEditor;
+export default WaitNodeSettings;

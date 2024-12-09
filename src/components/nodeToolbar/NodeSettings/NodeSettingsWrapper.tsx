@@ -1,11 +1,11 @@
 import { Button } from "@mui/material";
-import { useNodeEditor } from "../../hooks/useNodeEditor";
-import { INodeEditorProps } from "./NodeEditorWrapper.types";
+import { useNodeSettings } from "../../../hooks/useNodeSettings";
+import { INodeSettingsWrapperProps } from "./NodeSettingsWrapper.types";
 
-import "./NodeEditorWrapper.scss";
+import "./NodeSettingsWrapper.scss";
 
-const NodeEditorWrapper = ({ type, data, onClose, onUpdateNodeContent }: INodeEditorProps) => {
-    const { render, applyChanges } = useNodeEditor({ type, data, onUpdateNodeContent });
+const NodeSettingsWrapper = ({ type, data, onClose, onUpdateNodeContent }: INodeSettingsWrapperProps) => {
+    const { render, applyChanges } = useNodeSettings({ type, data, onUpdateNodeContent });
 
     const handleApply = () => {
         if (applyChanges) {
@@ -17,13 +17,13 @@ const NodeEditorWrapper = ({ type, data, onClose, onUpdateNodeContent }: INodeEd
     return (
         <section>
             <div className="overlay-dark" />
-            <div className="node-editor__wrapper">
-                <div className="node-editor__title">
+            <div className="node-settings__wrapper">
+                <div className="node-settings__title">
                     <h6>{data.label}</h6>
                     <div className="divider" />
                 </div>
-                <div className="node-editor__inner">
-                    <div className="node-editor__content">{render}</div>
+                <div className="node-settings__inner">
+                    <div className="node-settings__content">{render}</div>
                     <div className="btn-wrapper">
                         <Button variant="contained" color="success" onClick={handleApply}>
                             Apply
@@ -35,4 +35,4 @@ const NodeEditorWrapper = ({ type, data, onClose, onUpdateNodeContent }: INodeEd
     );
 };
 
-export default NodeEditorWrapper;
+export default NodeSettingsWrapper;

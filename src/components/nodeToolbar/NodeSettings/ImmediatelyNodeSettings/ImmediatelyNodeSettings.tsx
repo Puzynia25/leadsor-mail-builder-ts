@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { TextareaAutosize } from "@mui/material";
-import { INodeEditor, INodeEditorProps } from "../NodeEditorWrapper.types";
-import { ImmediatelyNodeData } from "../../nodes/Node.types";
+import { INodeSettingsWrapper, INodeSettingsWrapperProps } from "../NodeSettingsWrapper.types";
+import { ImmediatelyNodeData } from "../../../nodes/Node.types";
 
-const ImmediatelyNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
+const ImmediatelyNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapperProps): INodeSettingsWrapper => {
     const immediatelyNodeData = data as ImmediatelyNodeData;
 
     const [nodeName, setNodeName] = useState(immediatelyNodeData.name);
@@ -48,4 +48,4 @@ const ImmediatelyNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps):
     };
 };
 
-export default ImmediatelyNodeEditor;
+export default ImmediatelyNodeSettings;

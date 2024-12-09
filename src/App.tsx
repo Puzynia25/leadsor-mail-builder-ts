@@ -5,8 +5,8 @@ import Sidebar from "./components/sidebar/Sidebar";
 import FlowWrapper from "./components/flowWrapper/FlowWrapper";
 import { Divider } from "@mui/material";
 import { initialEdges, initialNodes } from "./components/flowWrapper/initialElements";
-import NodeEditorWrapper from "./components/nodeEditor/NodeEditorWrapper";
 import { CustomNodeType } from "./components/nodes/Node.types";
+import NodeSettingsWrapper from "./components/nodeToolbar/NodeSettings/NodeSettingsWrapper";
 
 import "./App.scss";
 
@@ -15,7 +15,7 @@ const App = () => {
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
     const [selectedNode, setSelectedNode] = useState(null);
-    const [isEditorOpen, setIsEditorOpen] = useState(false);
+    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
     const onConnect: OnConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
 
@@ -23,12 +23,12 @@ const App = () => {
         const node: CustomNodeType = nodes.find((n) => n.id === nodeId);
         if (node) {
             setSelectedNode(node);
-            setIsEditorOpen(true);
+            setIsSettingsOpen(true);
         }
     };
 
-    const handleCloseEditor = () => {
-        setIsEditorOpen(false);
+    const handleCloseSettings = () => {
+        setIsSettingsOpen(false);
         setSelectedNode(null);
     };
 
@@ -54,11 +54,11 @@ const App = () => {
                 />
             </div>
 
-            {isEditorOpen && selectedNode && (
-                <NodeEditorWrapper
+            {isSettingsOpen && selectedNode && (
+                <NodeSettingsWrapper
                     type={selectedNode.type}
                     data={selectedNode.data}
-                    onClose={handleCloseEditor}
+                    onClose={handleCloseSettings}
                     onUpdateNodeContent={handleUpdateNodeContent}
                 />
             )}

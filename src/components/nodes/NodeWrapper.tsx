@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Handle, Position } from "@xyflow/react";
 import { NodeData } from "./Node.types";
-import CustomNodeToolbar from "../customNodeToolbar/CustomNodeToolbar";
+import NodeToolbar from "../nodeToolbar/NodeToolbar";
 import * as Icons from "@mui/icons-material";
 
 import "./NodeWrapper.scss";
@@ -34,7 +34,7 @@ const NodeWrapper = ({ id, data, selected, children, handle }: NodeWrapperProps)
                     <Handle type="source" position={Position.Right} id={`${id}-source`} />
                 )}
             </div>
-            <CustomNodeToolbar data={data} selected={selected} nodeId={id} />
+            <NodeToolbar data={data} selected={selected} nodeId={id} />
         </>
         // <>
         //     <div>
@@ -53,7 +53,7 @@ const NodeWrapper = ({ id, data, selected, children, handle }: NodeWrapperProps)
         //         )}
         //     </div>
         //     <div className="node__wrapper-child">{children}</div>
-        //     <CustomNodeToolbar data={data} selected={selected} nodeId={id} />
+        //     <NodeToolbar data={data} selected={selected} nodeId={id} />
         // </>
     );
 };

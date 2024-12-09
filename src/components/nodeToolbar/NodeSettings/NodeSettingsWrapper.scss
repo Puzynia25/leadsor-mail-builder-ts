@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import "../../../styles/variables.scss";
 
 .overlay-dark {
     position: fixed;
@@ -10,7 +10,7 @@
     z-index: 1;
 }
 
-.node-editor__wrapper {
+.node-settings__wrapper {
     position: fixed;
     top: 0;
     right: 0;
@@ -25,21 +25,21 @@
     overflow: auto;
 }
 
-.node-editor__title {
+.node-settings__title {
     color: $primary;
     font-size: 0.9rem;
     text-transform: uppercase;
     margin-bottom: 20px;
 }
 
-.node-editor__inner {
+.node-settings__inner {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.node-editor__content {
+.node-settings__content {
     div {
         font-size: 0.9rem;
     }
@@ -61,4 +61,24 @@
     color: "grey";
     background: #ffff;
     border-radius: 4px;
+}
+
+.node-settings__container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.node-settings__item-title {
+    font-weight: 500;
+}
+
+.node-settings__select {
+    margin: 10px 0;
+}
+
+.node-settings__time-period {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
 }

@@ -1,13 +1,17 @@
 import { Divider, IconButton } from "@mui/material";
 import { ContactsOutlined, ContentCopyOutlined, DeleteOutlined, SettingsOutlined } from "@mui/icons-material";
-import { NodeToolbar, useReactFlow } from "@xyflow/react";
+import { NodeToolbar as FlowNodeToolbar, useReactFlow } from "@xyflow/react";
 import { CommonNodeData, CustomNodeType } from "../nodes/Node.types";
 import { v4 as uuidv4 } from "uuid";
 
-import "./CustomNodeToolbar.scss";
+import "./NodeToolbar.scss";
+import { useState } from "react";
+import ContactsDialog from "./ContactsDialog/ContactsDialog";
 
-const CustomNodeToolbar = ({ nodeId, data, selected }: { nodeId: string; data: CommonNodeData; selected: boolean }) => {
+const NodeToolbar = ({ nodeId, data, selected }: { nodeId: string; data: CommonNodeData; selected: boolean }) => {
     const { setNodes } = useReactFlow();
+
+    const [isContactsOpen, setContactsOpen] = useState(false);
 
     const onCopyNode = () => {
         const copyNode = (nodes: CustomNodeType[], nodeId: string): CustomNodeType[] => {
@@ -35,25 +39,36 @@ const CustomNodeToolbar = ({ nodeId, data, selected }: { nodeId: string; data: C
         setNodes((nodes) => nodes.filter((node) => node.id !== nodeId));
     };
 
+    const onOpenContacts = () => {
+        setContactsOpen(true);
+    };
+
+    const onCloseContacts = () => {
+        setContactsOpen(false);
+    };
+
     return (
         <>
-            <NodeToolbar isVisible={selected} position="bottom" className="node-toolbar__wrapper">
+            <FlowNodeToolbar isVisible={selected} position="bottom" className="node-toolbar__wrapper">
                 <IconButton onClick={data.onEdit}>
                     <SettingsOutlined className="node-toolbar__icon" />
                 </IconButton>
                 <IconButton onClick={onCopyNode}>
                     <ContentCopyOutlined fontSize="small" className="node-toolbar__icon" />
                 </IconButton>
-                <IconButton onClick={(e) => console.log("contacts")}>
+                <IconButton onClick={onOpenContacts}>
                     <ContactsOutlined fontSize="small" className="node-toolbar__icon" />
                 </IconButton>
                 <Divider orientation="vertical" variant="middle" flexItem sx={{ bgcolor: "#fff" }} />
                 <IconButton onClick={onDeleteNode}>
                     <DeleteOutlined className="node-toolbar__delete-icon" />
                 </IconButton>
-            </NodeToolbar>
+            </FlowNodeToolbar>
+            <ContactsDialog open={isContactsOpen} onClose={onCloseContacts} contacts={contacts} />
         </>
     );
 };
 
-export default CustomNodeToolbar;
+export default NodeToolbar;
+
+const contacts = [{ time: "10:30 am", email: "example@example.com", phone: "+123456789" }];

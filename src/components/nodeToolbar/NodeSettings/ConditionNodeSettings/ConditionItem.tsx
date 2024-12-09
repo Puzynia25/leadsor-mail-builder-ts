@@ -1,6 +1,6 @@
 import { FormControl, IconButton, MenuItem, Select } from "@mui/material";
-import { ICondition } from "../../nodes/Node.types";
-import { _currency } from "../../../constants";
+import { ICondition } from "../../../nodes/Node.types";
+import { _currency } from "../../../../constants";
 import { useEffect, useState } from "react";
 import { DeleteRounded } from "@mui/icons-material";
 

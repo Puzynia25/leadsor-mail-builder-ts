@@ -1,4 +1,5 @@
 import { Node } from "@xyflow/react";
+import { TimeRange } from "../nodeToolbar/NodeSettings/NodeSettingsWrapper.types";
 
 // export interface INodeBaseContent {
 //     label: string;
@@ -42,7 +43,7 @@ export type WaitNodeData = NodeData & {
     waitingType?: string;
     timePeriod?: number;
     calendar?: string;
-    timeRange?: string;
+    timeRange?: TimeRange;
 };
 export type ConditionNodeData = NodeData & {
     conditions?: ICondition[];

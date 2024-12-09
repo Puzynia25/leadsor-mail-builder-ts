@@ -1,11 +1,11 @@
-import { CommonNodeData } from "../nodes/Node.types";
+import { CommonNodeData } from "../../nodes/Node.types";
 
-export interface INodeEditor {
+export interface INodeSettingsWrapper {
     render: JSX.Element;
     applyChanges?: () => void;
 }
 
-export interface INodeEditorProps {
+export interface INodeSettingsWrapperProps {
     type: string;
     data: CommonNodeData;
     onClose?: () => void;

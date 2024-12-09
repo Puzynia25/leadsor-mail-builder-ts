@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { MenuItem, Select, TextareaAutosize } from "@mui/material";
-import { INodeEditor, INodeEditorProps } from "../NodeEditorWrapper.types";
-import { SmsNodeData } from "../../nodes/Node.types";
+import { SmsNodeData } from "../../../nodes/Node.types";
+import { INodeSettingsWrapper, INodeSettingsWrapperProps } from "../NodeSettingsWrapper.types";
 
-const SmsNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
+const SmsNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapperProps): INodeSettingsWrapper => {
     const smsNodeData = data as SmsNodeData;
 
     const [sender, setSender] = useState(smsNodeData.sender ?? "some sender");
@@ -17,10 +17,10 @@ const SmsNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEd
 
     return {
         render: (
-            <div className="wait-node-editor__container">
+            <div className="node-settings__container">
                 <div>
-                    <p className="wait-node-editor__item-title">SMS message to be sent:</p>
-                    <div className="wait-node-editor__select">
+                    <p className="node-settings__item-title">SMS message to be sent:</p>
+                    <div className="node-settings__select">
                         <Select
                             value={sender}
                             onChange={(e) => setSender(e.target.value)}
@@ -31,8 +31,8 @@ const SmsNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEd
                 </div>
 
                 <div>
-                    <div className="wait-node-editor__select">
-                        <p className="wait-node-editor__item-title">SMS message:</p>
+                    <div className="node-settings__select">
+                        <p className="node-settings__item-title">SMS message:</p>
                         <TextareaAutosize
                             minRows={3}
                             style={{
@@ -55,4 +55,4 @@ const SmsNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEd
     };
 };
 
-export default SmsNodeEditor;
+export default SmsNodeSettings;

@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { TextField } from "@mui/material";
-import { INodeEditor, INodeEditorProps } from "../NodeEditorWrapper.types";
-import { ScheduledTimeNodeData } from "../../nodes/Node.types";
+import { INodeSettingsWrapper, INodeSettingsWrapperProps } from "../NodeSettingsWrapper.types";
+import { ScheduledTimeNodeData } from "../../../nodes/Node.types";
 import { DatePicker, LocalizationProvider, TimePicker, TimePickerProps } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
 
-import "./ScheduledTimeNodeEditor.scss";
+import "./ScheduledTimeNodeSettings.scss";
 
-const ScheduledTimeNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
+const ScheduledTimeNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapperProps): INodeSettingsWrapper => {
     const scheduledTimeNodeData = data as ScheduledTimeNodeData;
 
     const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs(scheduledTimeNodeData.date) ?? dayjs());
@@ -28,10 +28,10 @@ const ScheduledTimeNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps
 
     return {
         render: (
-            <div className="scheduledTime-node-editor__container">
+            <div className="scheduledTime-node-settings__container">
                 <div>
-                    <p className="scheduledTime-node-editor__item-title">Select date:</p>
-                    <div className="scheduledTime-node-editor__time-period">
+                    <p className="node-settings__item-title">Select date:</p>
+                    <div className="node-settings__time-period">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
                                 value={selectedDate}
@@ -43,8 +43,8 @@ const ScheduledTimeNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps
                     </div>
                 </div>
                 <div>
-                    <p className="scheduledTime-node-editor__item-title">Select time:</p>
-                    <div className="scheduledTime-node-editor__time-period">
+                    <p className="node-settings__item-title">Select time:</p>
+                    <div className="node-settings__time-period">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <TimePicker
                                 value={selectedTime}
@@ -61,4 +61,4 @@ const ScheduledTimeNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps
     };
 };
 
-export default ScheduledTimeNodeEditor;
+export default ScheduledTimeNodeSettings;

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Button, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
-import { INodeEditor, INodeEditorProps } from "../NodeEditorWrapper.types";
-import { EmailNodeData } from "../../nodes/Node.types";
+import { INodeSettingsWrapper, INodeSettingsWrapperProps } from "../NodeSettingsWrapper.types";
+import { EmailNodeData } from "../../../nodes/Node.types";
 import { EditOutlined, RemoveRedEyeOutlined } from "@mui/icons-material";
 
-import "./EmailNodeEditor.scss";
+import "./EmailNodeSettings.scss";
 
-const EmailNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INodeEditor => {
+const EmailNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapperProps): INodeSettingsWrapper => {
     const emailNodeData = data as EmailNodeData;
 
     const [email, setEmail] = useState(emailNodeData.email ?? "some email");
@@ -22,10 +22,10 @@ const EmailNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INode
 
     return {
         render: (
-            <div className="wait-node-editor__container">
+            <div className="node-settings__container">
                 <div>
-                    <p className="wait-node-editor__item-title">Email to be sent:</p>
-                    <div className="wait-node-editor__select">
+                    <p className="node-settings__item-title">Email to be sent:</p>
+                    <div className="node-settings__select">
                         <Select
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -36,13 +36,13 @@ const EmailNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INode
                 </div>
 
                 <div>
-                    <p className="wait-node-editor__item-title">Email subject:</p>
-                    <div className="wait-node-editor__select">
+                    <p className="node-settings__item-title">Email subject:</p>
+                    <div className="node-settings__select">
                         <TextField value="" size="medium" sx={{ width: "100%", bgcolor: "#ffff" }} />
                     </div>
                 </div>
 
-                <div className="wait-node-editor__preview">
+                <div className="email-node-settings__preview">
                     <Button variant="contained" sx={{ bgcolor: "ButtonText", opacity: "0.5" }}>
                         <RemoveRedEyeOutlined fontSize="small" sx={{ marginRight: "7px" }} /> Preview
                     </Button>
@@ -56,4 +56,4 @@ const EmailNodeEditor = ({ data, onUpdateNodeContent }: INodeEditorProps): INode
     };
 };
 
-export default EmailNodeEditor;
+export default EmailNodeSettings;
