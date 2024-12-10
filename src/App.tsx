@@ -9,6 +9,7 @@ import { CommonNodeData, CustomNodeType } from "./components/nodes/Node.types";
 import NodeSettingsWrapper from "./components/nodeToolbar/NodeSettings/NodeSettingsWrapper";
 import ContactsDialog from "./components/nodeToolbar/ContactsDialog/ContactsDialog";
 import { Contact } from "./components/nodeToolbar/ContactsDialog/ContactsDialog.types";
+import { contactsList } from "./utils/contacts";
 
 import "./App.scss";
 
@@ -20,36 +21,7 @@ const App = () => {
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isContactsOpen, setIsContactsOpen] = useState(false);
 
-    const [contacts, setContacts] = useState<Contact[]>([
-        {
-            id: "0",
-            time: "2024-12-31T10:30:00+03:00",
-            email: "example@example.com",
-            phone: "+123456789",
-            contactContinued: "",
-        },
-        {
-            id: "1",
-            time: "2024-09-31T06:00:00+03:00",
-            email: "example@example.com",
-            phone: "+123456789",
-            contactContinued: "",
-        },
-        {
-            id: "2",
-            time: "2024-04-31T14:30:00+03:00",
-            email: "example@example.com",
-            phone: "+123456789",
-            contactContinued: "",
-        },
-        {
-            id: "3",
-            time: "2024-01-31T17:30:00+03:00",
-            email: "example@example.com",
-            phone: "+123456789",
-            contactContinued: "",
-        },
-    ]);
+    const [contacts, setContacts] = useState<Contact[]>(contactsList);
 
     const onConnect: OnConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
 
