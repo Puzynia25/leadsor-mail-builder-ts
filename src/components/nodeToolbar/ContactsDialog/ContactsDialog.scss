@@ -1,0 +1,16 @@
+.contacts-dialog__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contacts-dialog__filter {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.contacts-dialog__filter-name {
+    font-size: 0.875rem;
+    color: darkslategray;
+}
