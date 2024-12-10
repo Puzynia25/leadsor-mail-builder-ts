@@ -1,6 +1,7 @@
-import { Dialog, DialogTitle, DialogContent, Typography, Chip, Divider } from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, Typography, Chip } from "@mui/material";
 import { ContactsDialogProps } from "./ContactsDialog.types";
 import ContactsTable from "./ContactsTable";
+import SectionTitle from "../../common/SectionTitle/SectionTitle";
 
 const ContactsDialog = ({ open, onClose, contacts, data }: ContactsDialogProps) => {
     const contactsTableContent =
@@ -10,17 +11,7 @@ const ContactsDialog = ({ open, onClose, contacts, data }: ContactsDialogProps) 
         <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
             <DialogTitle>
                 <div>
-                    <div className="node-settings__title" style={{ color: data.color }}>
-                        <h6>{data.label}</h6>
-                        <Divider
-                            sx={{
-                                borderBottomWidth: "medium",
-                                bgcolor: data.color,
-                                marginTop: "7px",
-                            }}
-                        />
-                    </div>
-
+                    <SectionTitle label={data.label} color={data.color} />
                     <p>Contacts that have passed through the node</p>
                     <Chip
                         label="The record of contacts passing through the nodes is kept for 7 days."
