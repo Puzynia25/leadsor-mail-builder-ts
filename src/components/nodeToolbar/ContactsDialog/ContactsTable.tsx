@@ -1,8 +1,16 @@
-import { Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { Table, TableBody, TableCell, TableFooter, TableHead, TablePagination, TableRow } from "@mui/material";
 import { ContactTableProps } from "./ContactsDialog.types";
 import ContactRow from "./ContactRow";
 
 const ContactsTable = ({ contacts }: ContactTableProps) => {
+    const handleChangePage = () => {
+        console.log("handleChangePage");
+    };
+
+    const handleChangeRowsPerPage = () => {
+        console.log("handleChangePage");
+    };
+
     return (
         <Table>
             <TableHead>
@@ -18,6 +26,19 @@ const ContactsTable = ({ contacts }: ContactTableProps) => {
                     <ContactRow key={contact.id} contact={contact} />
                 ))}
             </TableBody>
+            <TableFooter>
+                <TableRow>
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                        colSpan={4}
+                        count={10}
+                        rowsPerPage={5}
+                        page={1}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                </TableRow>
+            </TableFooter>
         </Table>
     );
 };

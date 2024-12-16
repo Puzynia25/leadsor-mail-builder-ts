@@ -63,7 +63,7 @@ const ContactsDialog = ({ open, onClose, contacts, data }: ContactsDialogProps) 
                                 <Button
                                     variant="contained"
                                     onClick={onFilterApply}
-                                    sx={{ marginLeft: "10px", textTransform: "none" }}>
+                                    sx={{ marginLeft: "10px", textTransform: "none", bgcolor: "#1e1e1e" }}>
                                     Apply Filter
                                 </Button>
                             </div>
