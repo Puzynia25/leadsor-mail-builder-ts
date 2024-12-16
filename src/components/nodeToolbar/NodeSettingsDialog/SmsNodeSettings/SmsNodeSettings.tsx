@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { MenuItem, Select, TextareaAutosize } from "@mui/material";
 import { SmsNodeData } from "../../../nodes/Node.types";
-import { INodeSettingsWrapper, INodeSettingsWrapperProps } from "../NodeSettingsWrapper.types";
+import { INodeSettingsDialog, INodeSettingsDialogProps } from "../NodeSettingsDialog.types";
 
-const SmsNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapperProps): INodeSettingsWrapper => {
+const SmsNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogProps): INodeSettingsDialog => {
     const smsNodeData = data as SmsNodeData;
 
     const [sender, setSender] = useState(smsNodeData.sender ?? "some sender");

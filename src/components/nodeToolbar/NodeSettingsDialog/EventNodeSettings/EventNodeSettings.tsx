@@ -9,11 +9,11 @@ import {
     SelectChangeEvent,
     TextField,
 } from "@mui/material";
-import { INodeSettingsWrapper, INodeSettingsWrapperProps, TimeRange } from "../NodeSettingsWrapper.types";
+import { INodeSettingsDialog, INodeSettingsDialogProps, TimeRange } from "../NodeSettingsDialog.types";
 import { EventNodeData } from "../../../nodes/Node.types";
 import { inputConfig } from "./inputConfig";
 
-const EventNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapperProps): INodeSettingsWrapper => {
+const EventNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogProps): INodeSettingsDialog => {
     const eventNodeData = data as EventNodeData;
 
     const [selectedEvent, setSelectedEvent] = useState<string>(eventNodeData.selectedEvent ?? "0");

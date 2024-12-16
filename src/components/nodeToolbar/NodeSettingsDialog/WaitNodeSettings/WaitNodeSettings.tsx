@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { MenuItem, Select, TextField } from "@mui/material";
-import { INodeSettingsWrapper, INodeSettingsWrapperProps, TimeRange } from "../NodeSettingsWrapper.types";
+import { INodeSettingsDialog, INodeSettingsDialogProps, TimeRange } from "../NodeSettingsDialog.types";
 import { WaitNodeData } from "../../../nodes/Node.types";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
 
-const WaitNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapperProps): INodeSettingsWrapper => {
+const WaitNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogProps): INodeSettingsDialog => {
     const waitNodeData = data as WaitNodeData;
 
     const [type, setType] = useState<string>(waitNodeData.type ?? "setWaitingTime");

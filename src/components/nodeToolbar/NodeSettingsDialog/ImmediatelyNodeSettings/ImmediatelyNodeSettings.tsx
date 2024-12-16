@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { TextareaAutosize } from "@mui/material";
-import { INodeSettingsWrapper, INodeSettingsWrapperProps } from "../NodeSettingsWrapper.types";
+import { INodeSettingsDialog, INodeSettingsDialogProps } from "../NodeSettingsDialog.types";
 import { ImmediatelyNodeData } from "../../../nodes/Node.types";
 
-const ImmediatelyNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapperProps): INodeSettingsWrapper => {
+const ImmediatelyNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogProps): INodeSettingsDialog => {
     const immediatelyNodeData = data as ImmediatelyNodeData;
 
     const [nodeName, setNodeName] = useState(immediatelyNodeData.name);

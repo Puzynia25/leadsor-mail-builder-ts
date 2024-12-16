@@ -1,11 +1,11 @@
 import { CommonNodeData } from "../../nodes/Node.types";
 
-export interface INodeSettingsWrapper {
+export interface INodeSettingsDialog {
     render: JSX.Element;
     applyChanges?: () => void;
 }
 
-export interface INodeSettingsWrapperProps {
+export interface INodeSettingsDialogProps {
     type: string;
     data: CommonNodeData;
     onClose?: () => void;

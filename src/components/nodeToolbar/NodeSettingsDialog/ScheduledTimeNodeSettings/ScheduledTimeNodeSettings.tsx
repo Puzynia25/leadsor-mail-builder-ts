@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TextField } from "@mui/material";
-import { INodeSettingsWrapper, INodeSettingsWrapperProps } from "../NodeSettingsWrapper.types";
+import { INodeSettingsDialog, INodeSettingsDialogProps } from "../NodeSettingsDialog.types";
 import { ScheduledTimeNodeData } from "../../../nodes/Node.types";
 import { DatePicker, LocalizationProvider, TimePicker, TimePickerProps } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -8,7 +8,7 @@ import dayjs, { Dayjs } from "dayjs";
 
 import "./ScheduledTimeNodeSettings.scss";
 
-const ScheduledTimeNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapperProps): INodeSettingsWrapper => {
+const ScheduledTimeNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogProps): INodeSettingsDialog => {
     const scheduledTimeNodeData = data as ScheduledTimeNodeData;
 
     const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs(scheduledTimeNodeData.date) ?? dayjs());

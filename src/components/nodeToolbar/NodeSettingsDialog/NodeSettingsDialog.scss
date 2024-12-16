@@ -1,28 +1,10 @@
 @import "../../../styles/variables.scss";
 
-.overlay-dark {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}
-
 .node-settings__wrapper {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 500px;
-    height: 100vh;
-    padding: 20px;
-    background: $background;
-    z-index: 3;
-    color: $font-color;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    overflow: auto;
+    justify-content: space-between;
 }
 
 .node-settings__title {
@@ -32,21 +14,10 @@
     margin-bottom: 20px;
 }
 
-.node-settings__inner {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
 .node-settings__content {
     div {
         font-size: 0.9rem;
     }
-}
-
-.btns__wrapper {
-    margin-top: 20px;
 }
 
 .text-field {

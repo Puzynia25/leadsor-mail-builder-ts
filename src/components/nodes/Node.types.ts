@@ -1,5 +1,5 @@
 import { Node } from "@xyflow/react";
-import { TimeRange } from "../nodeToolbar/NodeSettings/NodeSettingsWrapper.types";
+import { TimeRange } from "../nodeToolbar/NodeSettingsDialog/NodeSettingsDialog";
 
 export interface IBtn {
     id: string;

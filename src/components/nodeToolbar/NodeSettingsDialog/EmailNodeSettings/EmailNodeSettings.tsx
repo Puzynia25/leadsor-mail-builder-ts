@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Button, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
-import { INodeSettingsWrapper, INodeSettingsWrapperProps } from "../NodeSettingsWrapper.types";
+import { INodeSettingsDialog, INodeSettingsDialogProps } from "../NodeSettingsDialog.types";
 import { EmailNodeData } from "../../../nodes/Node.types";
 import { EditOutlined, RemoveRedEyeOutlined } from "@mui/icons-material";
 
 import "./EmailNodeSettings.scss";
 
-const EmailNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapperProps): INodeSettingsWrapper => {
+const EmailNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogProps): INodeSettingsDialog => {
     const emailNodeData = data as EmailNodeData;
 
     const [email, setEmail] = useState(emailNodeData.email ?? "some email");

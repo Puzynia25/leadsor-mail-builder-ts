@@ -1,11 +1,11 @@
 import { INodeMap } from "./nodeMap.types";
-import ConditionNodeSettings from "../components/nodeToolbar/NodeSettings/ConditionNodeSettings/ConditionNodeSettings";
-import EmailNodeSettings from "../components/nodeToolbar/NodeSettings/EmailNodeSettings/EmailNodeSettings";
-import ImmediatelyNodeSettings from "../components/nodeToolbar/NodeSettings/ImmediatelyNodeSettings/ImmediatelyNodeSettings";
-import ScheduledTimeNodeSettings from "../components/nodeToolbar/NodeSettings/ScheduledTimeNodeSettings/ScheduledTimeNodeSettings";
-import SmsNodeSettings from "../components/nodeToolbar/NodeSettings/SmsNodeSettings/SmsNodeSettings";
-import WaitNodeSettings from "../components/nodeToolbar/NodeSettings/WaitNodeSettings/WaitNodeSettings";
-import EventNodeSettings from "../components/nodeToolbar/NodeSettings/EventNodeSettings/EventNodeSettings";
+import ConditionNodeSettings from "../components/nodeToolbar/NodeSettingsDialog/ConditionNodeSettings/ConditionNodeSettings";
+import EmailNodeSettings from "../components/nodeToolbar/NodeSettingsDialog/EmailNodeSettings/EmailNodeSettings";
+import ImmediatelyNodeSettings from "../components/nodeToolbar/NodeSettingsDialog/ImmediatelyNodeSettings/ImmediatelyNodeSettings";
+import ScheduledTimeNodeSettings from "../components/nodeToolbar/NodeSettingsDialog/ScheduledTimeNodeSettings/ScheduledTimeNodeSettings";
+import SmsNodeSettings from "../components/nodeToolbar/NodeSettingsDialog/SmsNodeSettings/SmsNodeSettings";
+import WaitNodeSettings from "../components/nodeToolbar/NodeSettingsDialog/WaitNodeSettings/WaitNodeSettings";
+import EventNodeSettings from "../components/nodeToolbar/NodeSettingsDialog/EventNodeSettings/EventNodeSettings";
 
 export const nodeMap: INodeMap = {
     immediately: ImmediatelyNodeSettings,

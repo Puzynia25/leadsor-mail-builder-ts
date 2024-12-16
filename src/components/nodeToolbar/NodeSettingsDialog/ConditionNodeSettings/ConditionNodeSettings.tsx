@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { INodeSettingsWrapper, INodeSettingsWrapperProps } from "../NodeSettingsWrapper.types";
+import { INodeSettingsDialog, INodeSettingsDialogProps } from "../NodeSettingsDialog.types";
 import { ConditionNodeData, ICondition } from "../../../nodes/Node.types";
 import { _currency } from "../../../../constants";
 import { v4 as uuidv4 } from "uuid";
@@ -10,7 +10,7 @@ import { notBtn } from "../../../../utils";
 
 import "./ConditionNodeSettings.scss";
 
-const ConditionNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapperProps): INodeSettingsWrapper => {
+const ConditionNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogProps): INodeSettingsDialog => {
     const conditionNodeData = data as ConditionNodeData;
 
     const [conditions, setConditions] = useState<ICondition[]>(conditionNodeData.conditions ?? []);
@@ -70,7 +70,8 @@ const ConditionNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapp
         return conditions.map((condition) => {
             return (
                 <div key={condition.id}>
-                    <ConditionItem
+                    Condition Node
+                    {/* <ConditionItem
                         conditions={conditions}
                         condition={condition}
                         onDelete={() => onDeleteCondition(condition.id)}
@@ -79,7 +80,7 @@ const ConditionNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapp
                     <div className="if-not-divider">
                         <p>If not:</p>
                         <div className="divider"></div>
-                    </div>
+                    </div> */}
                 </div>
             );
         });

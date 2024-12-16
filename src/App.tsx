@@ -6,7 +6,7 @@ import FlowWrapper from "./components/flowWrapper/FlowWrapper";
 import { Divider } from "@mui/material";
 import { initialEdges, initialNodes } from "./components/flowWrapper/initialElements";
 import { CommonNodeData, CustomNodeType } from "./components/nodes/Node.types";
-import NodeSettingsWrapper from "./components/nodeToolbar/NodeSettings/NodeSettingsWrapper";
+import NodeSettingsDialog from "./components/nodeToolbar/NodeSettingsDialog/NodeSettingsDialog";
 import ContactsDialog from "./components/nodeToolbar/ContactsDialog/ContactsDialog";
 import { Contact } from "./components/nodeToolbar/ContactsDialog/ContactsDialog.types";
 import { contactsList } from "./utils/contacts";
@@ -80,10 +80,11 @@ const App = () => {
             </div>
 
             {isSettingsOpen && selectedNode && (
-                <NodeSettingsWrapper
+                <NodeSettingsDialog
+                    open={isSettingsOpen}
+                    onClose={handleCloseSettings}
                     type={selectedNode.type ?? ""}
                     data={selectedNode.data}
-                    onClose={handleCloseSettings}
                     onUpdateNodeContent={handleUpdateNodeContent}
                 />
             )}
