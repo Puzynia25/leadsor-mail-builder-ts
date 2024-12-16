@@ -2,7 +2,7 @@ import {
     INodeSettingsWrapper,
     INodeSettingsWrapperProps,
 } from "../components/nodeToolbar/NodeSettings/NodeSettingsWrapper.types";
-import { nodeMap } from "../utils/nodeMap";
+import { nodeMap } from "../config/nodeMap";
 
 export const useNodeSettings = ({
     type,

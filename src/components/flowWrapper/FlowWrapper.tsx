@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import { calculateNodePosition } from "../../utils";
 import { ISidebarItem } from "../sidebar/SidebarItem.types";
 import { CustomNodeType } from "../nodes/Node.types";
-import { nodeTypes } from "./FlowWrapper.types";
+import { nodeTypes } from "../../config/nodeTypes";
 
 import "./FlowWrapper.scss";
 

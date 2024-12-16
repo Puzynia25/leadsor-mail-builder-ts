@@ -19,6 +19,7 @@ export interface INodeRender {
 export type NodeData = { icon: string; label: string; color: string; onEdit?: () => void; onOpenContacts?: () => void };
 export type ImmediatelyNodeData = NodeData & { name: string };
 export type ScheduledTimeNodeData = NodeData & { date?: string; time?: string };
+export type EventNodeData = NodeData & { selectedEvent?: string; selectedEventLabel?: string; inputValues?: {} };
 export type WaitNodeData = NodeData & {
     type?: string;
     waitingType?: string;
@@ -40,6 +41,7 @@ export type SmsNodeData = NodeData & {
 export type CommonNodeData =
     | ImmediatelyNodeData
     | ScheduledTimeNodeData
+    | EventNodeData
     | WaitNodeData
     | ConditionNodeData
     | EmailNodeData
@@ -48,6 +50,7 @@ export type CustomNodeType =
     | StartNodeType
     | ImmediatelyNodeType
     | ScheduledTimeNodeType
+    | EventNodeType
     | WaitNodeType
     | ConditionNodeType
     | EmailNodeType
@@ -56,6 +59,7 @@ export type CustomNodeType =
 export type StartNodeType = Node<NodeData, "start">;
 export type ImmediatelyNodeType = Node<ImmediatelyNodeData, "immediately">;
 export type ScheduledTimeNodeType = Node<ScheduledTimeNodeData, "scheduledTime">;
+export type EventNodeType = Node<EventNodeData, "event">;
 export type WaitNodeType = Node<WaitNodeData, "wait">;
 export type ConditionNodeType = Node<ConditionNodeData, "condition">;
 export type EmailNodeType = Node<EmailNodeData, "email">;

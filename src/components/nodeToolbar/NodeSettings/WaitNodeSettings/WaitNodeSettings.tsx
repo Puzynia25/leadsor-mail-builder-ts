@@ -13,7 +13,7 @@ const WaitNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapperPro
     const [waitingType, setWaitingType] = useState<string>(waitNodeData.waitingType ?? "timePeriod");
     const [calendar, setCalendar] = useState<Dayjs | null>(dayjs(waitNodeData.calendar) ?? dayjs());
     const [timePeriod, setTimePeriod] = useState<number>(waitNodeData.timePeriod ?? 0);
-    const [timeRange, setTimeRange] = useState<TimeRange>(waitNodeData.timeRange ?? TimeRange.minute);
+    const [timeRange, setTimeRange] = useState<TimeRange>(waitNodeData.timeRange ?? TimeRange.second);
 
     const applyChanges = () => {
         const newData: WaitNodeData = {
@@ -75,7 +75,7 @@ const WaitNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapperPro
                 {waitingType === "timePeriod" && (
                     <div>
                         <p className="node-settings__item-title">Enter the time period:</p>
-                        <div className="node-settings__time-period">
+                        <div className="node-settings__custom-group">
                             <TextField
                                 value={timePeriod}
                                 size="medium"
@@ -87,11 +87,11 @@ const WaitNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsWrapperPro
                                 value={timeRange}
                                 onChange={(e) => setTimeRange(e.target.value as TimeRange)}
                                 sx={{ width: "100%", bgcolor: "#ffff" }}>
-                                <MenuItem value={TimeRange.minute}>minute</MenuItem>
-                                <MenuItem value={TimeRange.hour}>hour</MenuItem>
-                                <MenuItem value={TimeRange.week}>week</MenuItem>
-                                <MenuItem value={TimeRange.month}>month</MenuItem>
-                                <MenuItem value={TimeRange.year}>year</MenuItem>
+                                {Object.values(TimeRange).map((option) => (
+                                    <MenuItem key={option} value={option}>
+                                        {option}
+                                    </MenuItem>
+                                ))}
                             </Select>
                         </div>
                     </div>

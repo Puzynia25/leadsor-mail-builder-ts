@@ -14,6 +14,7 @@ export interface INodeSettingsWrapperProps {
 }
 
 export enum TimeRange {
+    second = "second",
     minute = "minute",
     hour = "hour",
     day = "day",

@@ -20,6 +20,15 @@ export const sidebarItems: ISidebar = {
             },
             type: "scheduledTime",
         },
+        {
+            id: "3",
+            data: {
+                icon: "NotificationsNoneRounded",
+                label: "In the event",
+                color: "#2b7e2f",
+            },
+            type: "event",
+        },
     ],
 
     workflowControl: [

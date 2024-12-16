@@ -5,10 +5,12 @@ import ImmediatelyNodeSettings from "../components/nodeToolbar/NodeSettings/Imme
 import ScheduledTimeNodeSettings from "../components/nodeToolbar/NodeSettings/ScheduledTimeNodeSettings/ScheduledTimeNodeSettings";
 import SmsNodeSettings from "../components/nodeToolbar/NodeSettings/SmsNodeSettings/SmsNodeSettings";
 import WaitNodeSettings from "../components/nodeToolbar/NodeSettings/WaitNodeSettings/WaitNodeSettings";
+import EventNodeSettings from "../components/nodeToolbar/NodeSettings/EventNodeSettings/EventNodeSettings";
 
 export const nodeMap: INodeMap = {
     immediately: ImmediatelyNodeSettings,
     scheduledTime: ScheduledTimeNodeSettings,
+    event: EventNodeSettings,
     wait: WaitNodeSettings,
     condition: ConditionNodeSettings,
     email: EmailNodeSettings,

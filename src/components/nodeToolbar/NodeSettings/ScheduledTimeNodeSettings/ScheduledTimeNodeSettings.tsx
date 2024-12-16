@@ -31,7 +31,7 @@ const ScheduledTimeNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsW
             <div className="scheduledTime-node-settings__container">
                 <div>
                     <p className="node-settings__item-title">Select date:</p>
-                    <div className="node-settings__time-period">
+                    <div className="node-settings__custom-group">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
                                 value={selectedDate}
@@ -44,7 +44,7 @@ const ScheduledTimeNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsW
                 </div>
                 <div>
                     <p className="node-settings__item-title">Select time:</p>
-                    <div className="node-settings__time-period">
+                    <div className="node-settings__custom-group">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <TimePicker
                                 value={selectedTime}
