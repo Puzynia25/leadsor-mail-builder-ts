@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { Button, FormControl, FormLabel, MenuItem, Select, TextField } from "@mui/material";
 import { INodeSettingsDialog, INodeSettingsDialogProps } from "../NodeSettingsDialog.types";
 import { EmailNodeData } from "../../../nodes/Node.types";
 import { EditOutlined, RemoveRedEyeOutlined } from "@mui/icons-material";
@@ -23,20 +23,22 @@ const EmailNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogPro
     return {
         render: (
             <div className="node-settings__container">
-                <div>
-                    <p className="node-settings__item-title">Email to be sent:</p>
-                    <Select
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        sx={{ width: "100%", bgcolor: "#ffff" }}>
+                <FormControl fullWidth>
+                    <FormLabel sx={{ fontWeight: 500, color: "#202020", marginBottom: "10px" }}>
+                        Email to be sent:
+                    </FormLabel>
+
+                    <Select value={email} onChange={(e) => setEmail(e.target.value)}>
                         <MenuItem value={email}>{email}</MenuItem>
                     </Select>
-                </div>
+                </FormControl>
 
-                <div>
-                    <p className="node-settings__item-title">Email subject:</p>
-                    <TextField value="" size="medium" sx={{ width: "100%", bgcolor: "#ffff" }} />
-                </div>
+                <FormControl fullWidth>
+                    <FormLabel sx={{ fontWeight: 500, color: "#202020", marginBottom: "10px" }}>
+                        Email subject:
+                    </FormLabel>
+                    <TextField value="" size="medium" />
+                </FormControl>
 
                 <div className="email-node-settings__preview">
                     <Button variant="contained" sx={{ bgcolor: "ButtonText", opacity: "0.5" }}>

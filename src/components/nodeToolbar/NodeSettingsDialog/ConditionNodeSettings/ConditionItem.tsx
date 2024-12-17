@@ -34,7 +34,6 @@ const ConditionItem = ({
                         onChange={(e) => setCriteria(e.target.value as string)}
                         inputProps={{ "aria-label": "Without label" }}
                         displayEmpty
-                        sx={{ bgcolor: "#ffff" }}
                         className="form-control">
                         <MenuItem value="">Select criteria...</MenuItem>
                         <MenuItem value="cashAmount">cash amount</MenuItem>
@@ -47,7 +46,6 @@ const ConditionItem = ({
                         onChange={(e) => setEquals(e.target.value as string)}
                         inputProps={{ "aria-label": "Without label" }}
                         displayEmpty
-                        sx={{ bgcolor: "#ffff" }}
                         className="form-control">
                         <MenuItem value="">equals</MenuItem>
                         <MenuItem value=">20000€">
@@ -62,7 +60,7 @@ const ConditionItem = ({
                     <DeleteRounded />
                 </IconButton>
 
-                {/* <Select displayEmpty value={cashAmount} onChange={handleUpdateCashAmount} sx={{ bgcolor: "#ffff" }}>
+                {/* <Select displayEmpty value={cashAmount} onChange={handleUpdateCashAmount}>
                     <MenuItem value="">equals</MenuItem>
                     <MenuItem value="highCashAmount">
                         {">"} 20000 {_currency}

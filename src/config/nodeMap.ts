@@ -6,10 +6,12 @@ import ScheduledTimeNodeSettings from "../components/nodeToolbar/NodeSettingsDia
 import SmsNodeSettings from "../components/nodeToolbar/NodeSettingsDialog/SmsNodeSettings/SmsNodeSettings";
 import WaitNodeSettings from "../components/nodeToolbar/NodeSettingsDialog/WaitNodeSettings/WaitNodeSettings";
 import EventNodeSettings from "../components/nodeToolbar/NodeSettingsDialog/EventNodeSettings/EventNodeSettings";
+import RepeatNodeSettings from "../components/nodeToolbar/NodeSettingsDialog/RepeatNodeSettings/RepeatNodeSettings";
 
 export const nodeMap: INodeMap = {
     immediately: ImmediatelyNodeSettings,
     scheduledTime: ScheduledTimeNodeSettings,
+    repeat: RepeatNodeSettings,
     event: EventNodeSettings,
     wait: WaitNodeSettings,
     condition: ConditionNodeSettings,

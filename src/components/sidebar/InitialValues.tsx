@@ -29,6 +29,15 @@ export const sidebarItems: ISidebar = {
             },
             type: "event",
         },
+        {
+            id: "4",
+            data: {
+                icon: "LoopRounded",
+                label: "Repeat",
+                color: "#2b7e2f",
+            },
+            type: "repeat",
+        },
     ],
 
     workflowControl: [

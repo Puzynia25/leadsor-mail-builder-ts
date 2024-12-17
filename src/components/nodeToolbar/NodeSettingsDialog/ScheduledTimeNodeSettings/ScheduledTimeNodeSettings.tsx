@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { TextField } from "@mui/material";
+import { FormControl, FormLabel } from "@mui/material";
 import { INodeSettingsDialog, INodeSettingsDialogProps } from "../NodeSettingsDialog.types";
 import { ScheduledTimeNodeData } from "../../../nodes/Node.types";
-import { DatePicker, LocalizationProvider, TimePicker, TimePickerProps } from "@mui/x-date-pickers";
+import { DatePicker, LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
 
@@ -28,32 +28,26 @@ const ScheduledTimeNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsD
 
     return {
         render: (
-            <div className="scheduledTime-node-settings__container">
-                <div>
-                    <p className="node-settings__item-title">Select date:</p>
-                    <div className="node-settings__custom-group">
+            <div className="node-settings__container">
+                <div className="node-settings__custom-group">
+                    <FormControl fullWidth>
+                        <FormLabel sx={{ fontWeight: 500, color: "#202020", marginBottom: "10px" }}>
+                            Select date:
+                        </FormLabel>
+
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker
-                                value={selectedDate}
-                                onChange={(newDate) => setSelectedDate(newDate)}
-                                sx={{ width: "100%", bgcolor: "#ffff" }}>
-                                <TextField />
-                            </DatePicker>
+                            <DatePicker value={selectedDate} onChange={(newDate) => setSelectedDate(newDate)} />
                         </LocalizationProvider>
-                    </div>
-                </div>
-                <div>
-                    <p className="node-settings__item-title">Select time:</p>
-                    <div className="node-settings__custom-group">
+                    </FormControl>
+
+                    <FormControl fullWidth>
+                        <FormLabel sx={{ fontWeight: 500, color: "#202020", marginBottom: "10px" }}>
+                            Select time:
+                        </FormLabel>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <TimePicker
-                                value={selectedTime}
-                                onChange={(newTime) => setSelectedTime(newTime)}
-                                sx={{ width: "100%", bgcolor: "#ffff" }}>
-                                <TextField />
-                            </TimePicker>
+                            <TimePicker value={selectedTime} onChange={(newTime) => setSelectedTime(newTime)} />
                         </LocalizationProvider>
-                    </div>
+                    </FormControl>
                 </div>
             </div>
         ),

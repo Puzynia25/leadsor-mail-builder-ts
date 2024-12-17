@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, MenuItem, Select, TextField } from "@mui/material";
+import { Button, FormControl, FormLabel, MenuItem, Select, TextField } from "@mui/material";
 import { INodeSettingsDialog, INodeSettingsDialogProps, TimeRange } from "../NodeSettingsDialog.types";
 import { WaitNodeData } from "../../../nodes/Node.types";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -33,39 +33,34 @@ const WaitNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogProp
     return {
         render: (
             <div className="node-settings__container">
-                <div>
-                    <p className="node-settings__item-title">Type:</p>
-                    <Select
-                        value={type}
-                        onChange={(e) => setType(e.target.value)}
-                        sx={{ width: "100%", bgcolor: "#ffff" }}>
+                <FormControl fullWidth>
+                    <FormLabel sx={{ fontWeight: 500, color: "#202020", marginBottom: "10px" }}>Type:</FormLabel>
+                    <Select value={type} onChange={(e) => setType(e.target.value)}>
                         <MenuItem value="setWaitingTime">Set waiting time</MenuItem>
                     </Select>
-                </div>
+                </FormControl>
 
-                <div>
-                    <p className="node-settings__item-title">Waiting type:</p>
-                    <Select
-                        value={waitingType}
-                        onChange={(e) => setWaitingType(e.target.value)}
-                        sx={{ width: "100%", bgcolor: "#ffff" }}>
+                <FormControl fullWidth>
+                    <FormLabel sx={{ fontWeight: 500, color: "#202020", marginBottom: "10px" }}>
+                        Waiting type:
+                    </FormLabel>
+
+                    <Select value={waitingType} onChange={(e) => setWaitingType(e.target.value)}>
                         <MenuItem value="calendar">Date in the calendar</MenuItem>
                         <MenuItem value="timePeriod">Time period</MenuItem>
                     </Select>
-                </div>
+                </FormControl>
 
                 {waitingType === "calendar" && (
-                    <div>
-                        <p className="node-settings__item-title">Date picker:</p>
+                    <FormControl fullWidth>
+                        <FormLabel sx={{ fontWeight: 500, color: "#202020", marginBottom: "10px" }}>
+                            Date picker:
+                        </FormLabel>
+
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker
-                                value={calendar}
-                                onChange={(date) => setCalendar(date)}
-                                sx={{ width: "100%", bgcolor: "#ffff" }}>
-                                <TextField />
-                            </DatePicker>
+                            <DatePicker value={calendar} onChange={(date) => setCalendar(date)} />
                         </LocalizationProvider>
-                    </div>
+                    </FormControl>
                 )}
 
                 {waitingType === "timePeriod" && (
@@ -76,13 +71,13 @@ const WaitNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogProp
                                 value={timePeriod}
                                 size="medium"
                                 onChange={(e) => setTimePeriod(Number(e.target.value))}
-                                sx={{ width: "100%", marginRight: "10px", bgcolor: "#ffff" }}
+                                fullWidth
                                 type="number"
                             />
                             <Select
                                 value={timeRange}
                                 onChange={(e) => setTimeRange(e.target.value as TimeRange)}
-                                sx={{ width: "100%", bgcolor: "#ffff" }}>
+                                fullWidth>
                                 {Object.values(TimeRange).map((option) => (
                                     <MenuItem key={option} value={option}>
                                         {option}

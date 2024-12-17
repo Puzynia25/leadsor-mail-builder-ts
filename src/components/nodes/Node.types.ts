@@ -19,6 +19,7 @@ export interface INodeRender {
 export type NodeData = { icon: string; label: string; color: string; onEdit?: () => void; onOpenContacts?: () => void };
 export type ImmediatelyNodeData = NodeData & { name: string };
 export type ScheduledTimeNodeData = NodeData & { date?: string; time?: string };
+export type RepeatNodeData = ScheduledTimeNodeData & { repeatValue?: number; repeatUnit?: TimeRange };
 export type EventNodeData = NodeData & { selectedEvent?: string; selectedEventLabel?: string; inputValues?: {} };
 export type WaitNodeData = NodeData & {
     type?: string;
@@ -50,6 +51,7 @@ export type CustomNodeType =
     | StartNodeType
     | ImmediatelyNodeType
     | ScheduledTimeNodeType
+    | RepeatNodeType
     | EventNodeType
     | WaitNodeType
     | ConditionNodeType
@@ -59,6 +61,7 @@ export type CustomNodeType =
 export type StartNodeType = Node<NodeData, "start">;
 export type ImmediatelyNodeType = Node<ImmediatelyNodeData, "immediately">;
 export type ScheduledTimeNodeType = Node<ScheduledTimeNodeData, "scheduledTime">;
+export type RepeatNodeType = Node<RepeatNodeData, "repeat">;
 export type EventNodeType = Node<EventNodeData, "event">;
 export type WaitNodeType = Node<WaitNodeData, "wait">;
 export type ConditionNodeType = Node<ConditionNodeData, "condition">;

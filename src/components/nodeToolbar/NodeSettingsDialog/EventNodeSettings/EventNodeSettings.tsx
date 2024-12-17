@@ -1,7 +1,9 @@
 import { useState } from "react";
 import {
     Chip,
+    FormControl,
     FormControlLabel,
+    FormLabel,
     MenuItem,
     Radio,
     RadioGroup,
@@ -71,57 +73,61 @@ const EventNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogPro
         render: (
             <div className="node-settings__container">
                 {/* First Select */}
-                <div>
-                    <p className="node-settings__item-title">Select Event:</p>
-                    <Select value={selectedEvent} onChange={onEventChange} sx={{ width: "100%", bgcolor: "#ffff" }}>
+                <FormControl fullWidth>
+                    <FormLabel sx={{ fontWeight: 500, color: "#202020", marginBottom: "10px" }}>
+                        Select Event:
+                    </FormLabel>
+                    <Select value={selectedEvent} onChange={onEventChange}>
                         {Object.entries(inputConfig).map(([id, config]) => (
                             <MenuItem key={id} value={id}>
                                 {config.label}
                             </MenuItem>
                         ))}
                     </Select>
-                </div>
+                </FormControl>
 
                 {/* Dynamic Inputs */}
                 {selectedInputs.map((input) => {
                     if (input.type === "text") {
                         return (
-                            <div key={input.id} className="event-node-settings__input">
-                                <p className="node-settings__item-title">{input.label}:</p>
+                            <FormControl key={input.id} fullWidth>
+                                <FormLabel sx={{ fontWeight: 500, color: "#202020", marginBottom: "10px" }}>
+                                    {input.label}:
+                                </FormLabel>
                                 <TextField
                                     placeholder={input.placeholder}
                                     value={inputValues[input.id] || input.options[0]?.toLowerCase() || ""}
                                     onChange={(e) => onInputChange(input.id, e.target.value)}
-                                    fullWidth
-                                    sx={{ marginBottom: "10px", bgcolor: "#fff" }}
                                 />
-                            </div>
+                            </FormControl>
                         );
                     }
                     if (input.type === "select") {
                         return (
-                            <div key={input.id} className="event-node-settings__input">
-                                <p className="node-settings__item-title">{input.label}:</p>
+                            <FormControl key={input.id} fullWidth>
+                                <FormLabel sx={{ fontWeight: 500, color: "#202020", marginBottom: "10px" }}>
+                                    {input.label}:
+                                </FormLabel>
                                 <Select
                                     value={inputValues[input.id] || input.options[0]?.toLowerCase() || []}
-                                    onChange={(e) => onInputChange(input.id, e.target.value)}
-                                    fullWidth
-                                    sx={{ bgcolor: "#fff" }}>
+                                    onChange={(e) => onInputChange(input.id, e.target.value)}>
                                     {input.options.map((option: string) => (
                                         <MenuItem key={option} value={option.toLowerCase()}>
                                             {option}
                                         </MenuItem>
                                     ))}
                                 </Select>
-                            </div>
+                            </FormControl>
                         );
                     }
 
                     if (input.type === "multiple") {
                         if (inputValues["0"] !== input.visible) return null;
                         return (
-                            <div key={input.id} className="event-node-settings__input">
-                                <p className="node-settings__item-title">{input.label}:</p>
+                            <FormControl key={input.id} fullWidth>
+                                <FormLabel sx={{ fontWeight: 500, color: "#202020", marginBottom: "10px" }}>
+                                    {input.label}:
+                                </FormLabel>
                                 <Select
                                     multiple
                                     value={inputValues[input.id] || input.options[0]?.toLowerCase() || []}
@@ -132,22 +138,22 @@ const EventNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogPro
                                                 <Chip key={value} label={value} />
                                             ))}
                                         </div>
-                                    )}
-                                    fullWidth
-                                    sx={{ bgcolor: "#fff" }}>
+                                    )}>
                                     {input.options.map((option: string) => (
                                         <MenuItem key={option} value={option.toLowerCase()}>
                                             {option}
                                         </MenuItem>
                                     ))}
                                 </Select>
-                            </div>
+                            </FormControl>
                         );
                     }
                     if (input.type === "radio") {
                         return (
-                            <div key={input.id} className="event-node-settings__input">
-                                <p className="node-settings__item-title">{input.label}:</p>
+                            <FormControl key={input.id} fullWidth>
+                                <FormLabel sx={{ fontWeight: 500, color: "#202020", marginBottom: "10px" }}>
+                                    {input.label}:
+                                </FormLabel>
                                 <RadioGroup
                                     value={inputValues[input.id] || input.options[0]?.toLowerCase() || ""}
                                     onChange={(e) => onInputChange(input.id, e.target.value)}>
@@ -160,7 +166,7 @@ const EventNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogPro
                                         />
                                     ))}
                                 </RadioGroup>
-                            </div>
+                            </FormControl>
                         );
                     }
                     if (input.type === "custom") {
