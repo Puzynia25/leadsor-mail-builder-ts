@@ -47,15 +47,11 @@
 }
 
 .node-settings__item-title {
+    margin: 10px 0;
     font-weight: 500;
 }
 
-.node-settings__select {
-    margin: 10px 0;
-}
-
 .node-settings__custom-group {
-    margin-top: 10px;
     display: flex;
     gap: 10px;
     overflow-x: auto;

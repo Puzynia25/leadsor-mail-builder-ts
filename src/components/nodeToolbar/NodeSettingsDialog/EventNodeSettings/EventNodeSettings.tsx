@@ -73,15 +73,13 @@ const EventNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogPro
                 {/* First Select */}
                 <div>
                     <p className="node-settings__item-title">Select Event:</p>
-                    <div className="node-settings__select">
-                        <Select value={selectedEvent} onChange={onEventChange} sx={{ width: "100%", bgcolor: "#ffff" }}>
-                            {Object.entries(inputConfig).map(([id, config]) => (
-                                <MenuItem key={id} value={id}>
-                                    {config.label}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </div>
+                    <Select value={selectedEvent} onChange={onEventChange} sx={{ width: "100%", bgcolor: "#ffff" }}>
+                        {Object.entries(inputConfig).map(([id, config]) => (
+                            <MenuItem key={id} value={id}>
+                                {config.label}
+                            </MenuItem>
+                        ))}
+                    </Select>
                 </div>
 
                 {/* Dynamic Inputs */}
@@ -90,15 +88,13 @@ const EventNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogPro
                         return (
                             <div key={input.id} className="event-node-settings__input">
                                 <p className="node-settings__item-title">{input.label}:</p>
-                                <div className="node-settings__select">
-                                    <TextField
-                                        placeholder={input.placeholder}
-                                        value={inputValues[input.id] || input.options[0]?.toLowerCase() || ""}
-                                        onChange={(e) => onInputChange(input.id, e.target.value)}
-                                        fullWidth
-                                        sx={{ marginBottom: "10px", bgcolor: "#fff" }}
-                                    />
-                                </div>
+                                <TextField
+                                    placeholder={input.placeholder}
+                                    value={inputValues[input.id] || input.options[0]?.toLowerCase() || ""}
+                                    onChange={(e) => onInputChange(input.id, e.target.value)}
+                                    fullWidth
+                                    sx={{ marginBottom: "10px", bgcolor: "#fff" }}
+                                />
                             </div>
                         );
                     }
@@ -106,19 +102,17 @@ const EventNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogPro
                         return (
                             <div key={input.id} className="event-node-settings__input">
                                 <p className="node-settings__item-title">{input.label}:</p>
-                                <div className="node-settings__select">
-                                    <Select
-                                        value={inputValues[input.id] || input.options[0]?.toLowerCase() || []}
-                                        onChange={(e) => onInputChange(input.id, e.target.value)}
-                                        fullWidth
-                                        sx={{ bgcolor: "#fff" }}>
-                                        {input.options.map((option: string) => (
-                                            <MenuItem key={option} value={option.toLowerCase()}>
-                                                {option}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </div>
+                                <Select
+                                    value={inputValues[input.id] || input.options[0]?.toLowerCase() || []}
+                                    onChange={(e) => onInputChange(input.id, e.target.value)}
+                                    fullWidth
+                                    sx={{ bgcolor: "#fff" }}>
+                                    {input.options.map((option: string) => (
+                                        <MenuItem key={option} value={option.toLowerCase()}>
+                                            {option}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
                             </div>
                         );
                     }
@@ -128,27 +122,25 @@ const EventNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogPro
                         return (
                             <div key={input.id} className="event-node-settings__input">
                                 <p className="node-settings__item-title">{input.label}:</p>
-                                <div className="node-settings__select">
-                                    <Select
-                                        multiple
-                                        value={inputValues[input.id] || input.options[0]?.toLowerCase() || []}
-                                        onChange={(e) => onInputChange(input.id, e.target.value)}
-                                        renderValue={(selected: string) => (
-                                            <div className="node-settings__custom-group">
-                                                {selected.map((value) => (
-                                                    <Chip key={value} label={value} />
-                                                ))}
-                                            </div>
-                                        )}
-                                        fullWidth
-                                        sx={{ bgcolor: "#fff" }}>
-                                        {input.options.map((option: string) => (
-                                            <MenuItem key={option} value={option.toLowerCase()}>
-                                                {option}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </div>
+                                <Select
+                                    multiple
+                                    value={inputValues[input.id] || input.options[0]?.toLowerCase() || []}
+                                    onChange={(e) => onInputChange(input.id, e.target.value)}
+                                    renderValue={(selected: string) => (
+                                        <div className="node-settings__custom-group">
+                                            {selected.map((value) => (
+                                                <Chip key={value} label={value} />
+                                            ))}
+                                        </div>
+                                    )}
+                                    fullWidth
+                                    sx={{ bgcolor: "#fff" }}>
+                                    {input.options.map((option: string) => (
+                                        <MenuItem key={option} value={option.toLowerCase()}>
+                                            {option}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
                             </div>
                         );
                     }

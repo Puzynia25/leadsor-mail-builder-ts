@@ -35,42 +35,36 @@ const WaitNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogProp
             <div className="node-settings__container">
                 <div>
                     <p className="node-settings__item-title">Type:</p>
-                    <div className="node-settings__select">
-                        <Select
-                            value={type}
-                            onChange={(e) => setType(e.target.value)}
-                            sx={{ width: "100%", bgcolor: "#ffff" }}>
-                            <MenuItem value="setWaitingTime">Set waiting time</MenuItem>
-                        </Select>
-                    </div>
+                    <Select
+                        value={type}
+                        onChange={(e) => setType(e.target.value)}
+                        sx={{ width: "100%", bgcolor: "#ffff" }}>
+                        <MenuItem value="setWaitingTime">Set waiting time</MenuItem>
+                    </Select>
                 </div>
 
                 <div>
                     <p className="node-settings__item-title">Waiting type:</p>
-                    <div className="node-settings__select">
-                        <Select
-                            value={waitingType}
-                            onChange={(e) => setWaitingType(e.target.value)}
-                            sx={{ width: "100%", bgcolor: "#ffff" }}>
-                            <MenuItem value="calendar">Date in the calendar</MenuItem>
-                            <MenuItem value="timePeriod">Time period</MenuItem>
-                        </Select>
-                    </div>
+                    <Select
+                        value={waitingType}
+                        onChange={(e) => setWaitingType(e.target.value)}
+                        sx={{ width: "100%", bgcolor: "#ffff" }}>
+                        <MenuItem value="calendar">Date in the calendar</MenuItem>
+                        <MenuItem value="timePeriod">Time period</MenuItem>
+                    </Select>
                 </div>
 
                 {waitingType === "calendar" && (
                     <div>
                         <p className="node-settings__item-title">Date picker:</p>
-                        <div className="node-settings__select">
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker
-                                    value={calendar}
-                                    onChange={(date) => setCalendar(date)}
-                                    sx={{ width: "100%", bgcolor: "#ffff" }}>
-                                    <TextField />
-                                </DatePicker>
-                            </LocalizationProvider>
-                        </div>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker
+                                value={calendar}
+                                onChange={(date) => setCalendar(date)}
+                                sx={{ width: "100%", bgcolor: "#ffff" }}>
+                                <TextField />
+                            </DatePicker>
+                        </LocalizationProvider>
                     </div>
                 )}
 

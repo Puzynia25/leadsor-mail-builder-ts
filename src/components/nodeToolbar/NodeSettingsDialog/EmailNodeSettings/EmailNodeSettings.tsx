@@ -25,21 +25,17 @@ const EmailNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogPro
             <div className="node-settings__container">
                 <div>
                     <p className="node-settings__item-title">Email to be sent:</p>
-                    <div className="node-settings__select">
-                        <Select
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            sx={{ width: "100%", bgcolor: "#ffff" }}>
-                            <MenuItem value={email}>{email}</MenuItem>
-                        </Select>
-                    </div>
+                    <Select
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        sx={{ width: "100%", bgcolor: "#ffff" }}>
+                        <MenuItem value={email}>{email}</MenuItem>
+                    </Select>
                 </div>
 
                 <div>
                     <p className="node-settings__item-title">Email subject:</p>
-                    <div className="node-settings__select">
-                        <TextField value="" size="medium" sx={{ width: "100%", bgcolor: "#ffff" }} />
-                    </div>
+                    <TextField value="" size="medium" sx={{ width: "100%", bgcolor: "#ffff" }} />
                 </div>
 
                 <div className="email-node-settings__preview">

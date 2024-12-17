@@ -20,34 +20,30 @@ const SmsNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogProps
             <div className="node-settings__container">
                 <div>
                     <p className="node-settings__item-title">SMS message to be sent:</p>
-                    <div className="node-settings__select">
-                        <Select
-                            value={sender}
-                            onChange={(e) => setSender(e.target.value)}
-                            sx={{ width: "100%", bgcolor: "#ffff" }}>
-                            <MenuItem value={sender}>{sender}</MenuItem>
-                        </Select>
-                    </div>
+                    <Select
+                        value={sender}
+                        onChange={(e) => setSender(e.target.value)}
+                        sx={{ width: "100%", bgcolor: "#ffff" }}>
+                        <MenuItem value={sender}>{sender}</MenuItem>
+                    </Select>
                 </div>
 
                 <div>
-                    <div className="node-settings__select">
-                        <p className="node-settings__item-title">SMS message:</p>
-                        <TextareaAutosize
-                            minRows={3}
-                            style={{
-                                width: "100%",
-                                marginTop: "10px",
-                                padding: "8px",
-                                borderRadius: "15px",
-                                borderColor: "lightgray",
-                                resize: "vertical",
-                            }}
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            placeholder="type sms message..."
-                        />
-                    </div>
+                    <p className="node-settings__item-title">SMS message:</p>
+                    <TextareaAutosize
+                        minRows={3}
+                        style={{
+                            width: "100%",
+                            marginTop: "10px",
+                            padding: "8px",
+                            borderRadius: "15px",
+                            borderColor: "lightgray",
+                            resize: "vertical",
+                        }}
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        placeholder="type sms message..."
+                    />
                 </div>
             </div>
         ),
