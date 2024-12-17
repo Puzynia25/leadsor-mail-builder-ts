@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { MenuItem, Select, TextField } from "@mui/material";
+import { Button, MenuItem, Select, TextField } from "@mui/material";
 import { INodeSettingsDialog, INodeSettingsDialogProps, TimeRange } from "../NodeSettingsDialog.types";
 import { WaitNodeData } from "../../../nodes/Node.types";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
+
+import "./WaitNodeSettings.scss";
 
 const WaitNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogProps): INodeSettingsDialog => {
     const waitNodeData = data as WaitNodeData;
@@ -96,6 +98,58 @@ const WaitNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogProp
                         </div>
                     </div>
                 )}
+            </div>
+        ),
+        advanced: (
+            <div className="wait-advanced">
+                <div className="wait-advanced__item">
+                    <div className="wait-advanced__text">
+                        <h3>Release all waiting contacts</h3>
+                        <p>
+                            This option releases all waiting contacts immediately. Keep in mind that these contacts will
+                            immediately continue further into the next node. If no other node is connected, the contacts
+                            will leave the automation workflow.
+                        </p>
+                    </div>
+                    <div className="wait-advanced__button">
+                        <Button
+                            variant="outlined"
+                            onClick={(e) => console.log(e.target)}
+                            sx={{
+                                fontSize: "0.6rem",
+                                color: "#555",
+                                borderColor: "#555",
+                                backgroundColor: "#e1e1e1",
+                            }}>
+                            Release contacts
+                        </Button>
+                    </div>
+                </div>
+                <div className="wait-advanced__item">
+                    <div className="wait-advanced__text">
+                        <h3>Reschedule waiting time of contacts that are already waiting</h3>
+                        <p>
+                            If you change the wait time in a previously running workflow, this change only affects new
+                            contacts coming into the node. Contacts that had been waiting in this node before it was
+                            edited will still wait for the originally set period. If you also want to change the wait
+                            time for contacts that are already waiting, turn this option on.
+                        </p>
+                    </div>
+
+                    <div className="wait-advanced__button">
+                        <Button
+                            variant="outlined"
+                            onClick={(e) => console.log(e.target)}
+                            sx={{
+                                fontSize: "0.6rem",
+                                color: "#555",
+                                borderColor: "#555",
+                                backgroundColor: "#e1e1e1",
+                            }}>
+                            Update waiting time
+                        </Button>
+                    </div>
+                </div>
             </div>
         ),
         applyChanges,

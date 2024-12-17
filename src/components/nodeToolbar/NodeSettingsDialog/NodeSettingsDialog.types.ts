@@ -2,7 +2,8 @@ import { CommonNodeData } from "../../nodes/Node.types";
 
 export interface INodeSettingsDialog {
     render: JSX.Element;
-    applyChanges?: () => void;
+    advanced?: JSX.Element;
+    applyChanges: () => void;
 }
 
 export interface INodeSettingsDialogProps {

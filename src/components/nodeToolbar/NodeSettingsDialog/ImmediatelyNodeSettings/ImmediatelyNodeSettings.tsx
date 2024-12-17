@@ -21,7 +21,7 @@ const ImmediatelyNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDia
         render: (
             <>
                 <div>
-                    <label>
+                    {/* <label>
                         <p>
                             <b>Node name:</b>
                         </p>
@@ -40,7 +40,7 @@ const ImmediatelyNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDia
                             onChange={(e) => setNodeName(e.target.value)}
                             placeholder="type node name..."
                         />
-                    </label>
+                    </label> */}
                 </div>
             </>
         ),
