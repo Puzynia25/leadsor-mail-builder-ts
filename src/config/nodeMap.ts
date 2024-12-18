@@ -7,6 +7,7 @@ import SmsNodeSettings from "../components/nodeToolbar/NodeSettingsDialog/SmsNod
 import WaitNodeSettings from "../components/nodeToolbar/NodeSettingsDialog/WaitNodeSettings/WaitNodeSettings";
 import EventNodeSettings from "../components/nodeToolbar/NodeSettingsDialog/EventNodeSettings/EventNodeSettings";
 import RepeatNodeSettings from "../components/nodeToolbar/NodeSettingsDialog/RepeatNodeSettings/RepeatNodeSettings";
+import MessengerNodeSettings from "../components/nodeToolbar/NodeSettingsDialog/MessengerNodeSettings/MessengerNodeSettings";
 
 export const nodeMap: INodeMap = {
     immediately: ImmediatelyNodeSettings,
@@ -17,4 +18,5 @@ export const nodeMap: INodeMap = {
     condition: ConditionNodeSettings,
     email: EmailNodeSettings,
     sms: SmsNodeSettings,
+    messenger: MessengerNodeSettings,
 };

@@ -8,6 +8,7 @@ import SmsNode from "../components/nodes/SmsNode/SmsNode";
 import ScheduledTimeNode from "../components/nodes/ScheduledTimeNode/ScheduledTimeNode";
 import EventNode from "../components/nodes/EventNode/EventNode";
 import RepeatNode from "../components/nodes/RepeatNode/RepeatNode";
+import MessengerNode from "../components/nodes/MessengerNode/MessengerNode";
 
 export const nodeTypes: NodeTypes = {
     start: StartNode,
@@ -19,4 +20,5 @@ export const nodeTypes: NodeTypes = {
     condition: ConditionNode,
     email: EmailNode,
     sms: SmsNode,
+    messenger: MessengerNode,
 };

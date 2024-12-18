@@ -1,5 +1,5 @@
 import { Node } from "@xyflow/react";
-import { TimeRange } from "../nodeToolbar/NodeSettingsDialog/NodeSettingsDialog";
+import { TimeRange } from "../nodeToolbar/NodeSettingsDialog/NodeSettingsDialog.types";
 
 export interface IBtn {
     id: string;
@@ -38,6 +38,10 @@ export type SmsNodeData = NodeData & {
     sender?: string;
     message?: string;
 };
+export type MessengerNodeData = NodeData & {
+    sender?: string;
+    message?: string;
+};
 
 export type CommonNodeData =
     | ImmediatelyNodeData
@@ -46,7 +50,8 @@ export type CommonNodeData =
     | WaitNodeData
     | ConditionNodeData
     | EmailNodeData
-    | SmsNodeData;
+    | SmsNodeData
+    | MessengerNodeData;
 export type CustomNodeType =
     | StartNodeType
     | ImmediatelyNodeType
@@ -56,7 +61,8 @@ export type CustomNodeType =
     | WaitNodeType
     | ConditionNodeType
     | EmailNodeType
-    | SmsNodeType;
+    | SmsNodeType
+    | MessengerNodeType;
 
 export type StartNodeType = Node<NodeData, "start">;
 export type ImmediatelyNodeType = Node<ImmediatelyNodeData, "immediately">;
@@ -67,3 +73,4 @@ export type WaitNodeType = Node<WaitNodeData, "wait">;
 export type ConditionNodeType = Node<ConditionNodeData, "condition">;
 export type EmailNodeType = Node<EmailNodeData, "email">;
 export type SmsNodeType = Node<SmsNodeData, "sms">;
+export type MessengerNodeType = Node<MessengerNodeData, "messenger">;

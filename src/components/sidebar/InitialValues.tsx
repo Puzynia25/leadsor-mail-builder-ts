@@ -42,7 +42,7 @@ export const sidebarItems: ISidebar = {
 
     workflowControl: [
         {
-            id: "2",
+            id: "5",
             data: {
                 icon: "AccessTimeRounded",
                 label: "Wait",
@@ -51,7 +51,7 @@ export const sidebarItems: ISidebar = {
             type: "wait",
         },
         {
-            id: "3",
+            id: "6",
             data: { icon: "LanRounded", label: "Condition", color: "#6c95b2" },
             type: "condition",
         },
@@ -59,7 +59,7 @@ export const sidebarItems: ISidebar = {
 
     actions: [
         {
-            id: "4",
+            id: "9",
             data: {
                 icon: "AlternateEmailRounded",
                 label: "Send email",
@@ -68,9 +68,14 @@ export const sidebarItems: ISidebar = {
             type: "email",
         },
         {
-            id: "5",
+            id: "10",
             data: { icon: "SmsRounded", label: "Send sms", color: "#fe9c0c" },
             type: "sms",
+        },
+        {
+            id: "11",
+            data: { icon: "MarkEmailUnreadRounded", label: "Send messenger", color: "#fe9c0c" },
+            type: "messenger",
         },
     ],
 };
