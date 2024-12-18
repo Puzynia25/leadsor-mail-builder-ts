@@ -10,7 +10,7 @@ const EmailNode = ({ id, data }: NodeProps<EmailNodeType>) => {
         <NodeWrapper id={id} data={data} handle="all">
             {data.email && (
                 <>
-                    <span className="immediately-node__title">Sender: </span>
+                    <span className="node__title">Sender: </span>
                     <Chip label={data.email} />
                 </>
             )}

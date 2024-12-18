@@ -10,7 +10,7 @@ const ImmediatelyNode = ({ id, data }: NodeProps<ImmediatelyNodeType>) => {
         <NodeWrapper id={id} data={data} handle="right">
             {data.name && (
                 <>
-                    <span className="immediately-node__title">Name: </span>
+                    <span className="node__title">Name: </span>
                     <Chip label={data.name} />
                 </>
             )}

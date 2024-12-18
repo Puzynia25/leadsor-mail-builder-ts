@@ -11,11 +11,11 @@ const SmsNode = ({ id, data }: NodeProps<SmsNodeType>) => {
             {data.sender && data.message && (
                 <>
                     <div>
-                        <span className="immediately-node__title">Sender: </span>
+                        <span className="node__title">Sender: </span>
                         <Chip label={data.sender} sx={{ margin: "5px" }} />
                     </div>
                     <div>
-                        <span className="immediately-node__title">Message: </span>
+                        <span className="node__title">Message: </span>
                         <Chip label={data.message} />
                     </div>
                 </>
