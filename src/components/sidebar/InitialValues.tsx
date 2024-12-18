@@ -55,6 +55,11 @@ export const sidebarItems: ISidebar = {
             data: { icon: "LanRounded", label: "Condition", color: "#6c95b2" },
             type: "condition",
         },
+        {
+            id: "8",
+            data: { icon: "Inventory2Rounded", label: "Contact Storage", color: "#6c95b2" },
+            type: "contactStorage",
+        },
     ],
 
     actions: [

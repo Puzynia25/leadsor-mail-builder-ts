@@ -60,6 +60,7 @@ export type CustomNodeType =
     | EventNodeType
     | WaitNodeType
     | ConditionNodeType
+    | ContactStorageNodeType
     | EmailNodeType
     | SmsNodeType
     | MessengerNodeType;
@@ -71,6 +72,7 @@ export type RepeatNodeType = Node<RepeatNodeData, "repeat">;
 export type EventNodeType = Node<EventNodeData, "event">;
 export type WaitNodeType = Node<WaitNodeData, "wait">;
 export type ConditionNodeType = Node<ConditionNodeData, "condition">;
+export type ContactStorageNodeType = Node<ImmediatelyNodeData, "contactStorage">;
 export type EmailNodeType = Node<EmailNodeData, "email">;
 export type SmsNodeType = Node<SmsNodeData, "sms">;
 export type MessengerNodeType = Node<MessengerNodeData, "messenger">;
