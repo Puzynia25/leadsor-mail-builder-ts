@@ -19,7 +19,12 @@ export interface INodeRender {
 export type NodeData = { icon: string; label: string; color: string; onEdit?: () => void; onOpenContacts?: () => void };
 export type ImmediatelyNodeData = NodeData & { name: string };
 export type ScheduledTimeNodeData = NodeData & { date?: string; time?: string };
-export type RepeatNodeData = ScheduledTimeNodeData & { repeatValue?: number; repeatUnit?: TimeRange };
+export type RepeatNodeData = ScheduledTimeNodeData & {
+    repeatValue?: number;
+    repeatUnit?: TimeRange;
+    scheduledDate?: string | null;
+    scheduledTime?: string | null;
+};
 export type EventNodeData = NodeData & { selectedEvent?: string; selectedEventLabel?: string; inputValues?: {} };
 export type WaitNodeData = NodeData & {
     type?: string;

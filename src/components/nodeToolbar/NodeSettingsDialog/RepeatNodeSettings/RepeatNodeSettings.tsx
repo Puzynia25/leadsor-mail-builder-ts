@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Divider, FormControl, FormLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Divider, FormControl, FormControlLabel, FormLabel, MenuItem, Select, Switch, TextField } from "@mui/material";
 import { INodeSettingsDialog, INodeSettingsDialogProps, TimeRange } from "../NodeSettingsDialog.types";
 import { RepeatNodeData } from "../../../nodes/Node.types";
 import { DatePicker, LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
@@ -9,16 +9,20 @@ import dayjs, { Dayjs } from "dayjs";
 import "./RepeatNodeSettings.scss";
 
 const RepeatNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogProps): INodeSettingsDialog => {
-    const scheduledTimeNodeData = data as RepeatNodeData;
+    const repeatNodeData = data as RepeatNodeData;
 
-    const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs(scheduledTimeNodeData.date) ?? dayjs());
-    const [selectedTime, setSelectedTime] = useState<Dayjs | null>(
-        dayjs(scheduledTimeNodeData.time, "hh:mm a") ?? dayjs()
-    );
+    const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs(repeatNodeData.date) ?? dayjs());
+    const [selectedTime, setSelectedTime] = useState<Dayjs | null>(dayjs(repeatNodeData.time, "hh:mm a") ?? dayjs());
     const [repeatInputs, setRepeatInputs] = useState({
-        value: scheduledTimeNodeData.repeatValue ?? 1,
-        unit: scheduledTimeNodeData.repeatUnit ?? TimeRange.week,
+        value: repeatNodeData.repeatValue ?? 1,
+        unit: repeatNodeData.repeatUnit ?? TimeRange.week,
     });
+
+    const [isScheduled, setIsScheduled] = useState<boolean>(false);
+    const [scheduledDate, setScheduledDate] = useState<Dayjs | null>(dayjs(repeatNodeData.scheduledDate) ?? dayjs());
+    const [scheduledTime, setScheduledTime] = useState<Dayjs | null>(
+        dayjs(repeatNodeData.scheduledTime, "hh:mm a") ?? dayjs()
+    );
 
     const handleRepeatChange = (key: "value" | "unit", newValue: string | number) => {
         setRepeatInputs((prev) => ({
@@ -29,11 +33,13 @@ const RepeatNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogPr
 
     const applyChanges = () => {
         const newData: RepeatNodeData = {
-            ...scheduledTimeNodeData,
+            ...repeatNodeData,
             date: selectedDate?.format("YYYY-MM-DD") ?? "",
             time: selectedTime?.format("hh:mm a") ?? "",
             repeatValue: repeatInputs.value,
             repeatUnit: repeatInputs.unit,
+            scheduledDate: scheduledDate?.format("YYYY-MM-DD") ?? null,
+            scheduledTime: scheduledTime?.format("hh:mm a") ?? null,
         };
 
         onUpdateNodeContent(newData);
@@ -91,6 +97,48 @@ const RepeatNodeSettings = ({ data, onUpdateNodeContent }: INodeSettingsDialogPr
                                     </MenuItem>
                                 ))}
                             </Select>
+                        </FormControl>
+                    </div>
+                </div>
+                <Divider flexItem />
+                <div>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                color="success"
+                                checked={isScheduled}
+                                onChange={(e) => setIsScheduled(e.target.checked)}
+                            />
+                        }
+                        label="Scheduled activation"
+                        sx={{ marginBottom: "20px" }}
+                    />
+                    <div className="node-settings__custom-group">
+                        <FormControl fullWidth>
+                            <FormLabel sx={{ fontWeight: 500, color: "#202020", marginBottom: "10px" }}>
+                                Select date:
+                            </FormLabel>
+
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    value={scheduledDate}
+                                    onChange={(newDate) => setScheduledDate(newDate)}
+                                    disabled={!isScheduled}
+                                />
+                            </LocalizationProvider>
+                        </FormControl>
+
+                        <FormControl fullWidth>
+                            <FormLabel sx={{ fontWeight: 500, color: "#202020", marginBottom: "10px" }}>
+                                Select time:
+                            </FormLabel>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <TimePicker
+                                    value={scheduledTime}
+                                    onChange={(newTime) => setScheduledTime(newTime)}
+                                    disabled={!isScheduled}
+                                />
+                            </LocalizationProvider>
                         </FormControl>
                     </div>
                 </div>
